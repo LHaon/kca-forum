@@ -3,6 +3,7 @@ package com.mezjh.kcaforum.admin.userma.controller;
 import com.mezjh.kcaforum.admin.userma.service.UserManageService;
 import com.mezjh.kcaforum.admin.userma.vo.PageVO;
 import com.mezjh.kcaforum.user.info.entity.User;
+import com.mezjh.kcaforum.utils.ApiResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,11 @@ public class UserManageController {
     @GetMapping("/{id}")
     public User getUserDetail(@PathVariable("id") Integer id) {
         return userManageService.getUserById(id);
+    }
+
+    @PostMapping("/{id}")
+    public ApiResult updateUser() {
+        return ApiResult.success();
     }
 
 }
