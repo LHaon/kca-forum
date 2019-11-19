@@ -22,7 +22,7 @@ public class UserManageController {
 
     @GetMapping
     public List<User> getUsersByPageNum(@RequestBody PageVO pageVO) {
-        List<User> list = userManageService.getUserByPageNum(pageVO.getPageNum(), pageVO.getPageSize());
+        List<User> list = userManageService.getUserByPageNum(pageVO);
         return list;
     }
 

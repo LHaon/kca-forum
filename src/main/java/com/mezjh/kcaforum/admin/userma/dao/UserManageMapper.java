@@ -1,5 +1,6 @@
 package com.mezjh.kcaforum.admin.userma.dao;
 
+import com.mezjh.kcaforum.admin.userma.vo.PageVO;
 import com.mezjh.kcaforum.user.info.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -11,19 +12,17 @@ import java.util.List;
  * @author zjh
  * @date 2019/11/13
  */
-@Mapper
 @Repository
+@Mapper
 public interface UserManageMapper {
 
     /**
      * 获取用户列表
      *
-     * @param pageNum
-     * @param pageSize
+     * @param pageVO
      * @return
      */
-    @Select("select * from user where user_type=1 limit #{pageNum},#{pageSize}")
-    List<User> getUserByPageNum(int pageNum, int pageSize);
+    List<User> getUserByPageNum(PageVO pageVO);
 
     /**
      * 根据ID显示用户详情

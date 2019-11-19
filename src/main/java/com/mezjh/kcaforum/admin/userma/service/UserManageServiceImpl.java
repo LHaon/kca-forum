@@ -1,6 +1,7 @@
 package com.mezjh.kcaforum.admin.userma.service;
 
 import com.mezjh.kcaforum.admin.userma.dao.UserManageMapper;
+import com.mezjh.kcaforum.admin.userma.vo.PageVO;
 import com.mezjh.kcaforum.user.info.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,9 @@ public class UserManageServiceImpl implements UserManageService {
     UserManageMapper userManageMapper;
 
     @Override
-    public List<User> getUserByPageNum(int pageNum, int pageSize) {
-        pageNum = (pageNum - 1) * pageSize;
-        return userManageMapper.getUserByPageNum(pageNum, pageSize);
+    public List<User> getUserByPageNum(PageVO pageVO) {
+        pageVO.setPageNum((pageVO.getPageNum() - 1) * pageVO.getPageSize());
+        return userManageMapper.getUserByPageNum(pageVO);
     }
 
     @Override

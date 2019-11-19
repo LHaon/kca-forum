@@ -1,5 +1,6 @@
 package com.mezjh.kcaforum.admin.userma.service;
 
+import com.mezjh.kcaforum.admin.userma.vo.PageVO;
 import com.mezjh.kcaforum.user.info.entity.User;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface UserManageService {
 
-    List<User> getUserByPageNum(int pageNum, int pageSize);
+    List<User> getUserByPageNum(PageVO pageVO);
 
     User getUserById(Integer id);
 }

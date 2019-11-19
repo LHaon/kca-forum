@@ -24,9 +24,8 @@ public class AccountController {
     @Autowired
     private UserInfoService userInfoService;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ApiResult<? extends Account> accountLogin(@RequestBody Account account) {
-        System.out.println("在登陆");
         Account temp = accountService.accountToLogin(account.getUsername(), account.getPassword());
         if (temp == null) {
             return ApiResult.error("用户名或密码错误");
