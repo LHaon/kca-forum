@@ -1,11 +1,11 @@
 package com.mezjh.kcaforum.system.controller;
 
+import com.mezjh.integrationkit.apiutils.ApiResult;
 import com.mezjh.kcaforum.admin.info.service.AdminInfoService;
 import com.mezjh.kcaforum.system.entity.Account;
 import com.mezjh.kcaforum.system.service.AccountService;
 import com.mezjh.kcaforum.user.info.entity.User;
 import com.mezjh.kcaforum.user.info.service.UserInfoService;
-import com.mezjh.kcaforum.utils.ApiResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +36,7 @@ public class AccountController {
         return ApiResult.success(userInfoService.getUserInfoById(temp.getId()));
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public ApiResult<User> accountRegister(@RequestBody User user) {
         Account temp = accountService.getUserByUsername(user.getUsername());
         if (temp != null) {

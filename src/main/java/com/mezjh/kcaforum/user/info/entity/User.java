@@ -9,5 +9,8 @@ import lombok.Data;
  */
 @Data
 public class User extends Account {
+    /**
+     * 昵称
+     */
     private String nickname;
 }
