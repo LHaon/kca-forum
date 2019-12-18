@@ -11,12 +11,6 @@ spring:
       charset: UTF-8
       enabled: true
       force: true
-  datasource:
-    username: ENC(OzZn+55fwYj2a4N0qvBJUQ==)
-    password: ENC(F5VrpXsdpkaTKa2xGNIrHLntfT3/Zof0)
-    url: ENC(rzBM9f3pWhpjaDQPonVJnDIsq/9dGZOd2Zt5VDSlJSTsr934QpU2frGr0RLvESvdYII4u4rvoTIqgaMyw8ha6VdJpFQRGARcj7QaCREP
-     8g3uOFEFIDHQgfK4dfQTMGlpNph49TisbdXOVFYVr+Vg8ZfWa6fAhbxB+MeoK3J4a+8=)
-    driver-class-name: com.mysql.jdbc.Driver
   thymeleaf:
     cache: false
     suffix: .html
