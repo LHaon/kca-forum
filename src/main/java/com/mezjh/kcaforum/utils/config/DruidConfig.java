@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -35,11 +35,12 @@ public class DruidConfig {
         log.info("The datasource initializing...");
         DruidDataSource dataSource = new DruidDataSource();
         Properties properties = new Properties();
-        InputStream in = properties.getClass().getResourceAsStream("/db.properties");
         try {
+            FileInputStream in = new FileInputStream("./db.properties");
+            //InputStream in = properties.getClass().getResourceAsStream("/db.properties");
             properties.load(in);
         } catch (IOException e) {
-            log.error("The datasource profile load failed!");
+            log.error("The datasource profile load failed! Message={}", e.getMessage());
         }
         dataSource.configFromPropety(properties);
         dataSource.setUsername(username);
