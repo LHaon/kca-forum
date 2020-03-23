@@ -27,4 +27,9 @@ public class IndexServiceImpl implements IndexService{
     public List<User> getRecommendUser() {
         return indexMapper.getRecommendUser();
     }
+
+    @Override
+    public List<TextInfo> getPopularTextList() {
+        return indexMapper.getPopularTextList();
+    }
 }

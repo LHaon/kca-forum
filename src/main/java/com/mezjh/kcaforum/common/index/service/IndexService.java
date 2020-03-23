@@ -20,4 +20,9 @@ public interface IndexService {
      * @return
      */
     List<User> getRecommendUser();
+    /**
+     * 获取热门文章列表
+     * @return
+     */
+    List<TextInfo> getPopularTextList();
 }

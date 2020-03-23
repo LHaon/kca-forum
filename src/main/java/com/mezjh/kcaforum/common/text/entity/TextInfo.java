@@ -29,6 +29,10 @@ public class TextInfo {
      */
     private String title;
     /**
+     * 预览
+     */
+    private String preview;
+    /**
      * 文章markdown html
      */
     private String mdHtml;
