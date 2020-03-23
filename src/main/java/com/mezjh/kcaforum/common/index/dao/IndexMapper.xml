@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mezjh.kcaforum.common.index.dao.IndexMapper">
+    <select id="getIndexTextList" resultType="com.mezjh.kcaforum.common.text.entity.TextInfo">
+        SELECT id AS textId,user_id,comment_count,like_count,title,md_html,create_time,update_time,word_count,read_count
+        FROM text
+        ORDER BY update_time DESC
+    </select>
+
+    <select id="getRecommendUser" resultType="com.mezjh.kcaforum.user.info.entity.User">
+        SELECT id AS userId,account_id AS accountId,nickname,photo_str,word_count,collection_like_count
+        FROM user
+        ORDER BY lately_up_time DESC
+    </select>
+</mapper>

@@ -1,4 +1,4 @@
-package com.mezjh.kcaforum.utils.config;
+package com.mezjh.kcaforum.common.utils.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -27,7 +28,7 @@ public class DruidConfig {
     private String url;
     @Value("${db.username}")
     private String username;
-    @Value("${db.driver-class-name}")
+    @Value("${db.driverClassName}")
     private String driver;
 
     @Bean(value = "dataSource", name = "dataSource")
@@ -36,11 +37,11 @@ public class DruidConfig {
         DruidDataSource dataSource = new DruidDataSource();
         Properties properties = new Properties();
         try {
-            FileInputStream in = new FileInputStream("./db.properties");
-            //InputStream in = properties.getClass().getResourceAsStream("/db.properties");
+            //FileInputStream in = new FileInputStream("./db.properties");
+            InputStream in = properties.getClass().getResourceAsStream("/db.properties");
             properties.load(in);
-        } catch (IOException e) {
-            log.error("The datasource profile load failed! Message={}", e.getMessage());
+        } catch (Exception e) {
+            log.warn("The datasource profile load failed! Message={}", e.getMessage());
         }
         dataSource.configFromPropety(properties);
         dataSource.setUsername(username);
@@ -50,5 +51,4 @@ public class DruidConfig {
         log.info("The datasource initializing complete!");
         return dataSource;
     }
-
 }

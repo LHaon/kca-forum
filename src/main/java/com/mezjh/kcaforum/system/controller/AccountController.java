@@ -30,10 +30,10 @@ public class AccountController {
         if (temp == null) {
             return ApiResult.error("用户名或密码错误");
         }
-        if (temp.getUserType() == 2) {
-            return ApiResult.success(adminInfoService.getAdminInfoById(temp.getId()));
+        if (temp.getAccountType() == 2) {
+            return ApiResult.success(adminInfoService.getAdminInfoById(temp.getAccountId()));
         }
-        return ApiResult.success(userInfoService.getUserInfoById(temp.getId()));
+        return ApiResult.success(userInfoService.getUserInfoById(temp.getAccountId()));
     }
 
     @PostMapping("/register")
@@ -46,6 +46,6 @@ public class AccountController {
             return ApiResult.error("注册用户失败");
         }
         return ApiResult.success(userInfoService.getUserInfoById(
-        accountService.getUserByUsername(user.getUsername()).getId()));
+        accountService.getUserByUsername(user.getUsername()).getAccountId()));
     }
 }

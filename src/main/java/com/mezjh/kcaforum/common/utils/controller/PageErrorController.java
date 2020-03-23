@@ -1,11 +1,4 @@
-package com.mezjh.kcaforum.utils.controller;
-
-import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
+package com.mezjh.kcaforum.common.utils.controller;
 
 /**
  * @author zjh
