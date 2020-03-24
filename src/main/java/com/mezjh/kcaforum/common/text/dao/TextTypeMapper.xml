@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mezjh.kcaforum.common.text.dao.TextTypeMapper">
+    <select id="getPopularTypeList" resultType="com.mezjh.kcaforum.common.text.entity.TextType">
+        SELECT id AS textTypeId,type_name,text_id,type_text_count
+        FROM text_type
+        ORDER BY type_text_count DESC
+    </select>
+</mapper>

@@ -29,4 +29,10 @@ public interface IndexMapper {
      * @return
      */
     List<TextInfo> getPopularTextList();
+    /**
+     * 通过用户ID得到用户信息
+     * @param userId
+     * @return
+     */
+    User getUserInfoByUserId(Integer userId);
 }

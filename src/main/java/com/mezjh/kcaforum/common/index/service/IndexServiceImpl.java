@@ -20,7 +20,11 @@ public class IndexServiceImpl implements IndexService{
 
     @Override
     public List<TextInfo> getIndexTextList() {
-        return indexMapper.getIndexTextList();
+        List<TextInfo> textInfos = indexMapper.getIndexTextList();
+        for (TextInfo textInfo: textInfos) {
+            textInfo.setUser(indexMapper.getUserInfoByUserId(textInfo.getUserId()));
+        }
+        return textInfos;
     }
 
     @Override
@@ -31,5 +35,10 @@ public class IndexServiceImpl implements IndexService{
     @Override
     public List<TextInfo> getPopularTextList() {
         return indexMapper.getPopularTextList();
+    }
+
+    @Override
+    public User getUserInfoByUserId(Integer userId) {
+        return indexMapper.getUserInfoByUserId(userId);
     }
 }
