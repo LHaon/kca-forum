@@ -1,6 +1,7 @@
 package com.mezjh.kcaforum.system.controller;
 
 import com.mezjh.integrationkit.apiutils.ApiResult;
+import com.mezjh.integrationkit.safeutils.EncryptUtil;
 import com.mezjh.kcaforum.admin.info.service.AdminInfoService;
 import com.mezjh.kcaforum.system.entity.Account;
 import com.mezjh.kcaforum.system.service.AccountService;
@@ -47,5 +48,10 @@ public class AccountController {
         }
         return ApiResult.success(userInfoService.getUserInfoById(
         accountService.getUserByUsername(user.getUsername()).getAccountId()));
+    }
+
+    public static void main(String[] args) {
+        String str = EncryptUtil.decrypt("npcrhyKCAFORUM","F5VrpXsdpkaTKa2xGNIrHLntfT3/Zof0");
+        System.out.println(str);
     }
 }

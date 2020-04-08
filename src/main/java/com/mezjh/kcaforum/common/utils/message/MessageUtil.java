@@ -33,6 +33,9 @@ public class MessageUtil {
         try {
             String[] params = {captcha,"10"};
             SmsSingleSender ssender = new SmsSingleSender(appid, appkey);
+            if (!redisTemplate.opsForValue().get(phoneNumber+"msgFlag").isEmpty()) {
+                throw new Exception("请60s之后再试!");
+            }
             SmsSingleSenderResult result = ssender.sendWithParam("86", phoneNumber,
                 templateId, params, smsSign, "", "");
             System.out.println(result);
@@ -41,6 +44,8 @@ public class MessageUtil {
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -52,6 +57,7 @@ public class MessageUtil {
             str.append(random.nextInt(10));
         }
         //将当前验证码放入缓存
+        redisTemplate.opsForValue().set(phoneNumber+"msgFlag", str.toString(), 60, TimeUnit.SECONDS);
         redisTemplate.opsForValue().set(phoneNumber+"msg",str.toString(),600, TimeUnit.SECONDS);
         return str.toString();
     }

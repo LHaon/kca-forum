@@ -1,9 +1,7 @@
 server:
   tomcat:
     uri-encoding: UTF-8
-  servlet:
-    context-path: /kca
-  port: 8080
+  port: 11111
 
 spring:
   http:
@@ -11,14 +9,47 @@ spring:
       charset: UTF-8
       enabled: true
       force: true
-  thymeleaf:
+  freemarker:
+    template-loader-path:
+      - classpath:/templates
+      - file:${site.location}/storage/templates
     cache: false
-    suffix: .html
-    encoding: UTF-8
-    servlet:
-      content-type: text/html
+    check-template-location: true
+    charset: utf-8
+    settings:
+      classic_compatible: true #处理空值
+      template_exception_handler: rethrow
+      template_update_delay: 0
+      datetime_format: yyyy-MM-dd HH:mm
+      number_format: 0.##
+      auto_import: /utils.ftl as utils
+    flyway:
+      enabled: false
+      baseline-on-migrate: true
+      encoding: UTF-8
+      locations: classpath:scripts/migration
 
 mybatis:
   mapper-locations: com.mezjh.kcaforum.**.dao
   configuration:
     map-underscore-to-camel-case: true
+
+
+# site.options.theme: [default|classic]
+site:
+  version: 0.0.1
+  location: ${user.dir}
+  controls:
+    # 注册开关
+    register: true
+    # 注册开启邮箱验证
+    register_email_validate: false
+    # 发布文章开关
+    post: true
+    # 评论开关
+    comment: true
+  options:
+    theme: classic
+    storage_max_width: 800
+    storeage_limit_size: 2
+    editor: markdown
