@@ -1,6 +1,5 @@
 package com.mezjh.kcaforum.common.text.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mezjh.kcaforum.user.info.entity.User;
 import lombok.Data;
 

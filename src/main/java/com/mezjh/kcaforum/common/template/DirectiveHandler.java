@@ -2,8 +2,12 @@ package com.mezjh.kcaforum.common.template;
 
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
+import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
+import freemarker.template.TemplateModelException;
+import org.springframework.util.Assert;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -33,6 +37,40 @@ public class DirectiveHandler {
         this.params = params;
         this.body = body;
         this.namespace = environment.getCurrentNamespace();
+    }
+
+    public DirectiveHandler put(String key, Object value) throws TemplateModelException {
+        namespace.put(key, wrap(value));
+        return this;
+    }
+
+    /**
+     * 包装对象
+     *
+     * @param object
+     * @return
+     * @throws TemplateModelException
+     */
+    public TemplateModel wrap(Object object) throws TemplateModelException {
+        return environment.getObjectWrapper().wrap(object);
+    }
+
+    public void render() throws IOException, TemplateException {
+        Assert.notNull(body, "must have template directive body");
+        body.render(environment.getOut());
+    }
+
+    public Integer getInteger(String name, int defaultValue) throws Exception {
+        Integer res = getInteger(name);
+        return res == null ? defaultValue : res;
+    }
+
+    public Integer getInteger(String name) throws TemplateModelException {
+        return TemplateModelUtils.converInteger(getModel(name));
+    }
+
+    private TemplateModel getModel(String name) {
+        return params.get(name);
     }
 
 }

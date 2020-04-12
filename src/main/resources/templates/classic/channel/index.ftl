@@ -6,10 +6,10 @@
                 <div class="posts">
                     <ul class="posts-list">
                         <#include "/classic/inc/posts_item.ftl"/>
-                        <#list results.content as row>
+                        <#list results.data as row>
                             <@posts_item row/>
                         </#list>
-                        <#if  results.content?size == 0>
+                        <#if  results.data?size == 0>
                         <li class="content">
                             <div class="content-box posts-aside">
                                 <div class="posts-item">该目录下还没有内容!</div>

@@ -64,11 +64,11 @@
             <@pagelink 1, 1, cURL/>
         </#if>
 
-        <#if (pageNo < pageCount)>
-            <li><a href="${cURL}${pageNo + 1}" pageNo="${pageNo + 1}" class="next">下一页</a></li>
-        <#else>
-            <li class="disabled"><span>下一页</span></li>
-        </#if>
+<#--        <#if (pageNo < pageCount)>-->
+<#--            <li><a href="${cURL}${pageNo + 1}" pageNo="${pageNo + 1}" class="next">下一页</a></li>-->
+<#--        <#else>-->
+<#--            <li class="disabled"><span>下一页</span></li>-->
+<#--        </#if>-->
     </ul>
     </#if>
 </#macro>

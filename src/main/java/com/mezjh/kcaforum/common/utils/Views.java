@@ -1,7 +1,8 @@
-package com.mezjh.kcaforum.common.utils.common;
+package com.mezjh.kcaforum.common.utils;
 
 /**
  * 页面管理接口
+ *
  * @author zjh
  * @date 2020/4/4
  */

@@ -12,11 +12,17 @@ import java.util.Map;
 
 /**
  * freemarker自定义宏
+ *
  * @author zjh
  * @date 2020/4/12
  */
 @Slf4j
 public abstract class TemplateDirective implements TemplateDirectiveModel {
+
+    protected static String RESULTS = "results";
+    protected static String RESULT = "result";
+
+    public abstract String getName();
 
     /**
      * 执行自定义宏
