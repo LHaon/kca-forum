@@ -22,8 +22,8 @@
             </@contents>
         </div>
         <div class="text-center">
-            <!-- Pager -->
-            <@utils.pager request.requestURI!"", results, 5/>
+<#--            <!-- Pager &ndash;&gt;-->
+<#--            <@utils.pager request.requestURI!"", results, 5/>-->
         </div>
     </div>
     <div class="col-xs-12 col-md-3 side-right">
