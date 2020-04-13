@@ -1,10 +1,14 @@
 package com.mezjh.kcaforum.common.template.directives;
 
 import com.mezjh.integrationkit.apiutils.ApiResult;
+import com.mezjh.kcaforum.common.index.service.IndexService;
 import com.mezjh.kcaforum.common.template.DirectiveHandler;
 import com.mezjh.kcaforum.common.template.TemplateDirective;
 import com.mezjh.kcaforum.common.text.entity.TextInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * 宏 contents
@@ -15,7 +19,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContentsDirective extends TemplateDirective {
 
-
+    @Autowired
+    private IndexService indexService;
     @Override
     public String getName() {
         return "contents";
@@ -24,8 +29,7 @@ public class ContentsDirective extends TemplateDirective {
     @Override
     public void execute(DirectiveHandler handler) throws Exception {
         Integer pageType = handler.getInteger("pageType", 0);
-        ApiResult<TextInfo> result = new ApiResult<>();
-        result.setData(new TextInfo());
-        handler.put(RESULTS, result).render();
+        List<TextInfo> datas = indexService.getIndexTextList();
+        handler.put(RESULTS, ApiResult.success(datas)).render();
     }
 }
