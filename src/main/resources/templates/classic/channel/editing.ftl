@@ -17,7 +17,7 @@
                 <input type="text" class="form-control" name="title" maxlength="128" value="${view.title}" placeholder="请输入标题" required>
             </div>
             <div class="form-group">
-                <#include "/classic/channel/editor/${editor}.ftl"/>
+                <#include "/classic/channel/editor/markdown.ftl"/>
             </div>
         </div>
         <div class="col-xs-12 col-md-4 side-right">

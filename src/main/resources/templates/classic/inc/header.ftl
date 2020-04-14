@@ -109,7 +109,7 @@
 <#--				<#if profile??>-->
 <#--                    <@controls name="post">-->
                         <li>
-                            <a href="${base}/post/editing" class="plus"><i class="icon icon-note"></i> 写文章</a>
+                            <a href="${base}/texts/editing" class="plus"><i class="icon icon-note"></i> 写文章</a>
                         </li>
 <#--                    </@controls>-->
                     <li class="dropdown">

@@ -19,4 +19,6 @@ public interface Views {
     String REGISTER = "/auth/register";
 
     String H_INDEX = "/channel/index";
+
+    String TEXT_EDIT = "/channel/editing";
 }
