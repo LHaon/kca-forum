@@ -21,7 +21,19 @@
             </ul>
             </@contents>
         </div>
+        <#assign idx =0  />
         <div class="text-center">
+            <ul class="pagination">
+                <li class="disabled"><span>上一页</span></li>
+                <#if (idx == 1)>
+                    <li><span>...</span></li>
+                <#elseif (pageNo == idx)>
+                    <li class="active"><span>${idx}</span></li>
+                <#else>
+                    <li><a href="${url}${idx}">${idx}</a></li>
+                </#if>
+                <li class="disabled"><span>下一页</span></li>
+            </ul>
 <#--            <!-- Pager &ndash;&gt;-->
 <#--            <@utils.pager request.requestURI!"", results, 5/>-->
         </div>

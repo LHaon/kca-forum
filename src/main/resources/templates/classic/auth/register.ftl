@@ -16,11 +16,10 @@
                         <label class="control-label" for="username">用户名</label>
                         <input class="form-control" id="username" name="username" type="text" placeholder="字母和数字的组合, 不少于5位" required>
                     </div>
-                    <@controls name="register_email_validate">
                         <div class="form-group">
-                            <label class="control-label" for="username">邮箱</label>
+                            <label class="control-label" for="username">手机号</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="email" maxlength="64" placeholder="请输入邮箱地址" required>
+                                <input type="text" class="form-control" name="phone" maxlength="64" placeholder="请输入手机号" required>
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary" type="button" id="sendCode">获取验证码</button>
                                 </span>
@@ -28,9 +27,8 @@
                         </div>
                         <div class="form-group ">
                             <label class="control-label" for="code">验证码</label>
-                            <input class="form-control" id="code" name="code" type="text" placeholder="请输入邮箱验证码" maxlength="6" required>
+                            <input class="form-control" id="code" name="code" type="text" placeholder="请输入验证码" maxlength="6" required>
                         </div>
-                    </@controls>
                     <div class="form-group ">
                         <label class="control-label" for="username">密码</label>
                         <input class="form-control" id="password" name="password" type="password" maxlength="18" placeholder="请输入密码" required>

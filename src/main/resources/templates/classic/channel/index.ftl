@@ -1,8 +1,8 @@
 <#include "/classic/inc/layout.ftl"/>
-<@layout channel.name>
+<@layout>
     <div class="row">
         <div class="col-xs-12 col-md-9 side-left">
-            <@contents channelId=channel.id pageNo=pageNo order=order>
+            <@contents>
                 <div class="posts">
                     <ul class="posts-list">
                         <#include "/classic/inc/posts_item.ftl"/>
@@ -27,9 +27,9 @@
 
         </div>
 
-        <div class="col-xs-12 col-md-3 side-right">
-            <#include "/classic/inc/right.ftl" />
-        </div>
+<#--        <div class="col-xs-12 col-md-3 side-right">-->
+<#--            <#include "/classic/inc/right.ftl" />-->
+<#--        </div>-->
 
     </div>
 

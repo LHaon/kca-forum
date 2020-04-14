@@ -17,4 +17,6 @@ public interface Views {
     String FORGET = "/auth/forget";
 
     String REGISTER = "/auth/register";
+
+    String H_INDEX = "/channel/index";
 }

@@ -76,9 +76,9 @@ define(function(require, exports, module) {
 
             J(sendCodeButtonId).click(function () {
                 var btn = J(this).button('sending');
-                var email = J('input[name=email]').val();
-                J.getJSON(_BATH + '/email/send_code', {'email': email, 'type': 3}, function (data) {
-                    if (data.code === 0) {
+                var phone = J('input[name=phone]').val();
+                J.getJSON(_BATH + '/user/sendMessage', {'phone': phone}, function (data) {
+                    if (data.code != 0) {
                         btn.text('重新发送');
                         J('#message').html('<div class="alert alert-success">' + data.message + '</div>');
                     } else {
@@ -171,8 +171,8 @@ define(function(require, exports, module) {
 
             J(sendCodeButtonId).click(function () {
                 var btn = J(this).button('sending');
-                var email = J('input[name=email]').val();
-                J.getJSON(_BATH + '/email/send_code', {'email': email, 'type': 1}, function (data) {
+                var phone = J('input[name=phone]').val();
+                J.getJSON(_BATH + '/phone/send_code', {'phone': phone, 'type': 1}, function (data) {
                     if (data.code === 0) {
                         btn.text('重新发送');
                         J('#message').html('<div class="alert alert-success">' + data.message + '</div>');

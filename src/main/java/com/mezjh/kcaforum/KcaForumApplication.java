@@ -19,6 +19,6 @@ public class KcaForumApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(KcaForumApplication.class, args);
         String serverPort = context.getEnvironment().getProperty("server.port");
-        log.info("kca started at http://localhost:" + serverPort);
+        log.info("kca started at http://localhost:" + serverPort+ "/index");
     }
 }

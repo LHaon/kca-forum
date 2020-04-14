@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IndexController extends BaseController {
 
-    @RequestMapping(value = {"/", "/index"})
+    @RequestMapping("/index")
     public String getIndex(ModelMap modelMap, HttpServletRequest request) {
-        return view(Views.INDEX);
+        return view(Views.H_INDEX);
     }
 
     @GetMapping("/login")

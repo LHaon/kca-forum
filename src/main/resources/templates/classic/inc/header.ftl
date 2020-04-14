@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <button id="ajax_login_submit" class="btn btn-primary btn-block btn-sm" type="button">
-                            登录 Use it
+                            登录
                         </button>
                     </div>
                     <div class="form-group">
@@ -84,7 +84,7 @@
 						</li>
 					</#if>
                     <li>
-                        <a href="${base}/msgs" nav="msgs">最新</a>
+                        <a href="${base}/index" nav="msgs">最新</a>
                     </li>
                     <li>
                         <a href="${base}/followmsgs" nav="follow">关注</a>
@@ -106,16 +106,16 @@
                         </form>
                     </li>
 
-				<#if profile??>
-                    <@controls name="post">
+<#--				<#if profile??>-->
+<#--                    <@controls name="post">-->
                         <li>
                             <a href="${base}/post/editing" class="plus"><i class="icon icon-note"></i> 写文章</a>
                         </li>
-                    </@controls>
+<#--                    </@controls>-->
                     <li class="dropdown">
                         <a href="#" class="user dropdown-toggle" data-toggle="dropdown">
-                            <img class="img-circle" src="<@resource src=profile.avatar + '?t=' + .now?time />">
-                            <span>${profile.name}</span>
+<#--                            <img class="img-circle" src="<@resource src=profile.avatar + '?t=' + .now?time />">-->
+<#--                            <span>${profile.name}</span>-->
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
@@ -124,18 +124,18 @@
                             <li>
                                 <a href="${base}/settings/profile">编辑资料</a>
                             </li>
-                            <@shiro.hasPermission name="admin">
+<#--                            <@shiro.hasPermission name="admin">-->
                                 <li><a href="${base}/admin">后台管理</a></li>
-                            </@shiro.hasPermission>
+<#--                            </@shiro.hasPermission>-->
                             <li><a href="${base}/logout">退出</a></li>
                         </ul>
                     </li>
-				<#else>
-                    <li><a href="${base}/login" class="btn btn-default btn-sm signup">登录</a></li>
-<#--                    <@controls name="register">-->
-                        <li><a href="${base}/user/register" class="btn btn-primary btn-sm signup">注册</a></li>
-<#--                    </@controls>-->
-				</#if>
+<#--				<#else>-->
+<#--                    <li><a href="${base}/login" class="btn btn-default btn-sm signup">登录</a></li>-->
+<#--&lt;#&ndash;                    <@controls name="register">&ndash;&gt;-->
+<#--                        <li><a href="${base}/user/register" class="btn btn-primary btn-sm signup">注册</a></li>-->
+<#--&lt;#&ndash;                    </@controls>&ndash;&gt;-->
+<#--				</#if>-->
 
                 </ul>
             </div>
