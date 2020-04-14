@@ -1,4 +1,4 @@
-package com.mezjh.kcaforum.common.utils;
+package com.mezjh.kcaforum.common;
 
 /**
  * 页面管理接口
@@ -13,4 +13,8 @@ public interface Views {
     String INDEX = "/index";
 
     String LOGIN = "/auth/login";
+
+    String FORGET = "/auth/forget";
+
+    String REGISTER = "/auth/register";
 }

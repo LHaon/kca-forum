@@ -23,12 +23,12 @@
                             <input type="checkbox" name="rememberMe" value="1"> 记住登录
                         </label>
                         <span class="pull-right">
-                            <a class="forget-password" href="${base}/forgot">忘记密码？</a>
+                            <a class="forget-password" href="${base}/user/forget">忘记密码？</a>
                         </span>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block">
-                            登录 Use it
+                            登录
                         </button>
                     </div>
 <#--                    <@controls name="register">-->

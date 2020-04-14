@@ -14,9 +14,10 @@
                 </div>
                 <form id="submitForm" method="POST" action="${base}/forgot" accept-charset="UTF-8">
                     <div class="form-group">
-                        <label class="control-label" for="email">邮箱地址</label>
+                        <label class="control-label" for="phone">手机号</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="email" maxlength="64" data-required data-conditional="email" data-description="email" data-describedby="message">
+                            <input type="text" class="form-control" name="phone" maxlength="64" data-required
+                                   data-conditional="email" data-description="email" data-describedby="message">
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" type="button" id="sendCode">获取验证码</button>
                             </span>

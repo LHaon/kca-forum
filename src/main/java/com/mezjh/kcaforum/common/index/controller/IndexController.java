@@ -1,7 +1,7 @@
 package com.mezjh.kcaforum.common.index.controller;
 
 import com.mezjh.kcaforum.common.BaseController;
-import com.mezjh.kcaforum.common.utils.Views;
+import com.mezjh.kcaforum.common.Views;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;

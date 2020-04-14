@@ -108,15 +108,14 @@ define(function(require, exports, module) {
         forgot: function (formId, sendCodeButtonId) {
             J(sendCodeButtonId).click(function () {
                 var btn = J(this).button('sending');
-                var email = J('input[name=email]').val();
-                J.getJSON(_BATH + '/email/send_code', {'email': email, 'type': 2}, function (data) {
-                    if (data.code === 0) {
+                var phone = J('input[name=phone]').val();
+                J.getJSON(_BATH + '/user/sendMessage', {'phone': phone}, function (data) {
+                    if (data.code === 3) {
                         btn.text('重新发送');
                         J('#message').html('<div class="alert alert-success">' + data.message + '</div>');
                     } else {
                         J('#message').html('<div class="alert alert-danger">' + data.message + '</div>');
                     }
-
                     btn.button('reset');
                 });
             });
