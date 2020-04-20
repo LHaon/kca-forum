@@ -1,7 +1,6 @@
 package com.mezjh.kcaforum.user.info.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mezjh.kcaforum.system.entity.Account;
 import lombok.Data;
 
 /**
@@ -10,7 +9,7 @@ import lombok.Data;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class User extends Account {
+public class User {
     /**
      * 用户ID
      */
