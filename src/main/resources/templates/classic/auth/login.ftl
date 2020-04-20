@@ -4,27 +4,28 @@
 <div class="row">
     <div class="col-md-4 col-md-offset-4 floating-box">
         <div class="panel panel-default">
-            <ul id="reset-method" class="nav tab-underline border-bottom">
-                <li class="active border-primary"><a class="text-active-primary" href="#account"
-                                                     data-toggle="tab">账号登录</a></li>
-                <li class="border-primary"><a class="text-active-primary" href="#phone" data-toggle="tab">手机登录</a></li>
-            </ul>
+            <div class="panel-heading">
+                <span>
+                    <a id="account_btn" onclick="account()" class="btn btn-primary btn-sm">用户名登录</a>&nbsp;
+                    <a id="phone_btn" onclick="phone()" class="btn btn-default btn-sm">手机号登录</a>
+                </span>
+            </div>
             <div id="account">
                 <form method="POST" action="login" accept-charset="UTF-8">
                     <div class="form-group">
-                        <label class="control-label" for="username">账号</label>
-                        <input class="form-control" name="username" type="text" required>
+                        <label class="control-label" for="username">用户名</label>
+                        <input class="form-control" name="username" type="text" placeholder="请输入用户名" required>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="password">密码</label>
-                        <input class="form-control" name="password" type="password" required>
+                        <input class="form-control" name="password" type="password" placeholder="请输入密码" required>
                     </div>
                     <div class="form-group">
                         <label>
                             <input type="checkbox" name="rememberMe" value="1"> 记住登录
                         </label>
                         <span class="pull-right">
-                            <a class="forget-password" href="${base}/forgot">忘记密码？</a>
+                            <a class="forget-password" href="${base}/user/forget">忘记密码？</a>
                         </span>
                     </div>
                     <div class="form-group">
@@ -38,7 +39,7 @@
             <div class="form-group">
                 <label class="control-label" for="username">手机号</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" name="phone" maxlength="64" placeholder="请输入手机号"
+                    <input id="phone_inp" type="text" class="form-control" name="phone" maxlength="64" placeholder="请输入手机号"
                            required>
                     <span class="input-group-btn">
                                     <a class="btn btn-primary" href="javascript:void(0);" id="sendCode">
@@ -63,6 +64,69 @@
 </div>
 <script type="text/javascript">
 
+    var time = 60;
+    var flag = true;   //设置点击标记，防止60内再次点击生效
+    var vercode = 0;
+
+    //发送验证码
+    $('#sendCode').click(function () {
+        $(this).attr("disabled", true);
+        var phone = $('#phone_inp').val();
+        alert('手机号'+phone +'====');
+        if (flag) {
+            var timer = setInterval(function () {
+
+                if (time == 60 && flag) {
+                    flag = false;
+
+                    $.ajax({
+                        type: 'get',
+                        async: false,
+                        url:"http://localhost:11111/user/sendMessage",
+                        data: {
+                            "phone": phone
+                        },
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.code == 200) {
+                                alert(data.message);
+                                vercode = data.data;
+                                $("#send").html("已发送");
+                            } else {
+                                alert(data.message);
+                                flag = true;
+                                time = 60;
+                                clearInterval(timer);
+                            }
+                        }
+                    });
+                } else if (time == 0) {
+                    $("#sendCode").removeAttr("disabled");
+                    $("#sendCode").html("免费获取验证码");
+                    clearInterval(timer);
+                    time = 60;
+                    flag = true;
+                } else {
+                    $("#sendCode").html(time + " s 重新发送");
+                    time--;
+                }
+            }, 1000);
+        }
+
+    });
+
+    function account() {
+        document.getElementById('account').style.display= 'block';
+        document.getElementById('phone').style.display='none';
+        document.getElementById('account_btn').className = 'btn btn-primary btn-sm';
+        document.getElementById('phone_btn').className = 'btn btn-default btn-sm';
+    }
+    function phone() {
+        document.getElementById('account').style.display= 'none';
+        document.getElementById('phone').style.display='block';
+        document.getElementById('account_btn').className = 'btn btn-default btn-sm';
+        document.getElementById('phone_btn').className = 'btn btn-primary btn-sm';
+    }
 </script>
 
 </@layout>

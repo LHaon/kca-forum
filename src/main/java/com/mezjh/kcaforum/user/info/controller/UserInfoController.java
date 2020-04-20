@@ -22,7 +22,6 @@ public class UserInfoController extends BaseController {
 
     @GetMapping("/sendMessage")
     public ApiResult sendMesssage(String phone) {
-        System.out.println(phone);
         try {
             messageUtil.send(phone);
         } catch (Exception e) {
