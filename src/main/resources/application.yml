@@ -9,6 +9,8 @@ spring:
       charset: UTF-8
       enabled: true
       force: true
+  main:
+    allow-bean-definition-overriding: true
   freemarker:
     template-loader-path:
       - classpath:/templates
@@ -33,6 +35,22 @@ mybatis:
   mapper-locations: com.mezjh.kcaforum.**.dao
   configuration:
     map-underscore-to-camel-case: true
+
+shiro:
+  web:
+    enabled: true
+  annotations:
+    enabled: false
+  loginUrl: /login
+  successUrl: /index
+  unauthorizedUrl: /error/reject.html
+  sessionManager:
+    cookie:
+      maxAge: 604800
+  rememberMeManager:
+    cookie:
+      maxAge: 604800
+
 
 
 # site.options.theme: [default|classic]

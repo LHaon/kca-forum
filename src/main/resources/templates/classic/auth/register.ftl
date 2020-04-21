@@ -20,7 +20,8 @@
                         <div class="form-group">
                             <label class="control-label" for="username">手机号</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="phone" maxlength="64" placeholder="请输入手机号"
+                                <input id="phone" type="text" class="form-control" name="phone" maxlength="64"
+                                       placeholder="请输入手机号"
                                        required>
                                 <span class="input-group-btn">
                                     <a class="btn btn-primary" href="javascript:void(0);" id="sendCode">
@@ -29,22 +30,26 @@
                                 </span>
                             </div>
                         </div>
+                        <div id="message_tex" style="color: red"></div>
                         <div class="form-group ">
                             <label class="control-label" for="code">验证码</label>
                             <input class="form-control" id="code" name="code" type="text" placeholder="请输入验证码"
                                    maxlength="6" required>
                         </div>
+						<div id="code_tex" style="color: red"></div>
                         <div class="form-group ">
                             <label class="control-label" for="username">密码</label>
-                            <input class="form-control" id="password" name="password" type="password" maxlength="18"
+                            <input class="form-control" id="password" name="password" type="password"
+                                   maxlength="18"
                                    placeholder="请输入密码" required>
                         </div>
                         <div class="form-group ">
                             <label class="control-label" for="username">确认密码</label>
-                            <input class="form-control" id="password2" name="password2" type="password"
+                            <input class="form-control" id="passwordr" name="passwordr" type="password"
                                    placeholder="请再一次输入密码" maxlength="18">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">
+						<div id="password_tex" style="color: red"></div>
+                        <button id="to_register" type="submit" class="btn btn-primary btn-block">
                             提交
                         </button>
                     </form>
@@ -54,10 +59,6 @@
     </div>
 
     <script type="text/javascript">
-		seajs.use('validate', function (validate) {
-			validate.register('#submitForm', '#sendCode');
-		});
-		var vercode = 0;
 		var time = 60;
 		var flag = true;   //设置点击标记，防止60内再次点击生效
 
@@ -74,20 +75,27 @@
 						$.ajax({
 							type: 'get',
 							async: false,
-							url: 'sms.do',
+							url: "http://localhost:11111/user/sendMessage",
 							data: {
-								"phone": phone
+								"phone": phone,
+								"msgType":1
 							},
 							dataType: "json",
 							success: function (data) {
-								if (data.status == 0) {
-									vercode = data.data;
-									$("#send").html("已发送");
-								} else {
-									alert(data.msg);
+								if (data.code == 200) {
+									$("#message_tex").html("短信发送成功！");
+								} else if (data.code == 400) {
+									$("#message_tex").html(data.message);
 									flag = true;
 									time = 60;
 									clearInterval(timer);
+									$("#sendCode").removeAttr("disabled");
+								} else {
+									$("#message_tex").html(data.message);
+									flag = true;
+									time = 60;
+									clearInterval(timer);
+									$("#sendCode").removeAttr("disabled");
 								}
 							}
 						});
@@ -107,55 +115,40 @@
 		});
 
 		//手机号注册
-		$('input[name= "submit_phone"]').click(function () {
-			var reader_com_check = $('#reader-me').attr("checked");
-//            if(reader_com_check != true) {
-//                alert("请先点击确认商城服务协议再进行注册");
-//                return false;
-//			}
-			var code = $('#code').val();
-			if (vercode != code) {
-				alert("请输入正确的验证码");
-				$('#code').val("");
-			} else {
-				var phone = $('#phone').val();
-				var password = $('#password1').val();
-				var passwordRepeat = $('#passwordRepeat1').val();
-				if (password != passwordRepeat) {
-					alert("您输入的密码不一致，请从新输入");
-					$('#password1').val("");
-					$('#passwordRepeat1').val("");
-					return false;
-				}
-				var form = new FormData();
-				form.append("phone", phone);
-				form.append("password", password);
+		$('#to_register').click(function () {
 
-				$.ajax({
-					url: "register.do",
-					type: "post",
-					data: form,
-					processData: false,
-					contentType: false,
-					success: function (data) {
-						if (data.status == 0) {
-							alert(data.msg);
-							window.location.href = "init_login_page.do";
-						} else if (data.status == 1) {
-							alert(data.msg);
-						}
-
-					},
-					error: function (e) {
-						alert("错误提交！");
-
-					}
-				});
+			var password = $('#password').val();
+			var passwordr = $('#passwordr').val();
+			if (password != passwordr) {
+				$('#password_tex').html('两次密码输入不一致');
+				$('#password').val("");
+				$('#passwordr').val("");
+				return false;
 			}
+			var data = new FormData($( "#submitForm" )[0]);
+			$.ajax({
+				url: "http://localhost:11111/user/toRegister",
+				type: "post",
+				data: data,
+				processData: false,
+				contentType: false,
+				success: function (data) {
+					if (data.code == 200) {
+						alert(data.data);
+						window.location.href = "";
+					} else if (data.code == 400) {
+						$('#code_tex').html('验证码不正确')
+					} else {
+						alert(data.message)
+					}
+
+				},
+				error: function (e) {
+					alert("错误提交！");
+				}
+			});
 		});
 
-
-    </script>
 	</script>
 
 </@layout>

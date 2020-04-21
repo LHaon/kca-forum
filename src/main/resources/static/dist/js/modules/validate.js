@@ -37,9 +37,9 @@ define(function(require, exports, module) {
                         required: true,
                         check_username: true
                     },
-                    email: {
+                    phone: {
                         required: true,
-                        email: true
+                        phone: true
                     },
                     code: {
                         required: true
@@ -57,9 +57,9 @@ define(function(require, exports, module) {
                         required: '请输入用户名',
                         check_username: '只能是字母/字母+数字,不少于5位'
                     },
-                    email: {
-                        required: '请输入邮箱地址',
-                        email: '邮箱格式不正确'
+                    phone: {
+                        required: '请输入手机号码',
+                        phone: '手机号码格式不正确'
                     },
                     code: {
                         required: '请输入收到的验证码'
@@ -72,21 +72,6 @@ define(function(require, exports, module) {
                         equalTo: '两次输入的密码不一致'
                     }
                 }
-            });
-
-            J(sendCodeButtonId).click(function () {
-                var btn = J(this).button('sending');
-                var phone = J('input[name=phone]').val();
-                J.getJSON(_BATH + '/user/sendMessage', {'phone': phone}, function (data) {
-                    if (data.code != 0) {
-                        btn.text('重新发送');
-                        J('#message').html('<div class="alert alert-success">' + data.message + '</div>');
-                    } else {
-                        J('#message').html('<div class="alert alert-danger">' + data.message + '</div>');
-                    }
-
-                    btn.button('reset');
-                });
             });
         },
         oauthRegister: function (formId) {

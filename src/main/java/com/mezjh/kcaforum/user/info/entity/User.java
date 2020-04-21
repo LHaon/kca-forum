@@ -13,7 +13,19 @@ public class User {
     /**
      * 用户ID
      */
-    private Integer userId;
+    private Long userId;
+    /**
+     * 用户名
+     */
+    private String username;
+    /**
+     * 密码
+     */
+    private String password;
+    /**
+     * 手机号
+     */
+    private String phone;
     /**
      * 昵称
      */
@@ -62,4 +74,6 @@ public class User {
      * 最近上线时间
      */
     private String latelyUpTime;
+
+    private Integer status;
 }

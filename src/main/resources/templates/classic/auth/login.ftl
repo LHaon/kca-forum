@@ -10,7 +10,7 @@
                     <a id="phone_btn" onclick="phone()" class="btn btn-default btn-sm">手机号登录</a>
                 </span>
             </div>
-            <div id="account">
+            <div id="account" class="panel-body">
                 <form method="POST" action="login" accept-charset="UTF-8">
                     <div class="form-group">
                         <label class="control-label" for="username">用户名</label>
@@ -35,7 +35,7 @@
                     </div>
                 </form>
             </div>
-            <div id="phone" style="display: none">
+            <div id="phone" style="display: none" class="panel-body">
             <div class="form-group">
                 <label class="control-label" for="username">手机号</label>
                 <div class="input-group">
@@ -48,6 +48,7 @@
                                 </span>
                 </div>
             </div>
+                <div id="message_tex" style="color: red"></div>
             <div class="form-group ">
                 <label class="control-label" for="code">验证码</label>
                 <input class="form-control" id="code" name="code" type="text" placeholder="请输入验证码"
@@ -66,13 +67,11 @@
 
     var time = 60;
     var flag = true;   //设置点击标记，防止60内再次点击生效
-    var vercode = 0;
 
     //发送验证码
     $('#sendCode').click(function () {
-        $(this).attr("disabled", true);
+		$(this).attr("disabled", true);
         var phone = $('#phone_inp').val();
-        alert('手机号'+phone +'====');
         if (flag) {
             var timer = setInterval(function () {
 
@@ -84,16 +83,15 @@
                         async: false,
                         url:"http://localhost:11111/user/sendMessage",
                         data: {
-                            "phone": phone
+                            "phone": phone,
+                            "msgType": 2
                         },
                         dataType: "json",
                         success: function (data) {
                             if (data.code == 200) {
-                                alert(data.message);
-                                vercode = data.data;
-                                $("#send").html("已发送");
+                                $('#message_tex').html(data.data);
                             } else {
-                                alert(data.message);
+								$('#message_tex').html(data.message);
                                 flag = true;
                                 time = 60;
                                 clearInterval(timer);

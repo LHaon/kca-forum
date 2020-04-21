@@ -17,8 +17,8 @@ define(function(require, exports, module) {
         doPostLogin: function () {
             var un = $('#ajax_login_username').val();
             var pw = $('#ajax_login_password').val();
-            jQuery.post(_MTONS.BASE_PATH + '/api/login', {'username': un, 'password': pw}, function (ret) {
-                if (ret && ret.code == 0) {
+            jQuery.post(_MTONS.BASE_PATH + '/user/login', {'username': un, 'password': pw}, function (ret) {
+                if (ret && ret.code == 200) {
                     window.location.reload();
                 } else {
                     $('#ajax_login_message').text(ret.message).show();

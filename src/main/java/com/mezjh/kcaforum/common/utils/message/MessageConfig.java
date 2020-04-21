@@ -22,6 +22,14 @@ public class MessageConfig {
      * 注册短信模版ID
      */
     private String registerTemplateId;
+    /**
+     * 登陆短信模版ID
+     */
+    private String loginTemplateId;
+    /**
+     * 找回密码模版ID
+     */
+    private String findTemplateId;
     private String appId;
     private String appKey;
     private String secretId;
