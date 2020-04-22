@@ -11,7 +11,7 @@
                     <#include "/classic/inc/action_message.ftl"/>
                     <div id="message">
                     </div>
-                    <form id="submitForm" method="POST" action="register" accept-charset="UTF-8">
+                    <form id="registerForm">
                         <div class="form-group ">
                             <label class="control-label" for="username">用户名</label>
                             <input class="form-control" id="username" name="username" type="text"
@@ -48,8 +48,9 @@
                             <input class="form-control" id="passwordr" name="passwordr" type="password"
                                    placeholder="请再一次输入密码" maxlength="18">
                         </div>
-						<div id="password_tex" style="color: red"></div>
-                        <button id="to_register" type="submit" class="btn btn-primary btn-block">
+						<div id="password_tex" class="text-danger"></div>
+						<div>&nbsp;</div>
+                        <button id="to_register" type="button" class="btn btn-primary btn-block">
                             提交
                         </button>
                     </form>
@@ -125,26 +126,25 @@
 				$('#passwordr').val("");
 				return false;
 			}
-			var data = new FormData($( "#submitForm" )[0]);
+			var data = new FormData($( "#registerForm" )[0]);
 			$.ajax({
 				url: "http://localhost:11111/user/toRegister",
 				type: "post",
+				async: false,
 				data: data,
 				processData: false,
 				contentType: false,
+				dataType: "json",
 				success: function (data) {
 					if (data.code == 200) {
-						alert(data.data);
-						window.location.href = "";
-					} else if (data.code == 400) {
-						$('#code_tex').html('验证码不正确')
-					} else {
-						alert(data.message)
+						alert(data.data+"，即将跳转到登陆界面。");
+						window.location.href = "http://localhost:11111/user/login";
+					} else  {
+						$('#password_tex').html(data.message)
 					}
-
 				},
 				error: function (e) {
-					alert("错误提交！");
+
 				}
 			});
 		});

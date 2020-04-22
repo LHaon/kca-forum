@@ -2,6 +2,7 @@ package com.mezjh.kcaforum.common;
 
 import com.mezjh.integrationkit.apiutils.ApiResult;
 import com.mezjh.kcaforum.common.utils.MdFive;
+import com.mezjh.kcaforum.user.info.entity.AccountProfile;
 import com.mezjh.kcaforum.user.info.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -27,8 +28,8 @@ public class BaseController {
         return "/" + siteOptions.getValue("theme") + view;
     }
 
-    protected ApiResult<User> executeLogin(String username, String password, boolean rememberMe) {
-        ApiResult<User> ret = ApiResult.fail("登录失败");
+    protected ApiResult<AccountProfile> executeLogin(String username, String password, boolean rememberMe) {
+        ApiResult<AccountProfile> ret = ApiResult.fail("登录失败");
 
         if (StringUtils.isAnyBlank(username, password)) {
             return ret;
@@ -57,8 +58,12 @@ public class BaseController {
      *
      * @return
      */
-    protected User getProfile() {
+    protected AccountProfile getProfile() {
         Subject subject = SecurityUtils.getSubject();
-        return (User) subject.getPrincipal();
+        return (AccountProfile) subject.getPrincipal();
+    }
+
+    protected void putProfile(AccountProfile profile) {
+        SecurityUtils.getSubject().getSession(true).setAttribute("profile", profile);
     }
 }

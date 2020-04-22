@@ -21,4 +21,10 @@ public interface Views {
     String H_INDEX = "/channel/index";
 
     String TEXT_EDIT = "/channel/editing";
+
+    String REDIRECT_USER_HOME = "redirect:/users/%d";
+
+    String METHOD_TEXTS = "texts";
+
+    String USER_METHOD_TEMPLATE = "/user/method_%s";
 }

@@ -4,7 +4,6 @@ import com.mezjh.kcaforum.user.info.entity.User;
 import com.mezjh.kcaforum.user.info.vo.RegisterVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 /**

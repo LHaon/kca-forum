@@ -36,19 +36,19 @@ public class AccountRealm extends AuthorizingRealm {
         AccountProfile profile = (AccountProfile) SecurityUtils.getSubject().getPrincipal();
         if (profile != null) {
             User user = userInfoService.getUserById(profile.getId());
-            if (user != null) {
-                SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-                List<Role> roles = userRoleService.listRoles(user.getUserId());
-
-                //赋予角色
-                roles.forEach(role -> {
-                    info.addRole(role.getName());
-
-                    //赋予权限
-                    role.getPermissions().forEach(permission -> info.addStringPermission(permission.getName()));
-                });
-                return info;
-            }
+//            if (user != null) {
+//                SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+//                List<Role> roles = userRoleService.listRoles(user.getUserId());
+//
+//                //赋予角色
+//                roles.forEach(role -> {
+//                    info.addRole(role.getName());
+//
+//                    //赋予权限
+//                    role.getPermissions().forEach(permission -> info.addStringPermission(permission.getName()));
+//                });
+//                return info;
+//            }
         }
         return null;
     }
@@ -57,9 +57,9 @@ public class AccountRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         AccountProfile profile = getAccount(userInfoService, token);
 
-        if (profile.getStatus() == 1) {
-            throw new LockedAccountException(profile.getNickname());
-        }
+//        if (profile.getStatus() == 1) {
+//            throw new LockedAccountException(profile.getNickname());
+//        }
 
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(profile, token.getCredentials(), getName());
         Session session = SecurityUtils.getSubject().getSession();

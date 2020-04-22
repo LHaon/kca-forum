@@ -11,14 +11,16 @@
                 </span>
             </div>
             <div id="account" class="panel-body">
-                <form method="POST" action="login" accept-charset="UTF-8">
+                <form id="username_form" accept-charset="UTF-8">
                     <div class="form-group">
                         <label class="control-label" for="username">用户名</label>
-                        <input class="form-control" name="username" type="text" placeholder="请输入用户名" required>
+                        <input id="username" class="form-control" name="username" type="text" placeholder="请输入用户名"
+                               required>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="password">密码</label>
-                        <input class="form-control" name="password" type="password" placeholder="请输入密码" required>
+                        <input id="password" class="form-control" name="password" type="password" placeholder="请输入密码"
+                               required>
                     </div>
                     <div class="form-group">
                         <label>
@@ -29,7 +31,7 @@
                         </span>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">
+                        <button id="username_login" type="submit" class="btn btn-primary btn-block">
                             登录
                         </button>
                     </div>
@@ -55,7 +57,7 @@
                        maxlength="6" required>
             </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">
+                    <button id="phone_login" type="submit" class="btn btn-primary btn-block">
                         登录
                     </button>
                 </div>
@@ -113,7 +115,46 @@
 
     });
 
-    function account() {
+	//账号密码登陆
+	$('#username_login').click(function () {
+		var username = $('#username').val();
+		var password = $('#password').val();
+		if (username == "") {
+			alert("用户民");
+			return false;
+        } else if (password == "") {
+			alert("密码");
+			return  false;
+        }
+		var data = new FormData($( "#username_form" )[0]);
+		$.ajax({
+			url: "http://localhost:11111/user/toLogin",
+			type: "post",
+			async: false,
+			data: {
+				"username" : username,
+                "password" : password,
+				"loginType" : 1
+            },
+			dataType: "json",
+			success: function (data) {
+				if (data.code == 200) {
+					alert("su");
+					window.location.reload();
+				} else  {
+					alert("c");
+				}
+			},
+			error: function (e) {
+                alert("cuow");
+			}
+		});
+	});
+
+
+
+
+	function account() {
         document.getElementById('account').style.display= 'block';
         document.getElementById('phone').style.display='none';
         document.getElementById('account_btn').className = 'btn btn-primary btn-sm';

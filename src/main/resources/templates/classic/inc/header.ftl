@@ -131,7 +131,7 @@
                         </ul>
                     </li>
 <#--				<#else>-->
-                    <li><a href="${base}/login" class="btn btn-default btn-sm signup">登录</a></li>
+                    <li><a href="${base}/user/login" class="btn btn-default btn-sm signup">登录</a></li>
 <#--&lt;#&ndash;                    <@controls name="register">&ndash;&gt;-->
                         <li><a href="${base}/user/register" class="btn btn-primary btn-sm signup">注册</a></li>
 <#--&lt;#&ndash;                    </@controls>&ndash;&gt;-->

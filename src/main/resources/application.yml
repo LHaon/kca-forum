@@ -58,10 +58,6 @@ site:
   version: 0.0.1
   location: ${user.dir}
   controls:
-    # 注册开关
-    register: true
-    # 注册开启邮箱验证
-    register_email_validate: false
     # 发布文章开关
     post: true
     # 评论开关

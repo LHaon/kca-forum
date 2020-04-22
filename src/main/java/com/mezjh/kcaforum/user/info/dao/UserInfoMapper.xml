@@ -4,14 +4,20 @@
 <mapper namespace="com.mezjh.kcaforum.user.info.dao.UserInfoMapper">
     <select id="findUserExist" resultType="com.mezjh.kcaforum.user.info.entity.User"
             parameterType="com.mezjh.kcaforum.user.info.vo.RegisterVo">
-        select username,phone from user where username=#{username} or phone=#{phone}
+        select username,phone from user where username=#{username} or phone=#{phone} limit 1
     </select>
     <insert id="register" parameterType="com.mezjh.kcaforum.user.info.entity.User">
-         insert into user(id,username,password,phone,photo_url,nickname) values
-            (null,#{username},#{password},#{phone},#{photoUrl},#{nickname})
+         insert into user(id,username,password,phone,photo_url,nickname,create_time,update_time) values
+            (null,#{username},#{password},#{phone},#{photoUrl},#{nickname},#{createTime},#{updateTime})
     </insert>
-
-    <select id="getUserById" resultType="com.mezjh.kcaforum.user.info.entity.User" parameterType="long">
+    <select id="findByUsername" resultType="com.mezjh.kcaforum.user.info.entity.User"
+            parameterType="string">
+        select * from user where username=#{username}
+    </select>
+    <update id="saveLateltTime" parameterType="com.mezjh.kcaforum.user.info.entity.User">
+        update user set lately_up_time = #{latelyUpTime} where id = #{userId}
+    </update>
+    <select id="findUserById" resultType="com.mezjh.kcaforum.user.info.entity.User" parameterType="long">
         select * from user where id=#{id}
     </select>
 

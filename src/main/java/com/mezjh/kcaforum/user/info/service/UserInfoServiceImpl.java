@@ -1,6 +1,8 @@
 package com.mezjh.kcaforum.user.info.service;
 
 import com.mezjh.kcaforum.common.utils.BeanMapUtils;
+import com.mezjh.kcaforum.common.utils.MdFive;
+import com.mezjh.kcaforum.user.Comm;
 import com.mezjh.kcaforum.user.info.dao.UserInfoMapper;
 import com.mezjh.kcaforum.user.info.entity.AccountProfile;
 import com.mezjh.kcaforum.user.info.entity.User;
@@ -29,14 +31,17 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public User findUserExist(RegisterVo registerVo) {
-        return null;
+        return userInfoMapper.findUserExist(registerVo);
     }
 
     @Override
     public int register(User user) {
         user.setLatelyUpTime((new Date()).toString());
-        user.setPhotoUrl("http://image-mezjh.test.upcdn.net/kca/15181091307/photo.jpeg");
-        user.setNickname("sssss");
+        user.setPhotoUrl(Comm.HEAD_PHOTO_URL);
+        user.setNickname(Comm.getBaseNickname(user.getPhone()));
+        user.setPassword(MdFive.md5(user.getPassword()));
+        user.setCreateTime(Comm.getNowTime());
+        user.setUpdateTime(Comm.getNowTime());
         return userInfoMapper.register(user);
     }
 
@@ -47,17 +52,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         Assert.notNull(po, "账户不存在");
 
-//		Assert.state(po.getStatus() != Const.STATUS_CLOSED, "您的账户已被封禁");
-
         Assert.state(StringUtils.equals(po.getPassword(), password), "密码错误");
 
-        po.setLatelyUpTime(String.valueOf(Calendar.getInstance().getTime()));
+        po.setLatelyUpTime(Comm.getNowTime());
         userInfoMapper.saveLateltTime(po);
         u = BeanMapUtils.copyPassport(po);
 
         BadgesCount badgesCount = new BadgesCount();
-        badgesCount.setMessageCount(messageService.getUnReadMessageCount(u.getId()));
-
+        //badgesCount.setMessageCount(messageService.getUnReadMessageCount(u.getId()));
+        badgesCount.setMessageCount(1);
         u.setBadgesCount(badgesCount);
         return u;
     }

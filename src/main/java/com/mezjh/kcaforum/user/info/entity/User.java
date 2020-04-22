@@ -35,6 +35,18 @@ public class User {
      */
     private String photoUrl;
     /**
+     * 最近上线时间
+     */
+    private String latelyUpTime;
+    /**
+     * 创建时间
+     */
+    private String createTime;
+    /**
+     * 更新时间
+     */
+    private String updateTime;
+    /**
      * 关注数
      */
     private Integer followCount;
@@ -70,10 +82,6 @@ public class User {
      * 热门ID列表
      */
     private String popularId;
-    /**
-     * 最近上线时间
-     */
-    private String latelyUpTime;
 
     private Integer status;
 }

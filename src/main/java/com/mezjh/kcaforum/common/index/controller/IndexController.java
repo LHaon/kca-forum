@@ -20,9 +20,4 @@ public class IndexController extends BaseController {
     public String getIndex(ModelMap modelMap, HttpServletRequest request) {
         return view(Views.H_INDEX);
     }
-
-    @GetMapping("/login")
-    public String toLogin() {
-        return view(Views.LOGIN);
-    }
 }
