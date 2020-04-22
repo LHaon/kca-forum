@@ -40,17 +40,12 @@ public class BaseController {
         try {
             SecurityUtils.getSubject().login(token);
             ret = ApiResult.success(getProfile());
-        } catch (UnknownAccountException e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
-            ret = ApiResult.fail("用户不存在");
-        } catch (LockedAccountException e) {
-            log.error(e.getMessage());
-            ret = ApiResult.fail("用户被禁用");
-        } catch (AuthenticationException e) {
-            log.error(e.getMessage());
-            ret = ApiResult.fail("用户认证失败");
+            ret = ApiResult.fail("用户名或密码不正确");
+        } finally {
+            return ret;
         }
-        return ret;
     }
 
     /**

@@ -22,6 +22,8 @@
                         <input id="password" class="form-control" name="password" type="password" placeholder="请输入密码"
                                required>
                     </div>
+                    <div id="username_tex" class="text-danger"></div>
+                    <div>&nbsp;</div>
                     <div class="form-group">
                         <label>
                             <input type="checkbox" name="rememberMe" value="1"> 记住登录
@@ -31,7 +33,7 @@
                         </span>
                     </div>
                     <div class="form-group">
-                        <button id="username_login" type="submit" class="btn btn-primary btn-block">
+                        <button id="username_login" type="button" class="btn btn-primary btn-block">
                             登录
                         </button>
                     </div>
@@ -50,14 +52,14 @@
                                 </span>
                 </div>
             </div>
-                <div id="message_tex" style="color: red"></div>
+                <div id="message_tex" class="text-danger"></div>
             <div class="form-group ">
                 <label class="control-label" for="code">验证码</label>
                 <input class="form-control" id="code" name="code" type="text" placeholder="请输入验证码"
                        maxlength="6" required>
             </div>
                 <div class="form-group">
-                    <button id="phone_login" type="submit" class="btn btn-primary btn-block">
+                    <button id="phone_login" type="button" class="btn btn-primary btn-block">
                         登录
                     </button>
                 </div>
@@ -128,7 +130,7 @@
         }
 		var data = new FormData($( "#username_form" )[0]);
 		$.ajax({
-			url: "http://localhost:11111/user/toLogin",
+			url: "http://localhost:11111/user/toLoginR",
 			type: "post",
 			async: false,
 			data: {
@@ -142,11 +144,11 @@
 					alert("su");
 					window.location.reload();
 				} else  {
-					alert("c");
+					$('#username_tex').html(data.message);
 				}
 			},
-			error: function (e) {
-                alert("cuow");
+			error: function (data) {
+                $('#username_tex').html("服务器错误");
 			}
 		});
 	});

@@ -86,6 +86,12 @@ public class UserInfoController extends BaseController {
         return view;
     }
 
+    @PostMapping(value = "/toLoginR")
+    @ResponseBody
+    public ApiResult<AccountProfile> login(String username, String password) {
+        return executeLogin(username, password, false);
+    }
+
 //    @PostMapping("/qregister")
 //    public String register(User post, HttpServletRequest request, ModelMap model) {
 //        String view = view(Views.REGISTER);
