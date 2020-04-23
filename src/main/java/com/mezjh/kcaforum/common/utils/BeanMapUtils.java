@@ -10,7 +10,7 @@ import com.mezjh.kcaforum.user.info.entity.User;
 public class BeanMapUtils {
 
     public static AccountProfile copyPassport(User vo) {
-        AccountProfile res = new AccountProfile(vo.getUserId(), vo.getUsername());
+        AccountProfile res = new AccountProfile(vo.getId(), vo.getUsername());
         res.setNickname(vo.getNickname());
         res.setPhone(vo.getPhone());
         res.setPhotoUrl(vo.getPhotoUrl());

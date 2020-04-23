@@ -13,7 +13,7 @@ public class User {
     /**
      * 用户ID
      */
-    private Long userId;
+    private Long id;
     /**
      * 用户名
      */

@@ -31,17 +31,12 @@ public class BaseController {
     protected ApiResult<AccountProfile> executeLogin(String username, String password, boolean rememberMe) {
         ApiResult<AccountProfile> ret = ApiResult.fail("登录失败");
 
-        if (StringUtils.isAnyBlank(username, password)) {
-            return ret;
-        }
-
         UsernamePasswordToken token = new UsernamePasswordToken(username, MdFive.md5(password), rememberMe);
 
         try {
             SecurityUtils.getSubject().login(token);
             ret = ApiResult.success(getProfile());
         } catch (Exception e) {
-            log.error(e.getMessage());
             ret = ApiResult.fail("用户名或密码不正确");
         } finally {
             return ret;

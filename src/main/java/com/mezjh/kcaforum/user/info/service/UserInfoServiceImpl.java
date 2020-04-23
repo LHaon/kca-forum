@@ -55,13 +55,14 @@ public class UserInfoServiceImpl implements UserInfoService {
         Assert.state(StringUtils.equals(po.getPassword(), password), "密码错误");
 
         po.setLatelyUpTime(Comm.getNowTime());
-        userInfoMapper.saveLateltTime(po);
+        //int i = userInfoMapper.saveLateltTime(po);
+        //System.out.println(i);
         u = BeanMapUtils.copyPassport(po);
-
-        BadgesCount badgesCount = new BadgesCount();
-        //badgesCount.setMessageCount(messageService.getUnReadMessageCount(u.getId()));
-        badgesCount.setMessageCount(1);
-        u.setBadgesCount(badgesCount);
+//
+//        BadgesCount badgesCount = new BadgesCount();
+//        //badgesCount.setMessageCount(messageService.getUnReadMessageCount(u.getId()));
+//        badgesCount.setMessageCount(1);
+//        u.setBadgesCount(badgesCount);
         return u;
     }
 

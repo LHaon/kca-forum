@@ -33,7 +33,7 @@ public class UsersController extends BaseController {
     @GetMapping(value = "/{userId}")
     public String posts(@PathVariable(value = "userId") Long userId,
                         ModelMap model, HttpServletRequest request) {
-        return method(userId, Views.METHOD_TEXTS, model, request);
+        return view(Views.USER_INDEX);
     }
 
     /**
@@ -47,7 +47,7 @@ public class UsersController extends BaseController {
     public String method(@PathVariable(value = "userId") Long userId,
                          @PathVariable(value = "method") String method,
                          ModelMap model, HttpServletRequest request) {
-        model.put("pageNo", ServletRequestUtils.getIntParameter(request, "pageNo", 1));
+//        model.put("pageNo", ServletRequestUtils.getIntParameter(request, "pageNo", 1));
 
         // 访问消息页, 判断登录
 //        if (Views.METHOD_MESSAGES.equals(method)) {

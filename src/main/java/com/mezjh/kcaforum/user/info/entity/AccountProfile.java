@@ -43,7 +43,7 @@ public class AccountProfile implements Serializable {
      */
     private BadgesCount badgesCount;
 
-    public AccountProfile(long id, String username) {
+    public AccountProfile(Long id, String username) {
         this.id = id;
         this.username = username;
     }
