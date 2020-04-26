@@ -5,6 +5,7 @@ import com.mezjh.kcaforum.common.index.service.IndexService;
 import com.mezjh.kcaforum.common.template.DirectiveHandler;
 import com.mezjh.kcaforum.common.template.TemplateDirective;
 import com.mezjh.kcaforum.common.text.entity.TextInfo;
+import com.mezjh.kcaforum.common.text.entity.TextInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +30,7 @@ public class ContentsDirective extends TemplateDirective {
     @Override
     public void execute(DirectiveHandler handler) throws Exception {
         Integer pageType = handler.getInteger("pageType", 0);
-        List<TextInfo> datas = indexService.getIndexTextList();
+        List<TextInfoVo> datas = indexService.getIndexTextList();
         handler.put(RESULTS, ApiResult.success(datas)).render();
     }
 }

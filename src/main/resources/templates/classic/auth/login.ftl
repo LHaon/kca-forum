@@ -141,8 +141,6 @@
 			dataType: "json",
 			success: function (data) {
 				if (data.code == 200) {
-					alert(data.data.phone);
-					alert(data.data.id);
 					window.location.href="http://localhost:11111/users/"+ data.data.id;
 				} else  {
 					$('#username_tex').html(data.message);

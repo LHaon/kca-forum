@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mezjh.kcaforum.common.index.dao.IndexMapper">
-    <select id="getIndexTextList" resultType="com.mezjh.kcaforum.common.text.entity.TextInfo">
+    <select id="getIndexTextList" resultType="com.mezjh.kcaforum.common.text.entity.TextInfoVo">
         SELECT t.id AS textId,t.user_id AS userId,ty.id AS textTypeId,ty.type_name AS textTypeName,t.photo_preview,
         t.comment_count,t.like_count,t.title,t.preview,t.md_html,t.create_time,t.update_time,t.word_count,t.read_count
         FROM text t

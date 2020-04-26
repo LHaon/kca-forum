@@ -47,41 +47,13 @@ public class User {
      */
     private String updateTime;
     /**
-     * 关注数
-     */
-    private Integer followCount;
-    /**
-     * 粉丝数
-     */
-    private Integer fansCount;
-    /**
      * 文章数
      */
     private Integer textCount;
     /**
-     * 字数
+     * 评论数
      */
-    private Integer wordCount;
-    /**
-     * 获得喜欢数
-     */
-    private Integer collectionLikeCount;
-    /**
-     * 文章ID列表
-     */
-    private String textId;
-    /**
-     * 动态ID列表
-     */
-    private String dynamicId;
-    /**
-     * 最新评论ID列表
-     */
-    private String latestCommentId;
-    /**
-     * 热门ID列表
-     */
-    private String popularId;
+    private Integer commentCount;
 
     private Integer status;
 }

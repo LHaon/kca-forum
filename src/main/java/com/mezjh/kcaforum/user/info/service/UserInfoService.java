@@ -29,9 +29,17 @@ public interface UserInfoService {
      */
     AccountProfile login(String username, String password);
 
+    /**
+     * 查找profile
+     * @param id
+     * @return
+     */
+    AccountProfile findProfile(Long id);
+
+
     User getUserById(Long id);
 
-    AccountProfile findProfile(Long id);
+
 
     int userRegister(User user);
 }

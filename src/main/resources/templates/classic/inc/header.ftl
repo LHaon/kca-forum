@@ -106,7 +106,7 @@
                         </form>
                     </li>
 
-<#--				<#if profile??>-->
+				<#if profile??>
 <#--                    <@controls name="post">-->
                         <li>
                             <a href="${base}/texts/editing" class="plus"><i class="icon icon-note"></i> 写文章</a>
@@ -114,8 +114,8 @@
 <#--                    </@controls>-->
                     <li class="dropdown">
                         <a href="#" class="user dropdown-toggle" data-toggle="dropdown">
-<#--                            <img class="img-circle" src="<@resource src=profile.avatar + '?t=' + .now?time />">-->
-<#--                            <span>${profile.name}</span>-->
+                            <img class="img-circle" src="${profile.photoUrl}">
+                            <span>${profile.nickname}</span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
@@ -130,12 +130,12 @@
                             <li><a href="${base}/logout">退出</a></li>
                         </ul>
                     </li>
-<#--				<#else>-->
+				<#else>
                     <li><a href="${base}/user/login" class="btn btn-default btn-sm signup">登录</a></li>
 <#--&lt;#&ndash;                    <@controls name="register">&ndash;&gt;-->
                         <li><a href="${base}/user/register" class="btn btn-primary btn-sm signup">注册</a></li>
 <#--&lt;#&ndash;                    </@controls>&ndash;&gt;-->
-<#--				</#if>-->
+				</#if>
 
                 </ul>
             </div>

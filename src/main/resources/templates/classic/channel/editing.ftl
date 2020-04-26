@@ -35,19 +35,6 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">发布到</h3>
-                </div>
-                <div class="panel-body">
-                    <select class="form-control" name="channelId" required>
-                        <option value="">请选择栏目</option>
-                        <#list channels as row>
-                            <option value="${row.id}" <#if (view.channelId == row.id)> selected </#if>>${row.name}</option>
-                        </#list>
-                    </select>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
                     <h3 class="panel-title">标签(用逗号或空格分隔)</h3>
                 </div>
                 <div class="panel-body">

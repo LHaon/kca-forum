@@ -29,4 +29,6 @@ public interface Views {
     String USER_METHOD_TEMPLATE = "/user/method_%s";
 
     String USER_INDEX = "/inc/user_sidebar";
+
+    String TEXT_VIEW = "/channel/view";
 }

@@ -79,12 +79,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         Assert.notNull(po, "账户不存在");
 
 //		Assert.state(po.getStatus() != Const.STATUS_CLOSED, "您的账户已被封禁");
-        po.setLatelyUpTime(String.valueOf(Calendar.getInstance().getTime()));
+        po.setLatelyUpTime(Comm.getNowTime());
 
         u = BeanMapUtils.copyPassport(po);
 
         BadgesCount badgesCount = new BadgesCount();
-        badgesCount.setMessageCount(messageService.getUnReadMessageCount(u.getId()));
+        badgesCount.setMessageCount(1);
 
         u.setBadgesCount(badgesCount);
 

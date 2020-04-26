@@ -12,11 +12,11 @@
             <div class="infos panel-heading">
                 <h1 class="panel-title topic-title">${view.title}</h1>
                 <div class="meta inline-block">
-                    <a class="author" href="${base}/users/${view.author.id}">
-                    ${view.author.name}
+                    <a class="author" href="${base}/users/${view.user.id}">
+                    ${view.user.nickname}
                     </a>
-                    <abbr class="timeago">${timeAgo(view.created)}</abbr>
-                    <abbr>⋅ ${view.views} 阅读</abbr>
+<#--                    <abbr class="timeago">${timeAgo(view.created)}</abbr>-->
+                    <abbr>⋅ ${view.readCount} 阅读</abbr>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -47,10 +47,10 @@
         </div>
 
         <!-- Comments -->
-        <@controls name="comment">
+<#--        <@controls name="comment">-->
         <div id="chat" class="chats shadow-box">
             <div class="chat_header">
-                <h4>全部评论: <span id="chat_count">0</span> 条</h4>
+                <h4>全部评论: <span id="chat_count">${view.commentCount}</span> 条</h4>
             </div>
             <ul id="chat_container" class="its"></ul>
             <div id="pager" class="text-center"></div>
@@ -77,7 +77,7 @@
                 </div>
             </div>
         </div>
-        </@controls>
+<#--        </@controls>-->
         <!-- /view show -->
     </div>
     <div class="col-xs-12 col-md-3 side-right hidden-xs hidden-sm">
@@ -87,22 +87,22 @@
                     <@utils.showAva view.author "img-circle"/>
                 </div>
                 <div class="user-name">
-                    <span>${view.author.name}</span>
+                    <span>${view.user.nickName}</span>
                 </div>
             </li>
 
             <li class="list-group-item">
                 <div class="user-datas">
                     <ul>
-                        <li><strong>${view.author.posts}</strong><span>发布</span></li>
-                        <li class="noborder"><strong>${view.author.comments}</strong><span>评论</span></li>
+                        <li><strong>${view.user.textCount}</strong><span>发布</span></li>
+                        <li class="noborder"><strong>${view.user.commentCount}</strong><span>评论</span></li>
                     </ul>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="text-center">
                     <a class="btn btn-default btn-sm" href="javascript:void(0);" data-id="${view.id}" rel="favor">
-                        <i class="icon icon-star"></i> 收藏 <strong id="favors">${view.favors}</strong>
+                        <i class="icon icon-star"></i> 收藏 <strong id="favors">${view.likeCount}</strong>
                     </a>
                 </div>
             </li>

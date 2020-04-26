@@ -1,14 +1,15 @@
 package com.mezjh.kcaforum.common.text.entity;
 
-import com.mezjh.kcaforum.user.info.entity.User;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * @author zjh
  * @date 2020/3/23
  */
 @Data
-public class TextInfo {
+public class TextInfo implements Serializable {
     /**
      * ID
      */
@@ -18,11 +19,7 @@ public class TextInfo {
      */
     private Integer userId;
     /**
-     * 文章类型ID
-     */
-    private Integer textTypeId;
-    /**
-     * 文章类型名
+     * 文章标签名
      */
     private String textTypeName;
     /**
@@ -46,10 +43,6 @@ public class TextInfo {
      */
     private String preview;
     /**
-     * 文章markdown html
-     */
-    private String mdHtml;
-    /**
      * 创建时间
      */
     private String createTime;
@@ -58,15 +51,11 @@ public class TextInfo {
      */
     private String updateTime;
     /**
-     * 字数
-     */
-    private Integer wordCount;
-    /**
      * 阅读数
      */
     private Integer readCount;
     /**
-     * 文章所属用户
+     * 文章状态
      */
-    private User user;
+    private Integer status;
 }

@@ -33,7 +33,7 @@ public class UsersController extends BaseController {
     @GetMapping(value = "/{userId}")
     public String posts(@PathVariable(value = "userId") Long userId,
                         ModelMap model, HttpServletRequest request) {
-        return view(Views.USER_INDEX);
+        return method(userId, Views.METHOD_TEXTS, model, request);
     }
 
     /**
@@ -67,11 +67,11 @@ public class UsersController extends BaseController {
         model.put("user", userInfoService.getUserById(userId));
         boolean owner = true;
 
-//        AccountProfile profile = getProfile();
-//        if (null != profile && profile.getId() == userId) {
-//            owner = true;
-//            putProfile(userService.findProfile(profile.getId()));
-//        }
+        AccountProfile profile = getProfile();
+        if (null != profile && profile.getId() == userId) {
+            owner = true;
+            putProfile(userInfoService.findProfile(profile.getId()));
+        }
         model.put("owner", owner);
     }
 }

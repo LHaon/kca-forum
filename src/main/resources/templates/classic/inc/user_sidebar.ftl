@@ -5,14 +5,14 @@
             <@utils.showAva user "img-circle"/>
         </div>
         <div class="user-name">
-            <span>${user.name}</span>
+            <span>${user.nickname}</span>
         </div>
     </li>
     <li class="list-group-item">
         <div class="user-datas">
             <ul>
-                <li><strong>${user.posts}</strong><span>发布</span></li>
-                <li class="noborder"><strong>${user.comments}</strong><span>评论</span></li>
+                <li><strong>${user.textCount}</strong><span>发布</span></li>
+                <li class="noborder"><strong>${user.commentCount}</strong><span>评论</span></li>
             </ul>
         </div>
     </li>
