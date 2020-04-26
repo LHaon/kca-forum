@@ -17,12 +17,13 @@
                         <input id="username" class="form-control" name="username" type="text" placeholder="请输入用户名"
                                required>
                     </div>
+                    <div id="username_tex" class="text-danger"></div>
                     <div class="form-group">
                         <label class="control-label" for="password">密码</label>
                         <input id="password" class="form-control" name="password" type="password" placeholder="请输入密码"
                                required>
                     </div>
-                    <div id="username_tex" class="text-danger"></div>
+                    <div id="password_tex" class="text-danger"></div>
                     <div>&nbsp;</div>
                     <div class="form-group">
                         <label>
@@ -122,10 +123,10 @@
 		var username = $('#username').val();
 		var password = $('#password').val();
 		if (username == "") {
-			alert("用户民");
+            $('#username_tex').html("请输入账号");
 			return false;
         } else if (password == "") {
-			alert("密码");
+            $('#password_tex').html("请输入密码");
 			return  false;
         }
 		var data = new FormData($( "#username_form" )[0]);
@@ -143,11 +144,11 @@
 				if (data.code == 200) {
 					window.location.href="http://localhost:11111/users/"+ data.data.id;
 				} else  {
-					$('#username_tex').html(data.message);
+					$('#password_tex').html(data.message);
 				}
 			},
 			error: function (data) {
-                $('#username_tex').html("服务器错误");
+                $('#passwd_tex').html("服务器错误");
 			}
 		});
 	});
