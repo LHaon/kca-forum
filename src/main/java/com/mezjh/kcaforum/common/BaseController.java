@@ -4,6 +4,7 @@ import com.mezjh.integrationkit.apiutils.ApiResult;
 import com.mezjh.kcaforum.common.utils.MdFive;
 import com.mezjh.kcaforum.user.info.entity.AccountProfile;
 import com.mezjh.kcaforum.user.info.entity.User;
+import com.mezjh.kcaforum.user.info.service.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -13,6 +14,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * @author zjh
@@ -23,6 +25,10 @@ public class BaseController {
 
     @Autowired
     private SiteOptions siteOptions;
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+    @Autowired
+    private UserInfoService userInfoService;
 
     protected String view(String view) {
         return "/" + siteOptions.getValue("theme") + view;
@@ -41,6 +47,25 @@ public class BaseController {
         } finally {
             return ret;
         }
+    }
+
+    protected ApiResult<AccountProfile> phoneJudge(String username, String password) {
+        String redisCaptcha = "";
+        redisCaptcha =  redisTemplate.opsForValue().get(username + "login");
+        if (redisCaptcha.equals("") || !password.equals(redisCaptcha)) {
+            return ApiResult.fail("验证码错误或验证码已过期");
+        }
+
+        User user = userInfoService.findUserByPhone(username);
+        if (user == null) {
+            ApiResult.fail("该手机号未注册");
+        }
+
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword(),
+            false);
+
+        SecurityUtils.getSubject().login(token);
+        return ApiResult.success(getProfile());
     }
 
     /**

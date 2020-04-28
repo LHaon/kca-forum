@@ -79,7 +79,7 @@
 							url: "http://localhost:11111/user/sendMessage",
 							data: {
 								"phone": phone,
-								"msgType":1
+								"msgType":2
 							},
 							dataType: "json",
 							success: function (data) {

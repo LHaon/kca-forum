@@ -36,6 +36,8 @@ public interface UserInfoService {
      */
     AccountProfile findProfile(Long id);
 
+    User findUserByPhone(String phone);
+
 
     User getUserById(Long id);
 

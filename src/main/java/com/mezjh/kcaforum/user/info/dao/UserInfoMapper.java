@@ -33,6 +33,8 @@ public interface UserInfoMapper {
 
     User findByUsername(String username);
 
+    User findUserByPhone(String phone);
+
     int saveLateltTime(User user);
 
     /**

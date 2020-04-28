@@ -34,18 +34,19 @@ public class MessageUtil {
             String[] params = null;
             if (msgType == 1) {
                 //登陆
-                templateId = Integer.parseInt(messageConfig.getRegisterTemplateId());
-                params = new String[]{captcha, "10"};
+                redisTemplate.opsForValue().set(phoneNumber + "login", captcha, 600, TimeUnit.SECONDS);
+                templateId = Integer.parseInt(messageConfig.getLoginTemplateId());
+                params = new String[]{captcha};
             } else if(msgType == 2) {
                 //注册
                 redisTemplate.opsForValue().set(
                     phoneNumber + "register", captcha, 600, TimeUnit.SECONDS);
 
-                templateId = Integer.parseInt(messageConfig.getLoginTemplateId());
-                params = new String[]{captcha};
+                templateId = Integer.parseInt(messageConfig.getRegisterTemplateId());
+                params = new String[]{captcha, "10"};
             } else if(msgType == 3) {
                 //找回密码
-                templateId = Integer.parseInt(messageConfig.getLoginTemplateId());
+                templateId = Integer.parseInt(messageConfig.getFindTemplateId());
                 params = new String[]{captcha};
             }
             SmsSingleSender ssender = new SmsSingleSender(appid, appkey);
@@ -54,7 +55,8 @@ public class MessageUtil {
 //            }
             SmsSingleSenderResult result = ssender.sendWithParam("86", phoneNumber,
                 templateId, params, smsSign, "", "");
-            System.out.println(result);
+            redisTemplate.opsForValue().set(phoneNumber + Integer.toString(msgType) + "flag",
+                "true", 60, TimeUnit.SECONDS);
         } catch (HTTPException e) {
             e.printStackTrace();
         } catch (JSONException e) {

@@ -10,14 +10,14 @@ import com.mezjh.kcaforum.user.info.entity.AccountProfile;
 import com.mezjh.kcaforum.user.info.entity.User;
 import com.mezjh.kcaforum.user.info.service.UserInfoService;
 import com.mezjh.kcaforum.user.info.vo.RegisterVo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.concurrent.TimeUnit;
+import javax.servlet.http.HttpServletResponse;
 import java.util.regex.Pattern;
 
 /**
@@ -38,16 +38,24 @@ public class UserInfoController extends BaseController {
     @GetMapping("/sendMessage")
     @ResponseBody
     public ApiResult sendMesssage(String phone, Integer msgType) {
+        if (redisTemplate.opsForValue().get(phone + Integer.toString(msgType) + "flag") != null) {
+            return ApiResult.fail("发送短信过于频繁");
+        }
+        if (msgType == 2) {
+            User user = userInfoService.findUserByPhone(phone);
+            if (user != null) {
+                return ApiResult.fail("该手机号已被注册");
+            }
+        }
         Pattern pattern = Pattern.compile(Comm.PHONE_REG);
         if (!pattern.matcher(phone).matches() || phone == null) {
             return ApiResult.paramError("手机号格式不正确");
         }
         try {
-            //messageUtil.send(phone, msgType);
+            messageUtil.send(phone, msgType);
         } catch (Exception e) {
             return ApiResult.fail("服务器错误，请稍后再试");
         }
-        redisTemplate.opsForValue().set(phone+"register", "123456", 600, TimeUnit.SECONDS);
         return ApiResult.success("短信发送成功");
     }
 
@@ -60,7 +68,7 @@ public class UserInfoController extends BaseController {
         }
         User user = userInfoService.findUserExist(registerVo);
         if (user != null) {
-            return new ApiResult(true, "401", "用户名或手机号已被注册");
+            return new ApiResult(true, "401", "该用户名已被注册");
         }
         int i = userInfoService.register(registerVo.toUser());
         if (i < 1) {
@@ -88,30 +96,22 @@ public class UserInfoController extends BaseController {
 
     @PostMapping(value = "/toLoginR")
     @ResponseBody
-    public ApiResult<AccountProfile> login(String username, String password) {
+    public ApiResult<AccountProfile> login(String username, String password, Integer loginType) {
+        System.out.println(loginType);
+        if (loginType == 2) {
+            return phoneJudge(username, password);
+        }
         return executeLogin(username, password, false);
     }
 
-//    @PostMapping("/qregister")
-//    public String register(User post, HttpServletRequest request, ModelMap model) {
-//        String view = view(Views.REGISTER);
-//        try {
-//            if (siteOptions.getControls().isRegister_email_validate()) {
-//                String code = request.getParameter("code");
-//                Assert.state(StringUtils.isNotBlank(post.getEmail()), "请输入邮箱地址");
-//                Assert.state(StringUtils.isNotBlank(code), "请输入邮箱验证码");
-//                securityCodeService.verify(post.getEmail(), Consts.CODE_REGISTER, code);
-//            }
-//            post.setAvatar(Consts.AVATAR);
-//            userService.register(post);
-//            Result<AccountProfile> result = executeLogin(post.getUsername(), post.getPassword(), false);
-//            view = String.format(Views.REDIRECT_USER_HOME, result.getData().getId());
-//        } catch (Exception e) {
-//            model.addAttribute("post", post);
-//            model.put("data", Result.failure(e.getMessage()));
-//        }
-//        return view;
-//    }
+    @RequestMapping("/logout")
+    public String logout(HttpServletResponse response) {
+        SecurityUtils.getSubject().logout();
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        response.setDateHeader("Expires", 0); // Proxies.
+        return Views.REDIRECT_INDEX;
+    }
 
     @GetMapping("/login")
     public String toLogin() {
@@ -131,6 +131,21 @@ public class UserInfoController extends BaseController {
     @GetMapping("/forget")
     public String toForget() {
         return view(Views.FORGET);
+    }
+
+    @GetMapping("/setting")
+    public String toSetting() {
+        return view(Views.SETTING);
+    }
+
+    @GetMapping("/setting/photo")
+    public String toPhoto() {
+        return view(Views.PHOTO_HEAD);
+    }
+
+    @GetMapping("/setting/password")
+    public String toPassword() {
+        return view(Views.PASSWORD);
     }
 
 }

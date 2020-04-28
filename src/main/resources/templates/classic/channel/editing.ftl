@@ -1,7 +1,7 @@
 <#include "/classic/inc/layout.ftl"/>
 <@layout "编辑文章">
 
-<form id="submitForm" class="form" action="${base}/post/submit" method="post" enctype="multipart/form-data">
+<form id="submitForm" class="form" action="${base}/texts/submit" method="post" enctype="multipart/form-data">
     <input type="hidden" name="status" value="${view.status!0}"/>
     <input type="hidden" name="editor" value="${editor!'tinymce'}"/>
     <div class="row">

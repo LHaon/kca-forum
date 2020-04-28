@@ -92,6 +92,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    public User findUserByPhone(String phone) {
+        return userInfoMapper.findUserByPhone(phone);
+    }
+
+    @Override
     public int userRegister(User user) {
         try {
             return userInfoMapper.userRegister(user);

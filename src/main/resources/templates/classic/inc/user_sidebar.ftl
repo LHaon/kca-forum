@@ -18,7 +18,7 @@
     </li>
     <#if owner>
         <li class="list-group-item">
-            <a class="btn btn-primary btn-block btn-sm" href="${base}/settings/profile">
+            <a class="btn btn-primary btn-block btn-sm" href="${base}/user/setting">
                 <i class="icon icon-note"></i> 编辑个人资料
             </a>
         </li>

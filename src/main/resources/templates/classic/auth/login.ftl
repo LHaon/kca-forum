@@ -6,24 +6,24 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <span>
-                    <a id="account_btn" onclick="account()" class="btn btn-primary btn-sm">用户名登录</a>&nbsp;
-                    <a id="phone_btn" onclick="phone()" class="btn btn-default btn-sm">手机号登录</a>
+                    <a id="laccount_btn" onclick="laccount()" class="btn btn-primary btn-sm">用户名登录</a>&nbsp;
+                    <a id="lphone_btn" onclick="lphone()" class="btn btn-default btn-sm">手机号登录</a>
                 </span>
             </div>
-            <div id="account" class="panel-body">
-                <form id="username_form" accept-charset="UTF-8">
+            <div id="laccount" class="panel-body">
+                <form id="lusername_form" accept-charset="UTF-8">
                     <div class="form-group">
                         <label class="control-label" for="username">用户名</label>
-                        <input id="username" class="form-control" name="username" type="text" placeholder="请输入用户名"
+                        <input id="lusername" class="form-control" name="username" type="text" placeholder="请输入用户名"
                                required>
                     </div>
-                    <div id="username_tex" class="text-danger"></div>
+                    <div id="lusername_tex" class="text-danger"></div>
                     <div class="form-group">
                         <label class="control-label" for="password">密码</label>
-                        <input id="password" class="form-control" name="password" type="password" placeholder="请输入密码"
+                        <input id="lpassword" class="form-control" name="password" type="password" placeholder="请输入密码"
                                required>
                     </div>
-                    <div id="password_tex" class="text-danger"></div>
+                    <div id="lpassword_tex" class="text-danger"></div>
                     <div>&nbsp;</div>
                     <div class="form-group">
                         <label>
@@ -34,33 +34,36 @@
                         </span>
                     </div>
                     <div class="form-group">
-                        <button id="username_login" type="button" class="btn btn-primary btn-block">
+                        <button id="lusername_login" type="button" class="btn btn-primary btn-block">
                             登录
                         </button>
                     </div>
                 </form>
             </div>
-            <div id="phone" style="display: none" class="panel-body">
+            <div id="lphone" style="display: none" class="panel-body">
             <div class="form-group">
                 <label class="control-label" for="username">手机号</label>
                 <div class="input-group">
-                    <input id="phone_inp" type="text" class="form-control" name="phone" maxlength="64" placeholder="请输入手机号"
+                    <input id="lphone_inp" type="text" class="form-control" name="phone" maxlength="64"
+                           placeholder="请输入手机号"
                            required>
+                    <div id="lphone_tex" class="text-danger"></div>
                     <span class="input-group-btn">
-                                    <a class="btn btn-primary" href="javascript:void(0);" id="sendCode">
+                                    <a class="btn btn-primary" href="javascript:void(0);" id="lsendCode">
                                         <span id="dyMobileButton">获取验证码</span>
                                     </a>
                                 </span>
                 </div>
             </div>
-                <div id="message_tex" class="text-danger"></div>
+                <div id="lmessage_tex" class="text-danger"></div>
             <div class="form-group ">
                 <label class="control-label" for="code">验证码</label>
-                <input class="form-control" id="code" name="code" type="text" placeholder="请输入验证码"
+                <input id="lcaptcha_inp" class="form-control" id="code" name="code" type="text" placeholder="请输入验证码"
                        maxlength="6" required>
             </div>
+                <div id="lcaptcha_tex" class="text-danger"></div>
                 <div class="form-group">
-                    <button id="phone_login" type="button" class="btn btn-primary btn-block">
+                    <button id="lphone_login" type="button" class="btn btn-primary btn-block">
                         登录
                     </button>
                 </div>
@@ -73,10 +76,10 @@
     var time = 60;
     var flag = true;   //设置点击标记，防止60内再次点击生效
 
-    //发送验证码
-    $('#sendCode').click(function () {
+
+    $('#lsendCode').click(function () {
 		$(this).attr("disabled", true);
-        var phone = $('#phone_inp').val();
+        var phone = $('#lphone_inp').val();
         if (flag) {
             var timer = setInterval(function () {
 
@@ -89,14 +92,14 @@
                         url:"http://localhost:11111/user/sendMessage",
                         data: {
                             "phone": phone,
-                            "msgType": 2
+                            "msgType": 1
                         },
                         dataType: "json",
                         success: function (data) {
                             if (data.code == 200) {
-                                $('#message_tex').html(data.data);
+                                $('#lmessage_tex').html(data.data);
                             } else {
-								$('#message_tex').html(data.message);
+								$('#lmessage_tex').html(data.message);
                                 flag = true;
                                 time = 60;
                                 clearInterval(timer);
@@ -104,13 +107,13 @@
                         }
                     });
                 } else if (time == 0) {
-                    $("#sendCode").removeAttr("disabled");
-                    $("#sendCode").html("免费获取验证码");
+                    $("#lsendCode").removeAttr("disabled");
+                    $("#lsendCode").html("免费获取验证码");
                     clearInterval(timer);
                     time = 60;
                     flag = true;
                 } else {
-                    $("#sendCode").html(time + " s 重新发送");
+                    $("#lsendCode").html(time + " s 重新发送");
                     time--;
                 }
             }, 1000);
@@ -119,17 +122,16 @@
     });
 
 	//账号密码登陆
-	$('#username_login').click(function () {
-		var username = $('#username').val();
-		var password = $('#password').val();
+	$('#lusername_login').click(function () {
+		var username = $('#lusername').val();
+		var password = $('#lpassword').val();
 		if (username == "") {
-            $('#username_tex').html("请输入账号");
+            $('#lusername_tex').html("请输入账号");
 			return false;
         } else if (password == "") {
-            $('#password_tex').html("请输入密码");
+            $('#lpassword_tex').html("请输入密码");
 			return  false;
         }
-		var data = new FormData($( "#username_form" )[0]);
 		$.ajax({
 			url: "http://localhost:11111/user/toLoginR",
 			type: "post",
@@ -144,11 +146,38 @@
 				if (data.code == 200) {
 					window.location.href="http://localhost:11111/users/"+ data.data.id;
 				} else  {
-					$('#password_tex').html(data.message);
+					$('#lpassword_tex').html(data.message);
 				}
 			},
 			error: function (data) {
-                $('#passwd_tex').html("服务器错误");
+                $('#lpassword_tex').html("服务器错误");
+			}
+		});
+	});
+
+	//手机号登陆
+	$('#lphone_login').click(function () {
+		var username = $('#lphone_inp').val();
+        var password = $('#lcaptcha_inp').val();
+		$.ajax({
+			url: "http://localhost:11111/user/toLoginR",
+			type: "post",
+			async: false,
+			data: {
+				"username" : username,
+                "password" : password,
+				"loginType" : 2
+			},
+			dataType: "json",
+			success: function (data) {
+				if (data.code == 200) {
+					window.location.href="http://localhost:11111/users/"+ data.data.id;
+				} else  {
+					$('#lcaptcha_tex').html(data.message);
+				}
+			},
+			error: function (data) {
+				$('#lcaptcha_tex').html("服务器错误");
 			}
 		});
 	});
@@ -156,17 +185,17 @@
 
 
 
-	function account() {
-        document.getElementById('account').style.display= 'block';
-        document.getElementById('phone').style.display='none';
-        document.getElementById('account_btn').className = 'btn btn-primary btn-sm';
-        document.getElementById('phone_btn').className = 'btn btn-default btn-sm';
+	function laccount() {
+        document.getElementById('laccount').style.display= 'block';
+        document.getElementById('lphone').style.display='none';
+        document.getElementById('laccount_btn').className = 'btn btn-primary btn-sm';
+        document.getElementById('lphone_btn').className = 'btn btn-default btn-sm';
     }
-    function phone() {
-        document.getElementById('account').style.display= 'none';
-        document.getElementById('phone').style.display='block';
-        document.getElementById('account_btn').className = 'btn btn-default btn-sm';
-        document.getElementById('phone_btn').className = 'btn btn-primary btn-sm';
+    function lphone() {
+        document.getElementById('laccount').style.display= 'none';
+        document.getElementById('lphone').style.display='block';
+        document.getElementById('laccount_btn').className = 'btn btn-default btn-sm';
+        document.getElementById('lphone_btn').className = 'btn btn-primary btn-sm';
     }
 </script>
 

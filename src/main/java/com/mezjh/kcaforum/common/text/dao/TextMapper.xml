@@ -2,5 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mezjh.kcaforum.common.text.dao.TextMapper">
-    <select id=""
+    <select id="getTextInfoDetail">
+
+    </select>
+    <select id="getTextAttributeById" parameterType="long"
+            resultType="com.mezjh.kcaforum.common.text.entity.TextAttribute">
+        select * from text_attribute where id={id}
+    </select>
 </mapper>

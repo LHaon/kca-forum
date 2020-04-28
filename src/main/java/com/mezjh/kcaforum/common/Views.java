@@ -31,4 +31,12 @@ public interface Views {
     String USER_INDEX = "/inc/user_sidebar";
 
     String TEXT_VIEW = "/channel/view";
+
+    String REDIRECT_INDEX = "redirect:/index";
+
+    String SETTING = "/settings/profile";
+
+    String PHOTO_HEAD = "/settings/photo";
+
+    String PASSWORD = "/settings/password";
 }

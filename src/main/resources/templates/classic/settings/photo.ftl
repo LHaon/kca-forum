@@ -4,10 +4,9 @@
 <div class="panel panel-default stacked">
 	<div class="panel-heading">
 		<ul class="nav nav-pills account-tab">
-			<li><a href="profile">基本信息</a></li>
-            <li><a href="email">修改邮箱</a></li>
-			<li class="active"><a href="avatar">修改头像</a></li>
-			<li><a href="password">修改密码</a></li>
+			<li class="active"><a href="/user/setting">基本信息</a></li>
+			<li><a href="/user/setting/photo">修改头像</a></li>
+			<li><a href="/user/setting/password">修改密码</a></li>
 		</ul>
 	</div>
 	<div class="panel-body">
@@ -21,7 +20,8 @@
 				</label>
 			</div>
 			<div class="update_ava">
-				<img src="<@resource src=profile.avatar/>" id="target" alt="[Example]" />
+				<img style="width: 180px; height: 180px;" src="${profile.photoUrl}" id="target"
+					 alt="[Example]" />
 			</div>
 	</div><!-- /panel-content -->
 </div><!-- /panel -->

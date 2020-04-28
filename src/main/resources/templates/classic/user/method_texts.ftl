@@ -1,6 +1,6 @@
 <#include "/classic/inc/layout.ftl"/>
 
-<@layout user.name + "的文章">
+<@layout user.nickname + "的文章">
 <div class="row users-show">
     <div class="col-xs-12 col-md-3 side-left">
 		<#include "/classic/inc/user_sidebar.ftl"/>
@@ -8,7 +8,7 @@
     <div class="col-xs-12 col-md-9 side-right">
         <div class="panel panel-default">
             <div class="panel-heading">发表的文章</div>
-            <@user_contents userId=user.id pageNo=pageNo>
+<#--            <@user_contents userId=user.id>-->
                 <div class="panel-body">
                     <ul class="list-group">
                         <#list results.content as row>
@@ -47,7 +47,7 @@
                 <div class="panel-footer">
                     <@utils.pager request.requestURI!'', results, 5/>
                 </div>
-            </@user_contents>
+<#--            </@user_contents>-->
         </div>
     </div>
 </div>
