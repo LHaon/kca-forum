@@ -10,8 +10,20 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TextType {
-    private Integer textTypeId;
+    /**
+     * 文章类型ID
+     */
+    private Long textTypeId;
+    /**
+     * 类型名称
+     */
     private String typeName;
+    /**
+     * 文章ID列表
+     */
     private String textId;
+    /**
+     * 类型文章数量
+     */
     private Integer typeTextCount;
 }

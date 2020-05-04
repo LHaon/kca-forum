@@ -2,8 +2,6 @@ package com.mezjh.kcaforum.common.index.service;
 
 import com.mezjh.kcaforum.common.index.dao.IndexMapper;
 import com.mezjh.kcaforum.common.text.entity.TextInfo;
-import com.mezjh.kcaforum.common.text.entity.TextInfoVo;
-import com.mezjh.kcaforum.user.info.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +18,9 @@ public class IndexServiceImpl implements IndexService{
     private IndexMapper indexMapper;
 
     @Override
-    public List<TextInfoVo> getIndexTextList() {
-        List<TextInfoVo> textInfoVos = indexMapper.getIndexTextList();
-        for (TextInfoVo textInfoVo: textInfoVos) {
+    public List<TextInfo> getIndexTextList() {
+        List<TextInfo> textInfoVos = indexMapper.getIndexTextList();
+        for (TextInfo textInfoVo: textInfoVos) {
             textInfoVo.setUser(indexMapper.getUserInfoByUserId(textInfoVo.getUserId()));
         }
         return textInfoVos;

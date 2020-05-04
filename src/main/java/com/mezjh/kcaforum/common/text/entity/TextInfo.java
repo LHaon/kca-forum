@@ -1,5 +1,6 @@
 package com.mezjh.kcaforum.common.text.entity;
 
+import com.mezjh.kcaforum.user.info.entity.User;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,11 +14,11 @@ public class TextInfo implements Serializable {
     /**
      * ID
      */
-    private Integer textId;
+    private Long id;
     /**
      * 用户ID
      */
-    private Integer userId;
+    private Long userId;
     /**
      * 文章标签名
      */
@@ -39,6 +40,10 @@ public class TextInfo implements Serializable {
      */
     private String title;
     /**
+     * 内容
+     */
+    private String content;
+    /**
      * 预览
      */
     private String preview;
@@ -58,4 +63,8 @@ public class TextInfo implements Serializable {
      * 文章状态
      */
     private Integer status;
+    /**
+     * 文章用户
+     */
+    private User user;
 }

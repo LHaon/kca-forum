@@ -13,5 +13,5 @@ public interface TextTypeService {
      * 获取热门专题列表
      * @return
      */
-    List<TextType> getPopularTypeList();
+    List<TextType> getTextTypeList();
 }

@@ -1,7 +1,6 @@
 package com.mezjh.kcaforum.common.index.dao;
 
 import com.mezjh.kcaforum.common.text.entity.TextInfo;
-import com.mezjh.kcaforum.common.text.entity.TextInfoVo;
 import com.mezjh.kcaforum.user.info.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -19,7 +18,7 @@ public interface IndexMapper {
      * 获取首页文章列表
      * @return
      */
-    List<TextInfoVo> getIndexTextList();
+    List<TextInfo> getIndexTextList();
     /**
      * 获取首页推荐作者列表
      * @return
@@ -35,5 +34,5 @@ public interface IndexMapper {
      * @param userId
      * @return
      */
-    User getUserInfoByUserId(Integer userId);
+    User getUserInfoByUserId(Long userId);
 }

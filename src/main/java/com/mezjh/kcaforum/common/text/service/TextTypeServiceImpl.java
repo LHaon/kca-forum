@@ -18,7 +18,7 @@ public class TextTypeServiceImpl implements TextTypeService{
     private TextTypeMapper textTypeMapper;
 
     @Override
-    public List<TextType> getPopularTypeList() {
-        return textTypeMapper.getPopularTypeList();
+    public List<TextType> getTextTypeList() {
+        return textTypeMapper.getTextTypeList();
     }
 }

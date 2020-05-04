@@ -17,7 +17,7 @@
     <update id="saveLateltTime" parameterType="com.mezjh.kcaforum.user.info.entity.User">
         update user set lately_up_time = #{latelyUpTime} where id = #{userId}
     </update>
-    <select id="findUserById" resultType="com.mezjh.kcaforum.user.info.entity.User" parameterType="long">
+    <select id="findUserById" parameterType="long" resultType="com.mezjh.kcaforum.user.info.entity.User">
         select * from user where id=#{id}
     </select>
     <select id="findUserByPhone" parameterType="string" resultType="com.mezjh.kcaforum.user.info.entity.User">

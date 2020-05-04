@@ -97,7 +97,6 @@ public class UserInfoController extends BaseController {
     @PostMapping(value = "/toLoginR")
     @ResponseBody
     public ApiResult<AccountProfile> login(String username, String password, Integer loginType) {
-        System.out.println(loginType);
         if (loginType == 2) {
             return phoneJudge(username, password);
         }

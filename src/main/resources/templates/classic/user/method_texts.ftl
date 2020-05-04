@@ -8,18 +8,18 @@
     <div class="col-xs-12 col-md-9 side-right">
         <div class="panel panel-default">
             <div class="panel-heading">发表的文章</div>
-<#--            <@user_contents userId=user.id>-->
+            <@user_contents userId=user.id>
                 <div class="panel-body">
                     <ul class="list-group">
-                        <#list results.content as row>
-                            <li class="list-group-item" el="loop-${row.id}">
-                                <a href="${base}/post/${row.id}" class="remove-padding-left">${row.title}</a>
+                        <#list results as row>
+                            <li class="list-group-item">
+                                <a href="${base}/texts/${row.id}" class="remove-padding-left">${row.title}</a>
                                 <span class="meta">
-                                    ${row.favors} 点赞
+                                    ${row.likeCount} 点赞
                                     <span> ⋅ </span>
-                                    ${row.comments} 回复
+                                    ${row.commentCount} 回复
                                     <span> ⋅ </span>
-                                    <span class="timeago">${timeAgo(row.created)}</span>
+                                    <span>${row.updateTime}</span>
                                 </span>
 
                                 <div class="pull-right hidden-xs">
@@ -35,7 +35,7 @@
                             </li>
                         </#list>
 
-                        <#if results.content?size == 0>
+                        <#if results?size == 0>
                             <li class="list-group-item ">
                                 <div class="infos">
                                     <div class="media-heading">该目录下还没有内容!</div>
@@ -45,9 +45,9 @@
                     </ul>
                 </div>
                 <div class="panel-footer">
-                    <@utils.pager request.requestURI!'', results, 5/>
+<#--                    <@utils.pager null, results, 5/>-->
                 </div>
-<#--            </@user_contents>-->
+            </@user_contents>
         </div>
     </div>
 </div>
@@ -78,7 +78,7 @@ $(function() {
 	// edit
 	$('a[data-evt=edit]').click(function () {
 		var id = $(this).attr('data-id');
-		window.location.href='${base}/post/editing?id=' + id;
+		window.location.href='${base}/texts/editing?id=' + id;
 	});
 })
 </script>

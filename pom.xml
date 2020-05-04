@@ -148,6 +148,19 @@
             <version>1.4.0</version>
         </dependency>
 
+        <!--过滤html标签类库 -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+
+        <!--百度API -->
+        <dependency>
+            <groupId>com.baidu.aip</groupId>
+            <artifactId>java-sdk</artifactId>
+            <version>4.9.0</version>
+        </dependency>
     </dependencies>
 
 

@@ -4,6 +4,7 @@ import com.mezjh.kcaforum.common.text.entity.TextType;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.soap.Text;
 import java.util.List;
 
 /**
@@ -14,8 +15,15 @@ import java.util.List;
 @Mapper
 public interface TextTypeMapper {
     /**
-     * 获取热门专题列表
+     * 获取文章类型列表
      * @return
      */
-    List<TextType> getPopularTypeList();
+    List<TextType> getTextTypeList();
+
+    /**
+     * 更新文章类型
+     * @param textType
+     * @return
+     */
+    int updateTextType(TextType textType);
 }

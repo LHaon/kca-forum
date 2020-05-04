@@ -2,11 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mezjh.kcaforum.common.text.dao.TextMapper">
-    <select id="getTextInfoDetail">
 
+    <insert id="subText" parameterType="com.mezjh.kcaforum.common.text.entity.TextInfo">
+        insert into
+        text(id,user_id,text_type_id,title,content,preview,like_count,read_count,comment_count,create_time,update_time,status)
+        values
+            (null,#{userId},1,#{title},#{preview},#{content},0,0,0,#{createTime},#{updateTime},#{status})
+    </insert>
+    <select id="getTextListByUserId" parameterType="long" resultType="com.mezjh.kcaforum.common.text.entity.TextInfo">
+        select * from text where user_id=#{id}
+        order by update_time desc
     </select>
-    <select id="getTextAttributeById" parameterType="long"
-            resultType="com.mezjh.kcaforum.common.text.entity.TextAttribute">
-        select * from text_attribute where id={id}
+    <select id="getTextInfoById" parameterType="long" resultType="com.mezjh.kcaforum.common.text.entity.TextInfo">
+        select * from text where id=#{id} limit 1
     </select>
+    <update id="readCountAdd" parameterType="integer">
+        update text
+        set read_count=#{count}
+    </update>
+    <update id="updateText" parameterType="com.mezjh.kcaforum.common.text.entity.TextInfo">
+        update text
+        set title=#{title},
+            content=#{content},
+            update_time=#{updateTime}
+        where id=#{id}
+    </update>
 </mapper>

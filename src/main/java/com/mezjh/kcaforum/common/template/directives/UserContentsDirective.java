@@ -1,35 +1,32 @@
 package com.mezjh.kcaforum.common.template.directives;
 
-import com.mezjh.integrationkit.apiutils.ApiResult;
-import com.mezjh.kcaforum.common.index.service.IndexService;
 import com.mezjh.kcaforum.common.template.DirectiveHandler;
 import com.mezjh.kcaforum.common.template.TemplateDirective;
 import com.mezjh.kcaforum.common.text.entity.TextInfo;
+import com.mezjh.kcaforum.common.text.service.TextService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
- * 宏 contents
- *
  * @author zjh
- * @date 2020/4/12
+ * @date 2020/4/30
  */
 @Component
-public class ContentsDirective extends TemplateDirective {
-
+public class UserContentsDirective extends TemplateDirective {
     @Autowired
-    private IndexService indexService;
+    private TextService textService;
+
     @Override
     public String getName() {
-        return "contents";
+        return "user_contents";
     }
 
     @Override
     public void execute(DirectiveHandler handler) throws Exception {
-        Integer pageType = handler.getInteger("pageType", 0);
-        List<TextInfo> datas = indexService.getIndexTextList();
-        handler.put(RESULTS, ApiResult.success(datas)).render();
+        Long userId = handler.getInteger("userId", 0).longValue();
+        List<TextInfo> res = textService.getTextListByUserId(userId);
+        handler.put(RESULTS, res).render();
     }
 }

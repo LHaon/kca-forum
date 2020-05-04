@@ -1,6 +1,8 @@
 package com.mezjh.kcaforum;
 
+import com.mezjh.kcaforum.common.utils.keywords.baidu.AuthService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
