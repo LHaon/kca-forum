@@ -112,6 +112,30 @@ public class UserInfoController extends BaseController {
         return Views.REDIRECT_INDEX;
     }
 
+    /**
+     * 收藏文章
+     * @param id
+     * @return
+     */
+    @RequestMapping("/favor")
+    @ResponseBody
+    public ApiResult favor(Long id) {
+        System.out.println(id);
+        ApiResult data = ApiResult.fail("操作失败");
+        if (id != null) {
+            try {
+                AccountProfile up = getProfile();
+//                postService.favor(up.getId(), id);
+//                sendMessage(up.getId(), id);
+                data = ApiResult.success();
+            } catch (Exception e) {
+                data = ApiResult.fail(e.getMessage());
+            }
+        }
+        //data = ApiResult.fail("收藏失败");
+        return data;
+    }
+
     @GetMapping("/login")
     public String toLogin() {
         return view(Views.LOGIN);

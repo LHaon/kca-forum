@@ -1,0 +1,114 @@
+{
+  "id": "1798408",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1166149",
+      "name": "点赞",
+      "font_class": "iconfontzhizuobiaozhun023148",
+      "unicode": "e696",
+      "unicode_decimal": 59030
+    },
+    {
+      "icon_id": "5123826",
+      "name": "点赞",
+      "font_class": "dianzan2",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "8181933",
+      "name": "点赞",
+      "font_class": "dianzan1-copy",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "8715505",
+      "name": "点赞",
+      "font_class": "fabu-",
+      "unicode": "e6af",
+      "unicode_decimal": 59055
+    },
+    {
+      "icon_id": "485760",
+      "name": "评 论",
+      "font_class": "pinglun",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "1244758",
+      "name": "喜欢",
+      "font_class": "xihuan",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "4275559",
+      "name": "评论",
+      "font_class": "pinglun1",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "4381627",
+      "name": "浏览",
+      "font_class": "liulan",
+      "unicode": "e653",
+      "unicode_decimal": 58963
+    },
+    {
+      "icon_id": "6264196",
+      "name": "喜欢",
+      "font_class": "xihuan1",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "7532872",
+      "name": "喜欢",
+      "font_class": "xihuan2",
+      "unicode": "e665",
+      "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "10150358",
+      "name": "喜欢",
+      "font_class": "xihuan3",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "10683958",
+      "name": "喜欢",
+      "font_class": "xihuan4",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "11487988",
+      "name": "browse",
+      "font_class": "browse",
+      "unicode": "e745",
+      "unicode_decimal": 59205
+    },
+    {
+      "icon_id": "12011695",
+      "name": "favorites",
+      "font_class": "favorites",
+      "unicode": "e7b3",
+      "unicode_decimal": 59315
+    },
+    {
+      "icon_id": "11481317",
+      "name": "favorites-fill",
+      "font_class": "favorites-fill",
+      "unicode": "e721",
+      "unicode_decimal": 59169
+    }
+  ]
+}

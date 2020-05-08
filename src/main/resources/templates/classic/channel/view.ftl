@@ -84,10 +84,10 @@
         <ul class="list-group about-user">
             <li class="list-group-item user-card" >
                 <div class="user-avatar">
-                    <@utils.showAva view.author "img-circle"/>
+                    <@utils.showAva view.user "img-circle"/>
                 </div>
                 <div class="user-name">
-                    <span>${view.user.nickName}</span>
+                    <span>${view.user.nickname}</span>
                 </div>
             </li>
 
@@ -102,7 +102,8 @@
             <li class="list-group-item">
                 <div class="text-center">
                     <a class="btn btn-default btn-sm" href="javascript:void(0);" data-id="${view.id}" rel="favor">
-                        <i class="icon icon-star"></i> 收藏 <strong id="favors">${view.likeCount}</strong>
+                        <i id="icon_control" class="iconfont icon-favorites"></i> 收藏 <strong id="favors">${view
+                            .likeCount}</strong>
                     </a>
                 </div>
             </li>

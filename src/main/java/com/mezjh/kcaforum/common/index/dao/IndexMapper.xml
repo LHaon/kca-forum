@@ -7,7 +7,7 @@
         t.comment_count,t.like_count,t.title,t.content,t.preview,t.create_time,t.update_time,t.read_count
         FROM text t
         LEFT JOIN text_type ty ON t.text_type_id=ty.id
-        ORDER BY update_time DESC
+        ORDER BY create_time DESC
     </select>
 
     <select id="getRecommendUser" resultType="com.mezjh.kcaforum.user.info.entity.User">

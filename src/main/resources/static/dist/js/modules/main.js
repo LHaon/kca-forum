@@ -38,12 +38,13 @@ define(function(require, exports, module) {
 				Authc.showLogin();
 				return false;
 			}
-
 			if (parseInt(id) > 0) {
 				jQuery.getJSON(_MTONS.BASE_PATH +'/user/favor', {'id': id}, function (ret) {
-					if (ret.code >=0) {
+					if (ret.code == 200) {
+
 						var favors = $('#favors').text();
 						$('#favors').text(parseInt(favors) + 1);
+						$('#icon_control').style.background = "red";
 					} else {
 						layer.msg(ret.message, {icon: 5});
 					}

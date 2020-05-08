@@ -4,6 +4,8 @@ import com.mezjh.kcaforum.common.text.dao.TextMapper;
 import com.mezjh.kcaforum.common.text.entity.TextInfo;
 import com.mezjh.kcaforum.common.utils.TextUtils;
 import com.mezjh.kcaforum.user.Comm;
+import com.mezjh.kcaforum.user.info.entity.User;
+import com.mezjh.kcaforum.user.info.service.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -18,11 +20,17 @@ public class TextServiceImpl implements TextService{
     @Autowired
     private TextMapper textMapper;
     @Autowired
+    private UserInfoService userInfoService;
+    @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
     @Override
     public TextInfo getTextInfoById(Long id) {
-        return textMapper.getTextInfoById(id);
+        TextInfo res = new TextInfo();
+        res = textMapper.getTextInfoById(id);
+        User user = userInfoService.getUserById(res.getUserId());
+        res.setUser(user);
+        return res;
     }
 
     @Override
