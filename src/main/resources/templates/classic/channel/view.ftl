@@ -101,7 +101,7 @@
             </li>
             <li class="list-group-item">
                 <div class="text-center">
-                    <a class="btn btn-default btn-sm" href="javascript:void(0);" data-id="${view.id}" rel="favor">
+                    <a class="btn btn-default btn-sm" href="#" data-id="${view.id}" rel="favor">
                         <i id="icon_control" class="iconfont icon-favorites"></i> 收藏 <strong id="favors">${view
                             .likeCount}</strong>
                     </a>

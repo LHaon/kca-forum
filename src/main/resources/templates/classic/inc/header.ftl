@@ -274,7 +274,7 @@
 			dataType: "json",
 			success: function (data) {
 				if (data.code == 200) {
-					window.location.href="http://localhost:11111/users/"+ data.data.id;
+					window.location.reload();
 				} else  {
 					$('#password_tex').html(data.message);
 				}
@@ -301,7 +301,7 @@
 			dataType: "json",
 			success: function (data) {
 				if (data.code == 200) {
-					window.location.href="http://localhost:11111/users/"+ data.data.id;
+					window.location.reload();
 				} else  {
 					$('#captcha_tex').html(data.message);
 				}

@@ -120,7 +120,6 @@ public class UserInfoController extends BaseController {
     @RequestMapping("/favor")
     @ResponseBody
     public ApiResult favor(Long id) {
-        System.out.println(id);
         ApiResult data = ApiResult.fail("操作失败");
         if (id != null) {
             try {

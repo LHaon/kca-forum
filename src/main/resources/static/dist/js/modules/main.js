@@ -40,11 +40,12 @@ define(function(require, exports, module) {
 			}
 			if (parseInt(id) > 0) {
 				jQuery.getJSON(_MTONS.BASE_PATH +'/user/favor', {'id': id}, function (ret) {
+					alert("000");
 					if (ret.code == 200) {
 
 						var favors = $('#favors').text();
 						$('#favors').text(parseInt(favors) + 1);
-						$('#icon_control').style.background = "red";
+						alert("111");
 					} else {
 						layer.msg(ret.message, {icon: 5});
 					}
