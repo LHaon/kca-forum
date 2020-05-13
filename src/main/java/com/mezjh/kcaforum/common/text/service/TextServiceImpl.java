@@ -4,6 +4,7 @@ import com.mezjh.kcaforum.common.text.dao.TextMapper;
 import com.mezjh.kcaforum.common.text.entity.TextInfo;
 import com.mezjh.kcaforum.common.utils.TextUtils;
 import com.mezjh.kcaforum.user.Comm;
+import com.mezjh.kcaforum.user.info.dao.UserInfoMapper;
 import com.mezjh.kcaforum.user.info.entity.User;
 import com.mezjh.kcaforum.user.info.service.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
@@ -21,6 +22,8 @@ public class TextServiceImpl implements TextService{
     private TextMapper textMapper;
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private UserInfoMapper userInfoMapper;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
@@ -50,6 +53,14 @@ public class TextServiceImpl implements TextService{
         textMapper.updateText(textInfo);
     }
 
+    @Override
+    public void deleteText(Long id, Long userId) {
+        User user = userInfoService.getUserById(userId);
+        user.setTextCount(user.getTextCount() - 1);
+        userInfoMapper.addTextCount(user);
+        textMapper.deleteText(id);
+    }
+
 
     @Override
     public void subText(TextInfo textInfo) {
@@ -57,6 +68,12 @@ public class TextServiceImpl implements TextService{
         textInfo.setCreateTime(Comm.getNowTime());
         textInfo.setUpdateTime(Comm.getNowTime());
         textInfo.setStatus(textInfo.getStatus());
+
+        if (textInfo.getThumbnail() != null && !textInfo.getThumbnail().equals("")) {
+            textInfo.setPhotoPreview(textInfo.getThumbnail());
+        } else {
+            textInfo.setPhotoPreview(null);
+        }
 
         // 设置预览内容
         if (StringUtils.isBlank(textInfo.getPreview())) {
@@ -82,6 +99,9 @@ public class TextServiceImpl implements TextService{
         if (textInfo.getId() != null && textInfo.getId() > 0) {
             this.updateText(textInfo);
         } else {
+            User user = userInfoService.getUserById(textInfo.getUserId());
+            user.setTextCount(user.getTextCount() + 1);
+            userInfoMapper.addTextCount(user);
             textMapper.subText(textInfo);
         }
 

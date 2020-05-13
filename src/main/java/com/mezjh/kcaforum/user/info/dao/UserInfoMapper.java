@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 public interface UserInfoMapper {
 
     User findUserExist(RegisterVo registerVo);
-
     /**
      * 通过ID获取用户信息，出于安全考虑，这个方法不返回账号、密码、用户类型
      *
@@ -23,13 +22,17 @@ public interface UserInfoMapper {
      * @return
      */
     User findUserById(Long id);
-
     /**
      * 注册
      * @param user
      * @return
      */
     int register(User user);
+    /**
+     * 增加文章数量
+     * @param user
+     */
+    void addTextCount(User user);
 
     User findByUsername(String username);
 

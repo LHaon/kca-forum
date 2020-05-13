@@ -15,7 +15,7 @@
                             <li class="list-group-item">
                                 <a href="${base}/texts/${row.id}" class="remove-padding-left">${row.title}</a>
                                 <span class="meta">
-                                    ${row.likeCount} 点赞
+                                    ${row.likeCount} 收藏
                                     <span> ⋅ </span>
                                     ${row.commentCount} 回复
                                     <span> ⋅ </span>
@@ -63,7 +63,7 @@ $(function() {
             btn: ['确定','取消'], //按钮
             shade: false //不显示遮罩
         }, function(){
-			jQuery.getJSON('${base}/post/delete/' + id, function (ret) {
+			jQuery.getJSON('${base}/texts/delete/' + id, function (ret) {
 				layer.msg(ret.message, {icon: 1});
 				if (ret.code >=0) {
 					location.reload();

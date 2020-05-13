@@ -5,9 +5,9 @@
 
     <insert id="subText" parameterType="com.mezjh.kcaforum.common.text.entity.TextInfo">
         insert into
-        text(id,user_id,text_type_id,title,content,preview,like_count,read_count,comment_count,create_time,update_time,status)
+        text(id,user_id,text_type_id,title,content,preview,photo_preview,like_count,read_count,comment_count,create_time,update_time,status)
         values
-            (null,#{userId},1,#{title},#{preview},#{content},0,0,0,#{createTime},#{updateTime},#{status})
+            (null,#{userId},1,#{title},#{content},#{preview},#{photoPreview},0,0,0,#{createTime},#{updateTime},#{status})
     </insert>
     <select id="getTextListByUserId" parameterType="long" resultType="com.mezjh.kcaforum.common.text.entity.TextInfo">
         select * from text where user_id=#{id}
@@ -24,7 +24,13 @@
         update text
         set title=#{title},
             content=#{content},
-            update_time=#{updateTime}
+            preview=#{preview},
+            update_time=#{updateTime},
+            photo_preview=#{photoPreview}
         where id=#{id}
     </update>
+    <delete id="deleteText" parameterType="long">
+        delete from text
+        where id=#{id}
+    </delete>
 </mapper>

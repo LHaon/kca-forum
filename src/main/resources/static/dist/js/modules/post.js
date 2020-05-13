@@ -58,7 +58,6 @@ define(function(require, exports, module) {
                 ignore: "",
                 rules: {
                     title: 'required',
-                    channelId: 'required',
                     content: {
                         required: true,
                         check_editor: true
@@ -66,7 +65,6 @@ define(function(require, exports, module) {
                 },
                 messages: {
                     title: '请输入标题',
-                    channelId: '请选择栏目',
                     content: {
                         required: '内容不能为空',
                         check_editor: '内容不能为空'

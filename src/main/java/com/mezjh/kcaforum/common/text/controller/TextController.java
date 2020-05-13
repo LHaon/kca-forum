@@ -1,5 +1,6 @@
 package com.mezjh.kcaforum.common.text.controller;
 
+import com.mezjh.integrationkit.apiutils.ApiResult;
 import com.mezjh.kcaforum.common.BaseController;
 import com.mezjh.kcaforum.common.Views;
 import com.mezjh.kcaforum.common.text.entity.TextInfo;
@@ -11,18 +12,23 @@ import com.mezjh.kcaforum.user.info.entity.AccountProfile;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/texts")
 public class TextController extends BaseController {
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
     @Autowired
     private TextService textService;
@@ -56,8 +62,6 @@ public class TextController extends BaseController {
      */
     @PostMapping("/submit")
     public String submit(TextInfo text) {
-        String res = keywordsUtils.isKeywords(text.getContent());
-        JSONObject jsonObject = new JSONObject(res);
         Assert.notNull(text, "参数不完整");
         Assert.state(StringUtils.isNotBlank(text.getTitle()), "标题不能为空");
         Assert.state(StringUtils.isNotBlank(text.getContent()), "内容不能为空");
@@ -77,6 +81,37 @@ public class TextController extends BaseController {
 //        }
         textService.subText(text);
         return String.format(Views.REDIRECT_USER_HOME, profile.getId());
+    }
+
+    @RequestMapping("/judgeText")
+    @ResponseBody
+    public ApiResult judgeText(String text) {
+
+        String res = keywordsUtils.isKeywords(text);
+        JSONObject jsonObject = new JSONObject(res);
+        if (!jsonObject.get("conclusionType").equals("1")) {
+            return ApiResult.fail("包含违规词汇,请检查后重新发布");
+        }
+        return ApiResult.success();
+    }
+
+
+    /**
+     * 删除文章
+     * @param id
+     * @return
+     */
+    @RequestMapping("/delete/{id}")
+    @ResponseBody
+    public ApiResult delete(@PathVariable Long id) {
+        ApiResult data;
+        try {
+            textService.deleteText(id, getProfile().getId());
+            data = ApiResult.success();
+        } catch (Exception e) {
+            data = ApiResult.fail(e.getMessage());
+        }
+        return data;
     }
 
 }

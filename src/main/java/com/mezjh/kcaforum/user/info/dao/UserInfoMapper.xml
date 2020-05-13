@@ -23,5 +23,10 @@
     <select id="findUserByPhone" parameterType="string" resultType="com.mezjh.kcaforum.user.info.entity.User">
         select * from user where phone=#{phone}
     </select>
+    <update id="addTextCount" parameterType="com.mezjh.kcaforum.user.info.entity.User">
+        update user
+        set text_count = #{textCount}
+        where id = #{id}
+    </update>
 
 </mapper>

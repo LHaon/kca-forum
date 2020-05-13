@@ -37,4 +37,9 @@ public interface TextService {
      * @param textInfo
      */
     void updateText(TextInfo textInfo);
+    /**
+     * 删除文章
+     * @param id
+     */
+    void deleteText(Long id, Long userId);
 }

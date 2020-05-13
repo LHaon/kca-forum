@@ -21,6 +21,10 @@ public class ImageConfig {
      */
     private String serverName;
     /**
+     * 域名
+     */
+    private String domain;
+    /**
      * 操作员名称
      */
     private String username;
@@ -28,6 +32,10 @@ public class ImageConfig {
      * 操作员密码
      */
     private String password;
+    /**
+     * 文件路径
+     */
+    private String src;
 
     @Bean
     public UpYun getUpYun() {

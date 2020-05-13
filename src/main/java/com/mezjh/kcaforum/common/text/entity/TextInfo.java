@@ -64,6 +64,10 @@ public class TextInfo implements Serializable {
      */
     private Integer status;
     /**
+     * 预览图
+     */
+    private String thumbnail;
+    /**
      * 文章用户
      */
     private User user;

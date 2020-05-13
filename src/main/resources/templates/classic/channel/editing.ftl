@@ -11,7 +11,7 @@
                 <input type="hidden" name="id" value="${view.id}"/>
                 <input type="hidden" name="authorId" value="${view.authorId}"/>
             </#if>
-            <input type="hidden" id="thumbnail" name="thumbnail" value="${view.thumbnail}"/>
+            <input type="hidden" id="thumbnail" name="thumbnail" value="${view.photoPreview}"/>
 
             <div class="form-group">
                 <input type="text" class="form-control" name="title" maxlength="128" value="${view.title}" placeholder="请输入标题" required>
@@ -23,7 +23,9 @@
         <div class="col-xs-12 col-md-4 side-right">
             <div class="panel panel-default">
                 <div class="thumbnail-box">
-                    <div class="convent_choice" id="thumbnail_image"  <#if view.thumbnail?? && view.thumbnail?length gt 0> style="background: url(<@resource src=view.thumbnail/>);" </#if>>
+                    <div class="convent_choice" id="thumbnail_image"  <#if view.photoPreview?? && view.photoPreview?length
+                    gt 0>
+                        style="background: url(${view.photoPreview})" </#if>>
                         <div class="upload-btn">
                             <label>
                                 <span>点击选择一张图片</span>
@@ -41,10 +43,12 @@
                     <input type="text" id="tags" name="tags" class="form-control" value="${view.tags}">
                 </div>
             </div>
+            <div id="text_judge_text" class="text-danger"></div>
             <div class="col-xs-12 col-md-12">
                 <div class="form-group">
                     <div class="text-center">
-                        <button type="button" data-status="0" class="btn btn-primary" event="post_submit" style="padding-left: 30px; padding-right: 30px;">发布</button>
+                        <button id="sub" type="button" data-status="0" class="btn btn-primary" event="post_submit"
+                                 style="padding-left: 30px; padding-right: 30px;">发布</button>
                     </div>
                 </div>
             </div>
@@ -53,7 +57,32 @@
 </form>
 <!-- /form-actions -->
 <script type="text/javascript">
-seajs.use('post', function (post) {
+	//文章内容验证
+	$('#sub').click(function () {
+		var text = $('#content').val();
+		$.ajax({
+			url: "http://localhost:11111/texts/judgeText",
+			type: "post",
+			async: false,
+			data: {
+				"text" : text,
+			},
+			dataType: "json",
+			success: function (data) {
+				if (data.code == 200) {
+                    window.location.reload();
+				} else  {
+					$('#text_judge_text').html(data.message);
+				}
+			},
+			error: function (data) {
+				$('#text_judge_text').html("服务器错误");
+			}
+		});
+	});
+
+
+	seajs.use('post', function (post) {
 	post.init();
 });
 </script>

@@ -2,6 +2,7 @@ package com.mezjh.kcaforum.common;
 
 import com.mezjh.integrationkit.apiutils.ApiResult;
 import com.mezjh.kcaforum.common.utils.MdFive;
+import com.mezjh.kcaforum.common.utils.photo.PhotoFactory;
 import com.mezjh.kcaforum.user.info.entity.AccountProfile;
 import com.mezjh.kcaforum.user.info.entity.User;
 import com.mezjh.kcaforum.user.info.service.UserInfoService;
@@ -29,6 +30,8 @@ public class BaseController {
     private RedisTemplate<String, String> redisTemplate;
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    protected PhotoFactory photoFactory;
 
     protected String view(String view) {
         return "/" + siteOptions.getValue("theme") + view;
