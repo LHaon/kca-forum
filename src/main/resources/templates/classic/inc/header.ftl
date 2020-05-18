@@ -130,15 +130,15 @@
                         <li data="user">
                             <a href="${base}/users/${profile.id}" nav="user">我的主页</a>
                         </li>
+                        <li>
+                            <a href="${base}/user/likes" nav="follow">收藏</a>
+                        </li>
                     </#if>
                     <li>
                         <a href="${base}/index" nav="msgs">最新</a>
                     </li>
                     <li>
-                        <a href="${base}/followmsgs" nav="follow">关注</a>
-                    </li>
-                    <li>
-                        <a href="${base}/popularmsgs" nav="popular">热门</a>
+                        <a href="${base}/texts/populars" nav="popular">热门</a>
                     </li>
                     <li>
                         <a href="${base}/tags" nav="tags">标签</a>

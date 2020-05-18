@@ -5,7 +5,7 @@ define(function(require, exports, module) {
 	require('tagsinput');
 
 	var PostView = function () {};
-	
+
 	PostView.prototype = {
         name : 'PostView',
         init : function () {
@@ -18,7 +18,6 @@ define(function(require, exports, module) {
         },
         bindEvents : function () {
         	var that = this;
-
         	that.bindTagit();
         	that.bindValidate();
         	that.bindUpload();
@@ -29,14 +28,14 @@ define(function(require, exports, module) {
                 $("#submitForm").submit();
             });
         },
-        
+
         bindTagit : function () {
             $('#tags').tagsinput({
                 maxTags: 4,
                 trimValue: true
             });
         },
-        
+
         bindUpload : function () {
             $('#upload_btn').change(function(){
                 $(this).upload(_MTONS.BASE_PATH + '/post/upload?crop=1', function(data){

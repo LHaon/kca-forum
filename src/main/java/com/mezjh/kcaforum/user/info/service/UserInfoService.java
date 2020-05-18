@@ -35,6 +35,11 @@ public interface UserInfoService {
      * @return
      */
     AccountProfile findProfile(Long id);
+    /**
+     * 更新收藏文章列表
+     * @param user
+     */
+    void updateLikeText(User user);
 
     User findUserByPhone(String phone);
 

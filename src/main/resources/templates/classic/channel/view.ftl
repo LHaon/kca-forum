@@ -1,6 +1,6 @@
 <#include "/classic/inc/layout.ftl"/>
 
-<#assign title = view.title + ' - ' + options['site_name'] />
+<#assign title = view.title + ' - ' + view.user.nickname />
 <#assign keywords = view.keywords?default(options['site_keywords']) />
 <#assign description = view.description?default(options['site_description']) />
 
@@ -52,7 +52,9 @@
             <div class="chat_header">
                 <h4>全部评论: <span id="chat_count">${view.commentCount}</span> 条</h4>
             </div>
-            <ul id="chat_container" class="its"></ul>
+            <ul id="comments" class="its">
+
+            </ul>
             <div id="pager" class="text-center"></div>
             <div class="chat_post">
                 <div class="cbox-title">我有话说: <span id="chat_reply" style="display:none;">@<i
@@ -99,14 +101,25 @@
                     </ul>
                 </div>
             </li>
-            <li class="list-group-item">
-                <div class="text-center">
-                    <a class="btn btn-default btn-sm" href="#" data-id="${view.id}" rel="favor">
-                        <i id="icon_control" class="iconfont icon-favorites"></i> 收藏 <strong id="favors">${view
-                            .likeCount}</strong>
-                    </a>
-                </div>
-            </li>
+            <#if view.userLikeIds??>
+                <li class="list-group-item">
+                    <div class="text-center">
+                        <a id="like_btn" class="btn btn-default btn-sm" href="#" text-id="${view.id}">
+                            <i id="icon_control" class="iconfont icon-xihuan4"></i> 收藏 <strong
+                                    id="like_count_val" likeCount="${view.likeCount}">${view.likeCount}</strong>
+                        </a>
+                    </div>
+                </li>
+            <#else>
+                <li class="list-group-item">
+                    <div class="text-center">
+                        <a id="like_btn" class="btn btn-default btn-sm" href="#" text-id="${view.id}">
+                            <i id="icon_control" class="iconfont icon-xihuan2"></i> 收藏 <strong
+                                    id="like_count_val" likeCount="${view.likeCount}">${view.likeCount}</strong>
+                        </a>
+                    </div>
+                </li>
+            </#if>
         </ul>
         <#include "/classic/inc/right.ftl"/>
     </div>
@@ -133,6 +146,78 @@
 </script>
 
 <script type="text/javascript">
+
+    function initComments() {
+		$.ajax
+		({
+			cache: false,
+			async: false,
+			dataType: 'json', type: 'post',
+			url: "http://localhost:11111/comment/list/${view.id}",
+			success: function (data) {
+				var list = data.data;
+				var htm = "";
+				if (list.length < 1) {
+					htm = '<li><p>还没有评论, 快来占沙发吧!</p></li>';
+				} else {
+					$('#comments').find("li").remove();
+					$.each(list, function (index, item) {
+						htm += ('<li id="chat3"><a class="avt fl" target="_blank" href="/users/' + item.user.id +
+							'"><img src="' + item.user.photoUrl + '"> </a><div class="chat_body"><h5><div ' +
+							'class="fl"><a class="chat_name" href="/users/' + item.user.id + '">' +
+							item.user.nickname + '</a><span>' + item.createTime + '</span></div>' +
+							'<div class="fr reply_this"><a href="javascript:void(0);" onclick="goto(\'3\', \'ha\')' +
+							'"><i class="icon icon-action-redo"></i></a></div>' +
+							'<div class="clear"></div></h5><div class="chat_p"><div class="chat_pct">' +
+							item.content + '</div></div></div><div class="clear"></div><div class="chat_reply"></div></li>');
+					})
+				}
+				$('#comments').append(htm);
+			}
+		});
+	}
+
+	initComments();
+
+	//收藏
+	$('#like_btn').click(function () {
+		$('#like_btn').removeAttr("disabled");
+		if (!Authc.isAuthced()) {
+			Authc.showLogin();
+			return false;
+		}
+		var id = $(this).attr('text-id');
+		var valu = $('#like_count_val').attr('likeCount');
+		$.ajax({
+			url: "http://localhost:11111/user/like",
+			type: "post",
+			async: false,
+			data: {
+				"id" : id
+			},
+			dataType: "json",
+			success: function (data) {
+				if (data.code == 200) {
+					layer.msg(data.message,{icon : 1});
+					document.getElementById('icon_control').className = 'iconfont icon-xihuan4';
+					$('#like_count_val').html(data.data);
+				} else if(data.code == 202) {
+					layer.msg(data.message,{icon : 2});
+					document.getElementById('icon_control').className = 'iconfont icon-xihuan2';
+					$('#like_count_val').html(data.data);
+					// $('#like_count_val').html(data.data);
+					// window.location.reload();
+                }
+				else  {
+					layer.msg(data.data,{icon : 2});
+				}
+			},
+			error: function (data) {
+				layer.msg("服务器错误",{icon : 1});
+			}
+		});
+	});
+
     function goto(pid, user) {
         document.getElementById('chat_text').scrollIntoView();
         $('#chat_text').focus();
@@ -147,29 +232,56 @@
 
     seajs.use(['comment', 'view'], function (comment) {
         comment.init({
-            load: '${site.controls.comment}',
             load_url: '${base}/comment/list/${view.id}',
             post_url: '${base}/comment/submit',
             toId: '${view.id}',
             onLoad: function (i, data) {
+            	alert(i);
+            	alert(data);
                 var content = data.content;
                 var quoto = '';
+                alert(content);
                 if (data.pid > 0 && !(data.parent === null)) {
                     var pat = data.parent;
                     var pcontent = pat.content;
-                    quoto = '<div class="quote"><a href="${base}/users/' + pat.author.id + '">@' + pat.author.name + '</a>: ' + pcontent + '</div>';
+                    quoto = '<div class="quote"><a href="${base}/users/' + pat.user.id + '">@' + pat.user.nickname +
+                        '</a>: ' + pcontent + '</div>';
                 }
                 var item = jQuery.format(template,
-                        data.author.id,
-                        data.author.avatar,
-                        data.author.name,
-                        data.created,
+                        data.user.id,
+                        data.user.photoPreview,
+                        data.user.nickname,
+                        data.createTime,
                         content,
                         data.id, quoto);
                 return item;
             }
         });
     });
+
+	var Authc = {
+		isAuthced: function () {
+			return (typeof(_MTONS.LOGIN_TOKEN) !== 'undefined' && _MTONS.LOGIN_TOKEN.length > 0);
+		},
+		showLogin : function () {
+			var that = this;
+			$('#login_alert').modal();
+			$('#ajax_login_submit').unbind().click(function () {
+				that.doPostLogin();
+			});
+		},
+		doPostLogin: function () {
+			var un = $('#ajax_login_username').val();
+			var pw = $('#ajax_login_password').val();
+			jQuery.post(_MTONS.BASE_PATH + '/user/login', {'username': un, 'password': pw}, function (ret) {
+				if (ret && ret.code == 200) {
+					window.location.reload();
+				} else {
+					$('#ajax_login_message').text(ret.message).show();
+				}
+			});
+		}
+	};
 
 </script>
 </@layout>

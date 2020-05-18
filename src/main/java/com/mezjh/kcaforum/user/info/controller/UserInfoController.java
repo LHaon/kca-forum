@@ -3,6 +3,8 @@ package com.mezjh.kcaforum.user.info.controller;
 import com.mezjh.integrationkit.apiutils.ApiResult;
 import com.mezjh.kcaforum.common.BaseController;
 import com.mezjh.kcaforum.common.Views;
+import com.mezjh.kcaforum.common.text.entity.TextInfo;
+import com.mezjh.kcaforum.common.text.service.TextService;
 import com.mezjh.kcaforum.common.utils.MdFive;
 import com.mezjh.kcaforum.common.utils.message.MessageUtil;
 import com.mezjh.kcaforum.user.Comm;
@@ -18,6 +20,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -34,6 +38,8 @@ public class UserInfoController extends BaseController {
     private UserInfoService userInfoService;
     @Autowired
     private MessageUtil messageUtil;
+    @Autowired
+    private TextService textService;
 
     @GetMapping("/sendMessage")
     @ResponseBody
@@ -41,15 +47,15 @@ public class UserInfoController extends BaseController {
         if (redisTemplate.opsForValue().get(phone + Integer.toString(msgType) + "flag") != null) {
             return ApiResult.fail("发送短信过于频繁");
         }
+        Pattern pattern = Pattern.compile(Comm.PHONE_REG);
+        if (!pattern.matcher(phone).matches() || phone == null) {
+            return ApiResult.paramError("手机号格式不正确");
+        }
         if (msgType == 2) {
             User user = userInfoService.findUserByPhone(phone);
             if (user != null) {
                 return ApiResult.fail("该手机号已被注册");
             }
-        }
-        Pattern pattern = Pattern.compile(Comm.PHONE_REG);
-        if (!pattern.matcher(phone).matches() || phone == null) {
-            return ApiResult.paramError("手机号格式不正确");
         }
         try {
             messageUtil.send(phone, msgType);
@@ -62,13 +68,19 @@ public class UserInfoController extends BaseController {
     @PostMapping("/toRegister")
     @ResponseBody
     public ApiResult regisger(RegisterVo registerVo) {
-        String code = redisTemplate.opsForValue().get(registerVo.getPhone()+"register");
-        if (code == null || !code.equals(registerVo.getCode())) {
-            return new ApiResult(true, "401", "验证码错误或验证码已失效");
-        }
         User user = userInfoService.findUserExist(registerVo);
         if (user != null) {
             return new ApiResult(true, "401", "该用户名已被注册");
+        }
+        if (!registerVo.getUsername().matches(Comm.USERNAME_REG)) {
+            return new ApiResult(true, "401", "账号不符合规范");
+        }
+        if (!registerVo.getPassword().matches(Comm.PASSWORD_REG)) {
+            return new ApiResult(true, "401", "密码至少包含6-20位字母和数字,可以有特殊字符");
+        }
+        String code = redisTemplate.opsForValue().get(registerVo.getPhone()+"register");
+        if (code == null || !code.equals(registerVo.getCode())) {
+            return new ApiResult(true, "401", "验证码错误或验证码已失效");
         }
         int i = userInfoService.register(registerVo.toUser());
         if (i < 1) {
@@ -117,22 +129,50 @@ public class UserInfoController extends BaseController {
      * @param id
      * @return
      */
-    @RequestMapping("/favor")
+    @RequestMapping("/like")
     @ResponseBody
-    public ApiResult favor(Long id) {
+    public ApiResult like(Long id) {
         ApiResult data = ApiResult.fail("操作失败");
         if (id != null) {
             try {
-                AccountProfile up = getProfile();
-//                postService.favor(up.getId(), id);
-//                sendMessage(up.getId(), id);
-                data = ApiResult.success();
+                AccountProfile user = getProfile();
+                TextInfo text = textService.getTextInfoById(id, user.getId());
+                if (text.getUserLikeIds() != null && !text.getUserLikeIds().equals("")) {
+                    text.setLikeCount(text.getLikeCount() - 1);
+                    if (!text.getUserLikeIds().contains(",")) {
+                        text.setUserLikeIds(text.getUserLikeIds().replaceAll(Long.toString(user.getId()), ""));
+                    } else {
+                        text.setUserLikeIds(text.getUserLikeIds().replaceAll("," + Long.toString(user.getId()), ""));
+                    }
+                    textService.updateText(text);
+                    removeLikeForUser(text.getId());
+                    redisTemplate.opsForZSet().incrementScore("popularList", Long.toString(text.getId()), 1);
+                    return new ApiResult(true, "202", "取消收藏", text.getLikeCount());
+                }
+                if (user == null) {
+                    return ApiResult.fail("用户未登陆");
+                }
+                text = textService.getTextInfoById(id);
+                text.setUserLikeIds(text.getUserLikeIds() + "," + Long.toString(user.getId()));
+                text.setLikeCount(text.getLikeCount() + 1);
+                textService.updateText(text);
+                insetLikeForUser(text.getId());
+                return new ApiResult(true, "200", "收藏成功", text.getLikeCount());
             } catch (Exception e) {
-                data = ApiResult.fail(e.getMessage());
+                data = ApiResult.fail("收藏失败");
             }
         }
-        //data = ApiResult.fail("收藏失败");
         return data;
+    }
+
+    @GetMapping("/likes")
+    public String toLikes(ModelMap modelMap) {
+        User user = userInfoService.getUserById(getProfile().getId());
+        user.setLikeTextIds(user.getLikeTextIds().replaceAll("null,", ""));
+        List<String> textIds = Arrays.asList(user.getLikeTextIds().split(","));
+        List<TextInfo> likes = textService.getListByUserLikes(textIds);
+        modelMap.put("likes", likes);
+        return view(Views.LIKES);
     }
 
     @GetMapping("/login")
@@ -168,6 +208,18 @@ public class UserInfoController extends BaseController {
     @GetMapping("/setting/password")
     public String toPassword() {
         return view(Views.PASSWORD);
+    }
+
+    private void insetLikeForUser(Long textId) {
+        User user = userInfoService.getUserById(getProfile().getId());
+        user.setLikeTextIds(user.getLikeTextIds() + "," + Long.toString(textId));
+        userInfoService.updateLikeText(user);
+    }
+
+    private void removeLikeForUser(Long textId) {
+        User user = userInfoService.getUserById(getProfile().getId());
+        user.setLikeTextIds(user.getLikeTextIds().replaceAll("," + Long.toString(textId), ""));
+        userInfoService.updateLikeText(user);
     }
 
 }

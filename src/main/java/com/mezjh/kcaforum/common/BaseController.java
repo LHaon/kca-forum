@@ -15,7 +15,14 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author zjh
@@ -83,5 +90,20 @@ public class BaseController {
 
     protected void putProfile(AccountProfile profile) {
         SecurityUtils.getSubject().getSession(true).setAttribute("profile", profile);
+    }
+
+    protected boolean isAuthenticated() {
+        return SecurityUtils.getSubject() != null && (SecurityUtils.getSubject().isAuthenticated() || SecurityUtils.getSubject().isRemembered());
+    }
+
+    protected PageRequest wrapPageable(Sort sort) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        int pageSize = ServletRequestUtils.getIntParameter(request, "pageSize", 10);
+        int pageNo = ServletRequestUtils.getIntParameter(request, "pageNo", 1);
+
+        if (null == sort) {
+            sort = Sort.unsorted();
+        }
+        return PageRequest.of(pageNo - 1, pageSize, sort);
     }
 }

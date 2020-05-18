@@ -33,6 +33,11 @@ public interface UserInfoMapper {
      * @param user
      */
     void addTextCount(User user);
+    /**
+     * 更新收藏文章列表
+     * @param user
+     */
+    void updateLikeText(User user);
 
     User findByUsername(String username);
 

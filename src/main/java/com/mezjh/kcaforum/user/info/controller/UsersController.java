@@ -64,8 +64,7 @@ public class UsersController extends BaseController {
 
     private void initUser(long userId, ModelMap model) {
         model.put("user", userInfoService.getUserById(userId));
-        boolean owner = true;
-
+        boolean owner = false;
         AccountProfile profile = getProfile();
         if (null != profile && profile.getId() == userId) {
             owner = true;

@@ -17,7 +17,7 @@ public interface TextMapper {
      * @param textInfo
      * @return
      */
-    int subText(TextInfo textInfo);
+    void subText(TextInfo textInfo);
     /**
      * 通过用户ID获取用户文章
      * @param id
@@ -48,4 +48,6 @@ public interface TextMapper {
      * @param id
      */
     void deleteText(Long id);
+
+    List<TextInfo> getListByUserLikes(List<String> list);
 }

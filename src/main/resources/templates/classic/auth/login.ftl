@@ -99,6 +99,7 @@
                             if (data.code == 200) {
                                 $('#lmessage_tex').html(data.data);
                             } else {
+								$("#lsendCode").removeAttr("disabled");
 								$('#lmessage_tex').html(data.message);
                                 flag = true;
                                 time = 60;
@@ -159,6 +160,11 @@
 	$('#lphone_login').click(function () {
 		var username = $('#lphone_inp').val();
         var password = $('#lcaptcha_inp').val();
+		var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+		if (!myreg.test(username)) {
+			$('#lmessage_tex').html("手机号格式不正确");
+			return false;
+		}
 		$.ajax({
 			url: "http://localhost:11111/user/toLoginR",
 			type: "post",

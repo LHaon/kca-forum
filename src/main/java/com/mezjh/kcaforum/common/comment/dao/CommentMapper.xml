@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mezjh.kcaforum.common.comment.dao.CommentMapper">
+    <insert id="subComment" parameterType="com.mezjh.kcaforum.common.comment.entity.CommentInfo">
+        insert into comments(id, user_id, content, create_time, pid, text_id, status)
+        values (null, #{userId}, #{content}, #{createTime}, #{pid}, #{textId}, 1)
+    </insert>
+    <select id="findAllByTextId" parameterType="long"
+            resultType="com.mezjh.kcaforum.common.comment.vo.CommentVo">
+        select * from comments
+        where text_id = #{textId}
+    </select>
+
+</mapper>

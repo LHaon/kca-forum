@@ -22,7 +22,7 @@ public interface TextService {
      * @param id
      * @return
      */
-    TextInfo getTextInfoById(Long id);
+    TextInfo getTextInfoById(Long id, Long currentUserId);
 
     /**
      * 增加阅读数
@@ -42,4 +42,8 @@ public interface TextService {
      * @param id
      */
     void deleteText(Long id, Long userId);
+
+    TextInfo getTextInfoById(Long id);
+
+    List<TextInfo> getListByUserLikes(List<String> list);
 }

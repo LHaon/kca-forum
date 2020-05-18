@@ -2,6 +2,7 @@ package com.mezjh.kcaforum.common.text.service;
 
 import com.mezjh.kcaforum.common.text.dao.TextMapper;
 import com.mezjh.kcaforum.common.text.entity.TextInfo;
+import com.mezjh.kcaforum.common.utils.MarkdownUtils;
 import com.mezjh.kcaforum.common.utils.TextUtils;
 import com.mezjh.kcaforum.user.Comm;
 import com.mezjh.kcaforum.user.info.dao.UserInfoMapper;
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -28,10 +30,27 @@ public class TextServiceImpl implements TextService{
     private RedisTemplate<String, String> redisTemplate;
 
     @Override
-    public TextInfo getTextInfoById(Long id) {
+    public TextInfo getTextInfoById(Long id, Long currentUserId) {
         TextInfo res = new TextInfo();
-        res = textMapper.getTextInfoById(id);
+        res = this.getTextInfoById(id);
+        //查询文章所属用户
         User user = userInfoService.getUserById(res.getUserId());
+        if (currentUserId != null) {
+            if (res.getUserLikeIds() != null && !res.getUserLikeIds().equals("")) {
+                String temp = res.getUserLikeIds();
+                String[] ids = res.getUserLikeIds().split(",");
+                for(int i = 0;i < ids.length;i ++) {
+                    if (ids[i].equals(Long.toString(currentUserId))) {
+                        res.setUserLikeIds(temp);
+                        break;
+                    } else {
+                        res.setUserLikeIds(null);
+                    }
+                }
+            }
+        } else {
+            res.setUserLikeIds(null);
+        }
         res.setUser(user);
         return res;
     }
@@ -42,6 +61,7 @@ public class TextServiceImpl implements TextService{
         if (redisTemplate.opsForValue().get(key) != null) {
             return count;
         }
+        redisTemplate.opsForZSet().incrementScore("popularList", Long.toString(textId), 1);
         textMapper.readCountAdd(count + 1);
         redisTemplate.opsForValue().set(key, "true" , 120, TimeUnit.SECONDS);
         return count + 1;
@@ -61,6 +81,20 @@ public class TextServiceImpl implements TextService{
         textMapper.deleteText(id);
     }
 
+    @Override
+    public TextInfo getTextInfoById(Long id) {
+        return textMapper.getTextInfoById(id);
+    }
+
+    @Override
+    public List<TextInfo> getListByUserLikes(List<String> list) {
+        List<TextInfo> res = textMapper.getListByUserLikes(list);
+        for (TextInfo temp : res) {
+            temp.setUser(userInfoService.getUserById(temp.getUserId()));
+        }
+        return res;
+    }
+
 
     @Override
     public void subText(TextInfo textInfo) {
@@ -77,7 +111,7 @@ public class TextServiceImpl implements TextService{
 
         // 设置预览内容
         if (StringUtils.isBlank(textInfo.getPreview())) {
-            textInfo.setPreview(TextUtils.getText(textInfo.getContent(), 126));
+            textInfo.setPreview(TextUtils.getText(MarkdownUtils.renderMarkdown(textInfo.getContent()), 126));
         } else {
             textInfo.setPreview(textInfo.getPreview());
         }
@@ -97,6 +131,8 @@ public class TextServiceImpl implements TextService{
 //            });
 //        }
         if (textInfo.getId() != null && textInfo.getId() > 0) {
+            TextInfo org = textMapper.getTextInfoById(textInfo.getId());
+            textInfo.setLikeCount(org.getLikeCount());
             this.updateText(textInfo);
         } else {
             User user = userInfoService.getUserById(textInfo.getUserId());

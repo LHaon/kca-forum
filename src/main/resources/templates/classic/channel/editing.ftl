@@ -14,7 +14,8 @@
             <input type="hidden" id="thumbnail" name="thumbnail" value="${view.photoPreview}"/>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="title" maxlength="128" value="${view.title}" placeholder="请输入标题" required>
+                <input id="title" type="text" class="form-control" name="title" maxlength="128" value="${view.title}"
+                        placeholder="请输入标题" required>
             </div>
             <div class="form-group">
                 <#include "/classic/channel/editor/markdown.ftl"/>
@@ -44,11 +45,14 @@
                 </div>
             </div>
             <div id="text_judge_text" class="text-danger"></div>
+            <a id="subTe" class="btn btn-primary" style="padding-left: 30px;
+                        padding-right: 30px;">发布</a>
             <div class="col-xs-12 col-md-12">
                 <div class="form-group">
                     <div class="text-center">
-                        <button id="sub" type="button" data-status="0" class="btn btn-primary" event="post_submit"
-                                 style="padding-left: 30px; padding-right: 30px;">发布</button>
+                        <button type="button" id="sub_r" data-status="0" event="post_submit" style="display:
+                        none"></button>
+                        <!-- background-color: transparent; border: 0; -->
                     </div>
                 </div>
             </div>
@@ -58,21 +62,24 @@
 <!-- /form-actions -->
 <script type="text/javascript">
 	//文章内容验证
-	$('#sub').click(function () {
+	$('#subTe').click(function () {
 		var text = $('#content').val();
+		var title = $('#title').val();
+		text = text + title;
 		$.ajax({
 			url: "http://localhost:11111/texts/judgeText",
 			type: "post",
-			async: false,
+			async: true,
 			data: {
 				"text" : text,
 			},
 			dataType: "json",
 			success: function (data) {
 				if (data.code == 200) {
-                    window.location.reload();
+					layer.msg(data.data, {icon : 1});
+					$('#sub_r').click();
 				} else  {
-					$('#text_judge_text').html(data.message);
+					layer.msg(data.message, {icon : 2});
 				}
 			},
 			error: function (data) {
@@ -80,10 +87,8 @@
 			}
 		});
 	});
-
-
 	seajs.use('post', function (post) {
-	post.init();
-});
+		post.init();
+	});
 </script>
 </@layout>

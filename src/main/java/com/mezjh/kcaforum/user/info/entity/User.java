@@ -1,5 +1,6 @@
 package com.mezjh.kcaforum.user.info.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
@@ -21,6 +22,7 @@ public class User {
     /**
      * 密码
      */
+    @JsonIgnore
     private String password;
     /**
      * 手机号
@@ -54,6 +56,8 @@ public class User {
      * 评论数
      */
     private Integer commentCount;
+
+    private String likeTextIds;
 
     private Integer status;
 }

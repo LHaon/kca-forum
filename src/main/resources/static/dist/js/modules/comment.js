@@ -115,7 +115,7 @@ define(function(require, exports, module) {
         					$('#chat_reply').hide();
         					$('#chat_pid').val('0');
         					//window.location.reload();
-        					that.pageCallback(1);
+							initComments();
         				} else {
         					layer.msg(ret.message, {icon: 5});
         				}

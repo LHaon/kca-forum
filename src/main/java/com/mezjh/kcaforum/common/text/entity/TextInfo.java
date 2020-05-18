@@ -71,4 +71,9 @@ public class TextInfo implements Serializable {
      * 文章用户
      */
     private User user;
+    /**
+     * 点赞用户ID列表
+     */
+    private String userLikeIds;
+
 }

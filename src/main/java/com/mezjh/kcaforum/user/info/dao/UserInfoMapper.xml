@@ -28,5 +28,10 @@
         set text_count = #{textCount}
         where id = #{id}
     </update>
+    <update id="updateLikeText"  parameterType="com.mezjh.kcaforum.user.info.entity.User">
+        update user
+        set like_text_ids = #{likeTextIds}
+        where id = #{id}
+    </update>
 
 </mapper>

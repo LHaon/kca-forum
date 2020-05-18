@@ -26,11 +26,20 @@
             content=#{content},
             preview=#{preview},
             update_time=#{updateTime},
-            photo_preview=#{photoPreview}
+            photo_preview=#{photoPreview},
+            like_count=#{likeCount},
+            user_like_ids=#{userLikeIds}
         where id=#{id}
     </update>
     <delete id="deleteText" parameterType="long">
         delete from text
         where id=#{id}
     </delete>
+    <select id="getListByUserLikes" parameterType="list" resultType="com.mezjh.kcaforum.common.text.entity.TextInfo">
+        select * from text
+        where id in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

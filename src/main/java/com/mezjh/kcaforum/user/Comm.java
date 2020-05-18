@@ -13,6 +13,11 @@ public class Comm {
      */
     public static final String PHONE_REG = "^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\\d{8}$";
     /**
+     * 密码至少包含数字、字母，可以有特殊符号
+     */
+    public static final String PASSWORD_REG = "(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&*()]{6,20}$";
+    public static final String USERNAME_REG = "^[a-zA-Z0-9]{4,15}$";
+    /**
      * 默认头像地址
      */
     public static final String HEAD_PHOTO_URL = "http://image-mezjh.test.upcdn.net/kca/15181091307/photo.jpeg";

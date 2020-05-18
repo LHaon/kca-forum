@@ -20,6 +20,8 @@ public interface Views {
 
     String H_INDEX = "/channel/index";
 
+    String LIKES = "/auth/likes";
+
     String TEXT_EDIT = "/channel/editing";
 
     String REDIRECT_USER_HOME = "redirect:/users/%d";
@@ -31,6 +33,8 @@ public interface Views {
     String USER_INDEX = "/inc/user_sidebar";
 
     String TEXT_VIEW = "/channel/view";
+
+    String POPULARS = "/channel/populars";
 
     String REDIRECT_INDEX = "redirect:/index";
 
