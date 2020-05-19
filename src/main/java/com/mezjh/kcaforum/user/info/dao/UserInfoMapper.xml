@@ -33,5 +33,10 @@
         set like_text_ids = #{likeTextIds}
         where id = #{id}
     </update>
+    <update id="addCommentCount">
+        update user
+        set comment_count=#{commentCount}
+        where id = #{id}
+    </update>
 
 </mapper>

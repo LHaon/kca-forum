@@ -3,7 +3,10 @@ package com.mezjh.kcaforum.common.comment.service;
 import com.mezjh.kcaforum.common.comment.dao.CommentMapper;
 import com.mezjh.kcaforum.common.comment.entity.CommentInfo;
 import com.mezjh.kcaforum.common.comment.vo.CommentVo;
+import com.mezjh.kcaforum.common.text.entity.TextInfo;
+import com.mezjh.kcaforum.common.text.service.TextService;
 import com.mezjh.kcaforum.user.Comm;
+import com.mezjh.kcaforum.user.info.dao.UserInfoMapper;
 import com.mezjh.kcaforum.user.info.entity.User;
 import com.mezjh.kcaforum.user.info.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,10 @@ public class CommentServiceImpl implements CommentService{
     private CommentMapper commentMapper;
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private TextService textService;
+    @Autowired
+    private UserInfoMapper userInfoMapper;
 
     @Override
     public void subComment(CommentVo commentVo) {
@@ -33,8 +40,12 @@ public class CommentServiceImpl implements CommentService{
         commentInfo.setCreateTime(Comm.getNowTime());
         commentInfo.setPid(commentVo.getPid());
         commentMapper.subComment(commentInfo);
-        //评论增加
-        //userEventService.identityComment(comment.getAuthorId(), true);
+        TextInfo textInfo = textService.getTextInfoById(commentVo.getTextId());
+        textInfo.setCommentCount(textInfo.getCommentCount() + 1);
+        textService.updateText(textInfo);
+        User user = userInfoService.getUserById(commentVo.getUserId());
+        user.setCommentCount(user.getCommentCount() + 1);
+        userInfoMapper.addCommentCount(user);
     }
 
     @Override

@@ -114,8 +114,8 @@ define(function(require, exports, module) {
         					$('#chat_text').val('');
         					$('#chat_reply').hide();
         					$('#chat_pid').val('0');
-        					//window.location.reload();
-							initComments();
+        					window.location.reload();
+							//initComments();
         				} else {
         					layer.msg(ret.message, {icon: 5});
         				}

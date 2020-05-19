@@ -28,7 +28,8 @@
             update_time=#{updateTime},
             photo_preview=#{photoPreview},
             like_count=#{likeCount},
-            user_like_ids=#{userLikeIds}
+            user_like_ids=#{userLikeIds},
+            comment_count=#{commentCount}
         where id=#{id}
     </update>
     <delete id="deleteText" parameterType="long">

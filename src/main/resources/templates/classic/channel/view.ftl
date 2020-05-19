@@ -166,7 +166,9 @@
 							'"><img src="' + item.user.photoUrl + '"> </a><div class="chat_body"><h5><div ' +
 							'class="fl"><a class="chat_name" href="/users/' + item.user.id + '">' +
 							item.user.nickname + '</a><span>' + item.createTime + '</span></div>' +
-							'<div class="fr reply_this"><a href="javascript:void(0);" onclick="goto(\'3\', \'ha\')' +
+							'<div class="fr reply_this"><a href="javascript:void(0);" onclick="goto(\'' + item.id
+                            +'\', ' +
+                        '\''+ item.user.nickname +'\')' +
 							'"><i class="icon icon-action-redo"></i></a></div>' +
 							'<div class="clear"></div></h5><div class="chat_p"><div class="chat_pct">' +
 							item.content + '</div></div></div><div class="clear"></div><div class="chat_reply"></div></li>');
@@ -223,6 +225,7 @@
         $('#chat_text').focus();
         $('#chat_text').val('');
         $('#chat_to').text(user);
+        alert(pid);
         $('#chat_pid').val(pid);
 
         $('#chat_reply').show();

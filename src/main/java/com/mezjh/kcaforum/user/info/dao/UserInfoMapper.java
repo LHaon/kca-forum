@@ -39,6 +39,12 @@ public interface UserInfoMapper {
      */
     void updateLikeText(User user);
 
+    /**
+     * 增加用户评论数
+     * @param user
+     */
+    void addCommentCount(User user);
+
     User findByUsername(String username);
 
     User findUserByPhone(String phone);
