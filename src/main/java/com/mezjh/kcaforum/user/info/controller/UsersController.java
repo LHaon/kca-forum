@@ -46,6 +46,7 @@ public class UsersController extends BaseController {
     public String method(@PathVariable(value = "userId") Long userId,
                          @PathVariable(value = "method") String method,
                          ModelMap model, HttpServletRequest request) {
+        System.out.println(method);
 //        model.put("pageNo", ServletRequestUtils.getIntParameter(request, "pageNo", 1));
 
         // 访问消息页, 判断登录

@@ -5,8 +5,10 @@ import com.mezjh.kcaforum.common.BaseController;
 import com.mezjh.kcaforum.common.comment.entity.CommentInfo;
 import com.mezjh.kcaforum.common.comment.service.CommentService;
 import com.mezjh.kcaforum.common.comment.vo.CommentVo;
+import com.mezjh.kcaforum.common.utils.keywords.KeywordsUtils;
 import com.mezjh.kcaforum.user.info.entity.AccountProfile;
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +32,8 @@ public class CommentController extends BaseController {
 
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private KeywordsUtils keywordsUtils;
 
 
     @RequestMapping("/list/{toId}")
@@ -47,6 +51,12 @@ public class CommentController extends BaseController {
 
         if (toId <= 0 || StringUtils.isBlank(text)) {
             return ApiResult.fail("操作失败");
+        }
+        String res = keywordsUtils.isKeywords(text);
+        JSONObject jsonObject = new JSONObject(res);
+        Integer temp = (Integer) jsonObject.get("conclusionType");
+        if (!temp.equals(1)) {
+            return new ApiResult(false, "-1", "包含违禁词汇，请检查后重新发布");
         }
 
         AccountProfile profile = getProfile();

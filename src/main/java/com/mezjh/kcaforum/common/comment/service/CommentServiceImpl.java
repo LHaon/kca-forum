@@ -57,4 +57,9 @@ public class CommentServiceImpl implements CommentService{
         }
         return res;
     }
+
+    @Override
+    public List<CommentVo> findAllByUserId(Long userId) {
+        return commentMapper.findAllByUserId(userId);
+    }
 }

@@ -17,7 +17,7 @@
                             <div class="avatar">
                                 <img src="${row.user.photoUrl}" class="lazy avatar avatar-50 photo" height="50" width="50">
                             </div>
-                            <a href="${base}/users/${row.author.id}" target="_blank">${row.user.nickname}</a>
+                            <a href="${base}/users/${row.userId}" target="_blank">${row.user.nickname}</a>
                         </li>
 <#--                        <li class="ico-cat"><@utils.showChannel row/></li>-->
                         <li class="ico-time"><i class="icon-clock"></i>${row.createTime}</li>
@@ -40,7 +40,7 @@
                             <div class="avatar">
                                 <img src="${row.user.photoUrl}" class="lazy avatar avatar-50 photo" height="50" width="50">
                             </div>
-                            <a href="${base}/users/${row.user.id}" target="_blank">${row.user.nickname}</a>
+                            <a href="${base}/users/${row.userId}" target="_blank">${row.user.nickname}</a>
                         </li>
 <#--                        <li class="ico-cat"><@utils.showChannel row/></li>-->
                         <li class="ico-time"><i class="icon-clock"></i>${row.createTime}</li>

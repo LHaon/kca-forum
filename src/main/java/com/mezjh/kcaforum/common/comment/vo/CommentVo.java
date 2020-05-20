@@ -16,5 +16,5 @@ public class CommentVo extends CommentInfo {
 
     private User user;
     private CommentVo parent;
-    private TextInfo post;
+    private TextInfo text;
 }

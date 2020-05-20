@@ -28,6 +28,8 @@ public interface Views {
 
     String METHOD_TEXTS = "texts";
 
+    String METHOD_MESSAGES = "messages";
+
     String USER_METHOD_TEMPLATE = "/user/method_%s";
 
     String USER_INDEX = "/inc/user_sidebar";

@@ -28,7 +28,6 @@ public class ContentsDirective extends TemplateDirective {
 
     @Override
     public void execute(DirectiveHandler handler) throws Exception {
-        Integer pageType = handler.getInteger("pageType", 0);
         List<TextInfo> datas = indexService.getIndexTextList();
         handler.put(RESULTS, ApiResult.success(datas)).render();
     }

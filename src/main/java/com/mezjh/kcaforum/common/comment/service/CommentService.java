@@ -24,4 +24,11 @@ public interface CommentService {
      * @return
      */
     List<CommentVo> findAllByTextId(Long textId);
+
+    /**
+     * 根据用户ID查询所有文章
+     * @param userId
+     * @return
+     */
+    List<CommentVo> findAllByUserId(Long userId);
 }

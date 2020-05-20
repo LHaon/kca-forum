@@ -11,5 +11,10 @@
         select * from comments
         where text_id = #{textId}
     </select>
+    <select id="findAllByUserId" parameterType="long"
+            resultType="com.mezjh.kcaforum.common.comment.vo.CommentVo">
+        select * from comments
+        where user_id = #{userId}
+    </select>
 
 </mapper>
