@@ -219,7 +219,7 @@
 					$.ajax({
 						type: 'get',
 						async: false,
-						url:"http://localhost:11111/user/sendMessage",
+						url:"${http}/user/sendMessage",
 						data: {
 							"phone": phone,
 							"msgType": 1
@@ -263,7 +263,7 @@
 			return  false;
 		}
 		$.ajax({
-			url: "http://localhost:11111/user/toLoginR",
+			url: "${http}/user/toLoginR",
 			type: "post",
 			async: false,
 			data: {
@@ -290,7 +290,7 @@
 		var username = $('#phone_inp').val();
 		var password = $('#captcha_inp').val();
 		$.ajax({
-			url: "http://localhost:11111/user/toLoginR",
+			url: "${http}/user/toLoginR",
 			type: "post",
 			async: false,
 			data: {

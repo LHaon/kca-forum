@@ -153,7 +153,7 @@
 			cache: false,
 			async: false,
 			dataType: 'json', type: 'post',
-			url: "http://localhost:11111/comment/list/${view.id}",
+			url: "${http}/comment/list/${view.id}",
 			success: function (data) {
 				var list = data.data;
 				var htm = "";
@@ -191,7 +191,7 @@
 		var id = $(this).attr('text-id');
 		var valu = $('#like_count_val').attr('likeCount');
 		$.ajax({
-			url: "http://localhost:11111/user/like",
+			url: "${http}/user/like",
 			type: "post",
 			async: false,
 			data: {

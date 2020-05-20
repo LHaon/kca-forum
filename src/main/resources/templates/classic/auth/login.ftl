@@ -89,7 +89,7 @@
                     $.ajax({
                         type: 'get',
                         async: false,
-                        url:"http://localhost:11111/user/sendMessage",
+                        url:"${http}/user/sendMessage",
                         data: {
                             "phone": phone,
                             "msgType": 1
@@ -134,7 +134,7 @@
 			return  false;
         }
 		$.ajax({
-			url: "http://localhost:11111/user/toLoginR",
+			url: "${http}/user/toLoginR",
 			type: "post",
 			async: false,
 			data: {
@@ -145,7 +145,7 @@
 			dataType: "json",
 			success: function (data) {
 				if (data.code == 200) {
-					window.location.href="http://localhost:11111/users/"+ data.data.id;
+					window.location.href="${http}/users/"+ data.data.id;
 				} else  {
 					$('#lpassword_tex').html(data.message);
 				}
@@ -166,7 +166,7 @@
 			return false;
 		}
 		$.ajax({
-			url: "http://localhost:11111/user/toLoginR",
+			url: "${http}/user/toLoginR",
 			type: "post",
 			async: false,
 			data: {
@@ -177,7 +177,7 @@
 			dataType: "json",
 			success: function (data) {
 				if (data.code == 200) {
-					window.location.href="http://localhost:11111/users/"+ data.data.id;
+					window.location.href="${http}/users/"+ data.data.id;
 				} else  {
 					$('#lcaptcha_tex').html(data.message);
 				}
