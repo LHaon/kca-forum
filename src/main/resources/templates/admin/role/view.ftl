@@ -1,9 +1,9 @@
 <#include "/admin/utils/ui.ftl"/>
 <@layout>
 
-<link href="${base}/dist/vendors/treetable/css/jquery.treetable.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/dist/vendors/treetable/css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css"/>
-<script src="${base}/dist/vendors/treetable/jquery.treetable.js"></script>
+<link href="${http}/dist/vendors/treetable/css/jquery.treetable.css" rel="stylesheet" type="text/css"/>
+<link href="${http}/dist/vendors/treetable/css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css"/>
+<script src="${http}/dist/vendors/treetable/jquery.treetable.js"></script>
 
 <#macro treeIterator nodes>
 <#-- 循环节点-->
@@ -24,8 +24,8 @@
 <section class="content-header">
     <h1>编辑角色</h1>
     <ol class="breadcrumb">
-        <li><a href="${base}/admin">首页</a></li>
-        <li><a href="${base}/admin/role/list">角色管理</a></li>
+        <li><a href="${http}/admin">首页</a></li>
+        <li><a href="${http}/admin/role/list">角色管理</a></li>
         <li class="active">编辑角色</li>
     </ol>
 </section>

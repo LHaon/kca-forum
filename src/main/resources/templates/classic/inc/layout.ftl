@@ -16,35 +16,35 @@
 
     <title>${title?default(options['site_name'])}</title>
 
-    <link href="${base}/dist/vendors/pace/themes/pace-theme-minimal.css" rel="stylesheet"/>
-    <link href="${base}/dist/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="${http}/dist/vendors/pace/themes/pace-theme-minimal.css" rel="stylesheet"/>
+    <link href="${http}/dist/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <link href="${base}/dist/css/editor.css" rel="stylesheet"/>
-    <link href="${base}/dist/css/plugins.css" rel="stylesheet"/>
-    <link href="${base}/dist/css/style.css" rel="stylesheet"/>
+    <link href="${http}/dist/css/editor.css" rel="stylesheet"/>
+    <link href="${http}/dist/css/plugins.css" rel="stylesheet"/>
+    <link href="${http}/dist/css/style.css" rel="stylesheet"/>
 
-    <link href="${base}/dist/iconfont/iconfont.css" rel="stylesheet"/>
+    <link href="${http}/dist/iconfont/iconfont.css" rel="stylesheet"/>
 
-    <link href="${base}/dist/vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet"/>
-    <link href="${base}/dist/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="${http}/dist/vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet"/>
+    <link href="${http}/dist/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
 
-    <script src="${base}/dist/vendors/pace/pace.min.js"></script>
+    <script src="${http}/dist/vendors/pace/pace.min.js"></script>
 
-    <script src="${base}/dist/js/jquery.min.js"></script>
-    <script src="${base}/dist/vendors/layer/layer.js"></script>
-    <script src="${base}/dist/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${http}/dist/js/jquery.min.js"></script>
+    <script src="${http}/dist/vendors/layer/layer.js"></script>
+    <script src="${http}/dist/vendors/bootstrap/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
         var _MTONS = _MTONS || {};
-        _MTONS.BASE_PATH = '${base}';
+        _MTONS.BASE_PATH = '${http}';
         _MTONS.LOGIN_TOKEN = '${profile.id}';
     </script>
 
-    <script src="${base}/dist/js/sea.js"></script>
-    <script src="${base}/dist/js/sea.config.js"></script>
+    <script src="${http}/dist/js/sea.js"></script>
+    <script src="${http}/dist/js/sea.config.js"></script>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="${base}/dist/images/logo/icon.png" />
+    <link rel="icon" type="image/x-icon" href="${http}/dist/images/logo/icon.png" />
 </head>
 <body>
     <!-- header -->

@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1>系统配置</h1>
     <ol class="breadcrumb">
-        <li><a href="${base}/admin">首页</a></li>
+        <li><a href="${http}/admin">首页</a></li>
         <li class="active">系统配置</li>
     </ol>
 </section>

@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1>栏目管理</h1>
     <ol class="breadcrumb">
-        <li><a href="${base}/admin">首页</a></li>
+        <li><a href="${http}/admin">首页</a></li>
         <li class="active">栏目管理</li>
     </ol>
 </section>
@@ -15,7 +15,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">栏目列表</h3>
                     <div class="box-tools">
-                        <a class="btn btn-default btn-sm" href="${base}/admin/channel/view">添加栏目</a>
+                        <a class="btn btn-default btn-sm" href="${http}/admin/channel/view">添加栏目</a>
                     </div>
                 </div>
                 <div class="box-body">
@@ -81,7 +81,7 @@
                 btn: ['确定', '取消'], //按钮
                 shade: false //不显示遮罩
             }, function () {
-                J.getJSON('${base}/admin/channel/delete', {id: that.attr('data-id')}, ajaxReload);
+                J.getJSON('${http}/admin/channel/delete', {id: that.attr('data-id')}, ajaxReload);
             }, function () {
             });
             return false;

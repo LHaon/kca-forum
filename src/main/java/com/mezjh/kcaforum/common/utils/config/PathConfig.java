@@ -13,7 +13,7 @@ public class PathConfig {
 
     @ModelAttribute(name="http")
     public Object title() {
-        return upUrl;
+        return downUrl;
     }
 
 }

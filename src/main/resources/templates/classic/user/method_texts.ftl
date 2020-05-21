@@ -13,7 +13,7 @@
                     <ul class="list-group">
                         <#list results as row>
                             <li class="list-group-item">
-                                <a href="${base}/texts/${row.id}" class="remove-padding-left">${row.title}</a>
+                                <a href="${http}/texts/${row.id}" class="remove-padding-left">${row.title}</a>
                                 <span class="meta">
                                     ${row.likeCount} 收藏
                                     <span> ⋅ </span>
@@ -63,7 +63,7 @@ $(function() {
             btn: ['确定','取消'], //按钮
             shade: false //不显示遮罩
         }, function(){
-			jQuery.getJSON('${base}/texts/delete/' + id, function (ret) {
+			jQuery.getJSON('${http}/texts/delete/' + id, function (ret) {
 				layer.msg(ret.message, {icon: 1});
 				if (ret.code >=0) {
 					location.reload();
@@ -78,7 +78,7 @@ $(function() {
 	// edit
 	$('a[data-evt=edit]').click(function () {
 		var id = $(this).attr('data-id');
-		window.location.href='${base}/texts/editing?id=' + id;
+		window.location.href='${http}/texts/editing?id=' + id;
 	});
 })
 </script>

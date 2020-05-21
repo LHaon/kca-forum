@@ -12,7 +12,7 @@
                 <div id="message">
                     <#include "/classic/inc/action_message.ftl"/>
                 </div>
-                <form id="submitForm" method="POST" action="${base}/forgot" accept-charset="UTF-8">
+                <form id="submitForm" method="POST" action="${http}/forgot" accept-charset="UTF-8">
                     <div class="form-group">
                         <label class="control-label" for="phone">手机号</label>
                         <div class="input-group">

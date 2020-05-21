@@ -15,7 +15,7 @@
                             <#assign target = row />
                             <li class="list-group-item" id="loop-${target.id}">
                                 <#if target??>
-                                    <a href="${base}/texts/${target.id}" class="remove-padding-left">${target.title}</a>
+                                    <a href="${http}/texts/${target.id}" class="remove-padding-left">${target.title}</a>
                                 <#else>
                                     <a href="javascript:;" class="remove-padding-left">文章已删除</a>
                                 </#if>
@@ -61,7 +61,7 @@ $(function() {
             shade: false //不显示遮罩
         }, function(){
 
-			jQuery.getJSON('${base}/user/like', {'id': id}, function (ret) {
+			jQuery.getJSON('${http}/user/like', {'id': id}, function (ret) {
 				layer.msg(ret.message, {icon: 1});
 				if (ret.code >=0) {
 					$('#loop-' + id).fadeOut();

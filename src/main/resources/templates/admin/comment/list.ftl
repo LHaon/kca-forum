@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1>评论管理</h1>
     <ol class="breadcrumb">
-        <li><a href="${base}/admin">首页</a></li>
+        <li><a href="${http}/admin">首页</a></li>
         <li class="active">评论管理</li>
     </ol>
 </section>
@@ -79,7 +79,7 @@
     }
 
     function doDelete(ids) {
-        J.getJSON('${base}/admin/comment/delete', J.param({'id': ids}, true), ajaxReload);
+        J.getJSON('${http}/admin/comment/delete', J.param({'id': ids}, true), ajaxReload);
     }
 
     $(function () {

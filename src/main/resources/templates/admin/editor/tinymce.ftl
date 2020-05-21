@@ -1,5 +1,5 @@
-<script type="text/javascript" charset="utf-8" src="${base}/dist/js/jquery.form.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="${base}/dist/vendors/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${http}/dist/js/jquery.form.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${http}/dist/vendors/tinymce/tinymce.min.js"></script>
 
 <textarea id="content" name="content" rows="5" required>${view.content?html}</textarea>
 
@@ -9,7 +9,7 @@ $(function () {
         selector: "#content",
         theme: 'modern',
         language: "zh_CN",
-        upload_image_url: "${base}/post/upload", //配置的上传图片的路由
+        upload_image_url: "${http}/post/upload", //配置的上传图片的路由
         height: 400,
         plugins: [
             'advlist autolink autosave lists link image print anchor codesample',
@@ -39,8 +39,8 @@ $(function () {
             {text: 'C++', value: 'cpp'}
         ],
         content_css: [
-            '${base}/dist/vendors/bootstrap/css/bootstrap.min.css',
-            '${base}/dist/css/editor.css',
+            '${http}/dist/vendors/bootstrap/css/bootstrap.min.css',
+            '${http}/dist/css/editor.css',
         ],
         setup: function(editor) {
             editor.on('change', function(e) {

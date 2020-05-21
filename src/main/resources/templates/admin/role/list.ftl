@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1>角色管理</h1>
     <ol class="breadcrumb">
-        <li><a href="${base}/admin">首页</a></li>
+        <li><a href="${http}/admin">首页</a></li>
         <li class="active">角色管理</li>
     </ol>
 </section>
@@ -15,7 +15,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">角色列表</h3>
                     <div class="box-tools">
-                        <a class="btn btn-default btn-sm" href="${base}/admin/role/view">添加角色</a>
+                        <a class="btn btn-default btn-sm" href="${http}/admin/role/view">添加角色</a>
                     </div>
                 </div>
                 <div class="box-body">
@@ -42,7 +42,7 @@
                                     <td>${row.name}</td>
                                     <td class="text-center">
                                         <#if row.id != 1>
-                                            <a href="${base}/admin/role/view?id=${row.id}" class="btn btn-xs btn-success">
+                                            <a href="${http}/admin/role/view?id=${row.id}" class="btn btn-xs btn-success">
                                                 <i class="fa fa-check-square-o"></i> 修改
                                             </a>
                                             <a href="javascript:void(0);" class="btn btn-xs btn-primary" data-id="${row.id}"
@@ -81,7 +81,7 @@
     }
 
     function doDelete(ids) {
-        J.getJSON('${base}/admin/role/delete', J.param({'id': ids}, true), ajaxReload);
+        J.getJSON('${http}/admin/role/delete', J.param({'id': ids}, true), ajaxReload);
     }
 
     $(function () {

@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1>文章管理</h1>
     <ol class="breadcrumb">
-        <li><a href="${base}/admin">首页</a></li>
+        <li><a href="${http}/admin">首页</a></li>
         <li class="active">文章管理</li>
     </ol>
 </section>
@@ -15,7 +15,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">文章列表</h3>
                     <div class="box-tools">
-                        <a class="btn btn-default btn-sm" href="${base}/admin/post/view">新建</a>
+                        <a class="btn btn-default btn-sm" href="${http}/admin/post/view">新建</a>
                         <a class="btn btn-default btn-sm" href="javascrit:;" data-action="batch_del">批量删除</a>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                                         <img src="<@resource src=row.thumbnail/>" style="width: 80px;">
                                     </td>
                                     <td>
-                                        <a href="${base}/post/${row.id}" target="_blank">${row.title}</a>
+                                        <a href="${http}/post/${row.id}" target="_blank">${row.title}</a>
                                     </td>
                                     <td>${row.author.username}</td>
                                     <td>${row.created?string('yyyy-MM-dd')}</td>
@@ -94,7 +94,7 @@
                                             <a href="javascript:void(0);" class="btn btn-xs btn-warning" data-id="${row.id}" rel="unweight">消顶</a>
                                         </#if>
 
-                                        <a href="${base}/admin/post/view?id=${row.id}" class="btn btn-xs btn-info">修改</a>
+                                        <a href="${http}/admin/post/view?id=${row.id}" class="btn btn-xs btn-info">修改</a>
                                         <a href="javascript:void(0);" class="btn btn-xs btn-primary" data-id="${row.id}" rel="delete">删除</a>
                                     </td>
                                 </tr>
@@ -125,15 +125,15 @@ function ajaxReload(json){
 }
 
 function doDelete(ids) {
-	J.getJSON('${base}/admin/post/delete', J.param({'id': ids}, true), ajaxReload);
+	J.getJSON('${http}/admin/post/delete', J.param({'id': ids}, true), ajaxReload);
 }
 
 function doUpdateFeatured(id, featured) {
-    J.getJSON('${base}/admin/post/featured', J.param({'id': id, 'featured': featured}, true), ajaxReload);
+    J.getJSON('${http}/admin/post/featured', J.param({'id': id, 'featured': featured}, true), ajaxReload);
 }
 
 function doUpdateWeight(id, weight) {
-    J.getJSON('${base}/admin/post/weight', J.param({'id': id, 'weight': weight}, true), ajaxReload);
+    J.getJSON('${http}/admin/post/weight', J.param({'id': id, 'weight': weight}, true), ajaxReload);
 }
 
 $(function() {

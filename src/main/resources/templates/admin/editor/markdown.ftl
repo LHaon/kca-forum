@@ -1,11 +1,11 @@
-<link href="${base}/dist/vendors/codemirror/lib/codemirror.css" rel="stylesheet">
-<link href="${base}/dist/vendors/codemirror/theme/idea.css" rel="stylesheet">
-<link href="${base}/dist/css/editor.css" rel="stylesheet">
-<script type="text/javascript" charset="utf-8" src="${base}/dist/vendors/codemirror/lib/codemirror.js"></script>
-<script type="text/javascript" charset="utf-8" src="${base}/dist/vendors/codemirror/mode/markdown/markdown.js"></script>
-<script type="text/javascript" charset="utf-8" src="${base}/dist/vendors/codemirror/keymap/sublime.js"></script>
-<script type="text/javascript" charset="utf-8" src="${base}/dist/vendors/marked/marked.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="${base}/dist/js/app.markdown.js"></script>
+<link href="${http}/dist/vendors/codemirror/lib/codemirror.css" rel="stylesheet">
+<link href="${http}/dist/vendors/codemirror/theme/idea.css" rel="stylesheet">
+<link href="${http}/dist/css/editor.css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="${http}/dist/vendors/codemirror/lib/codemirror.js"></script>
+<script type="text/javascript" charset="utf-8" src="${http}/dist/vendors/codemirror/mode/markdown/markdown.js"></script>
+<script type="text/javascript" charset="utf-8" src="${http}/dist/vendors/codemirror/keymap/sublime.js"></script>
+<script type="text/javascript" charset="utf-8" src="${http}/dist/vendors/marked/marked.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${http}/dist/js/app.markdown.js"></script>
 <div class="md-editor">
     <div class="editor-toolbar">
         <button type="button" event="undo">

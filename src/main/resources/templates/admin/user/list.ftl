@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1>用户管理</h1>
     <ol class="breadcrumb">
-        <li><a href="${base}/admin">首页</a></li>
+        <li><a href="${http}/admin">首页</a></li>
         <li class="active">用户管理</li>
     </ol>
 </section>
@@ -62,9 +62,9 @@
                                             <#else>
                                                 <a href="javascript:void(0);" class="btn btn-xs btn-success" data-id="${row.id}" data-action="open">激活</a>
                                             </#if>
-                                            <a href="${base}/admin/user/pwd?id=${row.id}" class="btn btn-xs btn-success">修改密码</a>
+                                            <a href="${http}/admin/user/pwd?id=${row.id}" class="btn btn-xs btn-success">修改密码</a>
 
-                                            <a href="${base}/admin/user/view?id=${row.id}" class="btn btn-xs btn-primary">修改角色</a>
+                                            <a href="${http}/admin/user/view?id=${row.id}" class="btn btn-xs btn-primary">修改角色</a>
                                         <#else>
                                             <a href="javascript:void(0);" class="btn btn-xs disabled"><i class="fa fa-check-square-o"></i> 不可编辑</a>
                                         </#if>
@@ -104,7 +104,7 @@ $(function() {
             btn: ['确定','取消'], //按钮
             shade: false //不显示遮罩
         }, function(){
-			 J.getJSON('${base}/admin/user/close', {id: that.attr('data-id'), active: false}, ajaxReload);
+			 J.getJSON('${http}/admin/user/close', {id: that.attr('data-id'), active: false}, ajaxReload);
         }, function(){
         });
         return false;
@@ -117,7 +117,7 @@ $(function() {
             btn: ['确定','取消'], //按钮
             shade: false //不显示遮罩
         }, function(){
-			 J.getJSON('${base}/admin/user/open', {id: that.attr('data-id'), active: true}, ajaxReload);
+			 J.getJSON('${http}/admin/user/open', {id: that.attr('data-id'), active: true}, ajaxReload);
         }, function(){
         });
         return false;

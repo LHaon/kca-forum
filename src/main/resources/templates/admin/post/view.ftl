@@ -1,19 +1,19 @@
 <#include "/admin/utils/ui.ftl"/>
 <@layout>
-<link rel='stylesheet' media='all' href='${base}/dist/css/plugins.css'/>
-<script type="text/javascript" src="${base}/dist/vendors/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+<link rel='stylesheet' media='all' href='${http}/dist/css/plugins.css'/>
+<script type="text/javascript" src="${http}/dist/vendors/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
 
 <section class="content-header">
     <h1>文章编辑</h1>
     <ol class="breadcrumb">
-        <li><a href="${base}/admin">首页</a></li>
-        <li><a href="${base}/admin/post/list">文章管理</a></li>
+        <li><a href="${http}/admin">首页</a></li>
+        <li><a href="${http}/admin/post/list">文章管理</a></li>
         <li class="active">文章编辑</li>
     </ol>
 </section>
 <section class="content container-fluid">
     <div class="row">
-        <form id="qForm" method="post" action="${base}/admin/post/update">
+        <form id="qForm" method="post" action="${http}/admin/post/update">
             <#if view??>
                 <input type="hidden" name="id" value="${view.id}"/>
             </#if>
@@ -80,7 +80,7 @@
 <script type="text/javascript">
 $(function() {
     $('#upload_btn').change(function(){
-        $(this).upload('${base}/post/upload?crop=1', function(data){
+        $(this).upload('${http}/post/upload?crop=1', function(data){
             if (data.status == 200) {
                 var path = data.path;
                 $("#thumbnail_image").css("background", "url(" + path + ") no-repeat scroll center 0 rgba(0, 0, 0, 0)");

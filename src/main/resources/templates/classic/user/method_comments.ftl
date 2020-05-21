@@ -14,7 +14,7 @@
                         <#list results as row>
                             <li class="list-group-item" el="loop-${row.id}">
                                 <#if row.textId??>
-                                    <a href="${base}/texts/${row.textId}" class="remove-padding-left">${row.text
+                                    <a href="${http}/texts/${row.textId}" class="remove-padding-left">${row.text
                                         .title}</a>
                                 <#else>
                                     <a href="javascript:;" class="remove-padding-left">文章已删除</a>
@@ -64,7 +64,7 @@ $(function() {
             btn: ['确定','取消'], //按钮
             shade: false //不显示遮罩
         }, function(){
-			jQuery.getJSON('${base}/comment/delete', {'id':id }, function (ret) {
+			jQuery.getJSON('${http}/comment/delete', {'id':id }, function (ret) {
 				layer.msg(ret.message, {icon: 1});
 				if (ret.code >=0) {
 					var el = $('li[el=loop-' + id + ']');

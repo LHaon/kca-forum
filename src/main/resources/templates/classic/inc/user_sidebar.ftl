@@ -18,7 +18,7 @@
     </li>
     <#if owner>
         <li class="list-group-item">
-            <a class="btn btn-primary btn-block btn-sm" href="${base}/user/setting">
+            <a class="btn btn-primary btn-block btn-sm" href="${http}/user/setting">
                 <i class="icon icon-note"></i> 编辑个人资料
             </a>
         </li>
@@ -40,20 +40,20 @@
     <div id="home-navbar" class="collapse navbar-collapse">
         <ul class="list-group user-nav first">
             <li class="list-group-item">
-                <a href="${base}/users/${user.id}"><i class="icon icon-list"></i> 发表的文章</a>
+                <a href="${http}/users/${user.id}"><i class="icon icon-list"></i> 发表的文章</a>
             </li>
             <li class="list-group-item">
-                <a href="${base}/users/${user.id}/comments"><i class="icon icon-speech"></i> 发表的评论</a>
+                <a href="${http}/users/${user.id}/comments"><i class="icon icon-speech"></i> 发表的评论</a>
             </li>
             <li class="list-group-item">
-                <a href="${base}/users/${user.id}/favorites"><i class="icon icon-heart"></i> 收藏的文章</a>
+                <a href="${http}/users/${user.id}/favorites"><i class="icon icon-heart"></i> 收藏的文章</a>
             </li>
         </ul>
 
         <#if owner>
             <ul class="list-group user-nav">
                 <li class="list-group-item">
-                    <a href="${base}/users/${user.id}/messages">
+                    <a href="${http}/users/${user.id}/messages">
                         <i class="icon icon-envelope"></i> 通知
                         <#if (profile.badgesCount.messages > 0)>
                             <span class="label label-danger">${profile.badgesCount.messages}</span>

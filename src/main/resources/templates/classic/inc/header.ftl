@@ -33,7 +33,7 @@
                             <input type="checkbox" name="rememberMe" value="1"> 记住登录
                         </label>
                         <span class="pull-right">
-                            <a class="forget-password" href="${base}/user/forget">忘记密码？</a>
+                            <a class="forget-password" href="${http}/user/forget">忘记密码？</a>
                         </span>
                     </div>
                     <div class="form-group">
@@ -74,17 +74,17 @@
             <#--                    <@controls name="register">-->
             <fieldset class="form-group">
                 <#--			    <#if site.hasValue("weibo_client_id")>-->
-                <#--                            <a class="btn btn-default btn-block" href="${base}/oauth/callback/call_weibo">-->
+                <#--                            <a class="btn btn-default btn-block" href="${http}/oauth/callback/call_weibo">-->
                 <#--                                <i class="fa fa-weibo"></i> 微博帐号登录-->
                 <#--                            </a>-->
                 <#--                            </#if>-->
                 <#--                            <#if site.hasValue("qq_app_id")>-->
-                <#--                            <a class="btn btn-default btn-block" href="${base}/oauth/callback/call_qq">-->
+                <#--                            <a class="btn btn-default btn-block" href="${http}/oauth/callback/call_qq">-->
                 <#--                                <i class="fa fa-qq"></i> QQ帐号登录-->
                 <#--                            </a>-->
                 <#--                            </#if>-->
                 <#--                            <#if site.hasValue("github_client_id")>-->
-                <#--                            <a class="btn btn-default btn-block" href="${base}/oauth/callback/call_github">-->
+                <#--                            <a class="btn btn-default btn-block" href="${http}/oauth/callback/call_github">-->
                 <#--                                <i class="fa fa-github"></i> Github帐号登录-->
                 <#--                            </a>-->
                 <#--                            </#if>-->
@@ -128,25 +128,25 @@
                 <ul class="nav navbar-nav">
                     <#if profile??>
                         <li data="user">
-                            <a href="${base}/users/${profile.id}" nav="user">我的主页</a>
+                            <a href="${http}/users/${profile.id}" nav="user">我的主页</a>
                         </li>
                         <li>
-                            <a href="${base}/user/likes" nav="follow">收藏</a>
+                            <a href="${http}/user/likes" nav="follow">收藏</a>
                         </li>
                     </#if>
                     <li>
-                        <a href="${base}/index" nav="msgs">最新</a>
+                        <a href="${http}/index" nav="msgs">最新</a>
                     </li>
                     <li>
-                        <a href="${base}/texts/populars" nav="popular">热门</a>
+                        <a href="${http}/texts/populars" nav="popular">热门</a>
                     </li>
                     <li>
-                        <a href="${base}/tags" nav="tags">标签</a>
+                        <a href="${http}/tags" nav="tags">标签</a>
                     </li>
                 </ul>
                 <ul class="navbar-button list-inline" id="header_user">
                     <li view="search" class="hidden-xs hidden-sm">
-                        <form method="GET" action="${base}/search" accept-charset="UTF-8"
+                        <form method="GET" action="${http}/search" accept-charset="UTF-8"
                               class="navbar-form navbar-left">
                             <div class="form-group">
                                 <input class="form-control search-input mac-style" placeholder="搜索" name="kw"
@@ -159,7 +159,7 @@
                     <#if profile??>
                     <#--                    <@controls name="post">-->
                         <li>
-                            <a href="${base}/texts/editing" class="plus"><i class="icon icon-note"></i> 写文章</a>
+                            <a href="${http}/texts/editing" class="plus"><i class="icon icon-note"></i> 写文章</a>
                         </li>
                     <#--                    </@controls>-->
                         <li class="dropdown">
@@ -169,21 +169,21 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="${base}/users/${profile.id}">我的主页</a>
+                                    <a href="${http}/users/${profile.id}">我的主页</a>
                                 </li>
                                 <li>
-                                    <a href="${base}/user/setting">编辑资料</a>
+                                    <a href="${http}/user/setting">编辑资料</a>
                                 </li>
                                 <#--                            <@shiro.hasPermission name="admin">-->
-                                <li><a href="${base}/admin">后台管理</a></li>
+                                <li><a href="${http}/admin">后台管理</a></li>
                                 <#--                            </@shiro.hasPermission>-->
-                                <li><a href="${base}/user/logout">退出</a></li>
+                                <li><a href="${http}/user/logout">退出</a></li>
                             </ul>
                         </li>
                     <#else>
-                        <li><a href="${base}/user/login" class="btn btn-default btn-sm signup">登录</a></li>
+                        <li><a href="${http}/user/login" class="btn btn-default btn-sm signup">登录</a></li>
                     <#--&lt;#&ndash;                    <@controls name="register">&ndash;&gt;-->
-                        <li><a href="${base}/user/register" class="btn btn-primary btn-sm signup">注册</a></li>
+                        <li><a href="${http}/user/register" class="btn btn-primary btn-sm signup">注册</a></li>
                     <#--&lt;#&ndash;                    </@controls>&ndash;&gt;-->
                     </#if>
 

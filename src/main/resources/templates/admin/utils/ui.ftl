@@ -12,38 +12,38 @@
     <link rel="shortcut icon" href="http://mtons.com/dist/images/logo.png"/>
 
     <!-- Bootstrap -->
-    <link href="${base}/dist/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${http}/dist/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="${base}/dist/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${http}/dist/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Theme Style -->
-    <link href="${base}/theme/admin/dist/css/site.css" rel="stylesheet">
-    <link href="${base}/theme/admin/dist/css/site.addons.css" rel="stylesheet">
-    <link href="${base}/theme/admin/dist/css/skins/skin-blue.css" rel="stylesheet">
+    <link href="${http}/theme/admin/dist/css/site.css" rel="stylesheet">
+    <link href="${http}/theme/admin/dist/css/site.addons.css" rel="stylesheet">
+    <link href="${http}/theme/admin/dist/css/skins/skin-blue.css" rel="stylesheet">
 
     <script type="text/javascript">
         var _MTONS = _MTONS || {};
-        _MTONS.BASE_PATH = '${base}';
+        _MTONS.BASE_PATH = '${http}';
         _MTONS.LOGIN_TOKEN = '${profile.id}';
     </script>
 
     <!-- jQuery -->
-    <script src="${base}/dist/js/jquery.min.js"></script>
-    <script src="${base}/dist/js/plugins.js"></script>
+    <script src="${http}/dist/js/jquery.min.js"></script>
+    <script src="${http}/dist/js/plugins.js"></script>
     <!-- Bootstrap -->
-    <script src="${base}/dist/vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src='${base}/dist/vendors/jquery-validation/jquery.validate.min.js'></script>
-    <script src='${base}/dist/vendors/jquery-validation/additional-methods.js'></script>
-    <script src='${base}/dist/vendors/jquery-validation/localization/messages_zh.min.js'></script>
-    <script src="${base}/dist/vendors/layer/layer.js"></script>
-    <script src="${base}/theme/admin/dist/js/site.js"></script>
-    <script src="${base}/theme/admin/dist/js/site.base.js"></script>
+    <script src="${http}/dist/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src='${http}/dist/vendors/jquery-validation/jquery.validate.min.js'></script>
+    <script src='${http}/dist/vendors/jquery-validation/additional-methods.js'></script>
+    <script src='${http}/dist/vendors/jquery-validation/localization/messages_zh.min.js'></script>
+    <script src="${http}/dist/vendors/layer/layer.js"></script>
+    <script src="${http}/theme/admin/dist/js/site.js"></script>
+    <script src="${http}/theme/admin/dist/js/site.base.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     <!-- Main Header -->
     <header class="main-header">
-        <a href="${base}/index" class="logo">
+        <a href="${http}/index" class="logo">
             <span class="logo-mini">MBG</span>
             <span class="logo-lg"><b>M</b>BLOG</span>
         </a>
@@ -55,7 +55,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/" title="跳转到前台" target="_blank"><i class="fa fa-television"></i></a></li>
                     <li class="messages-menu">
-                        <a href="${base}/users/${profile.id}/messages">
+                        <a href="${http}/users/${profile.id}/messages">
                             <i class="fa fa-envelope-o"></i>
                             <#if (profile.badgesCount.messages > 0)>
                             <span class="label label-success">${profile.badgesCount.messages}</span>
@@ -74,10 +74,10 @@
                             </li>
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="${base}/settings/profile" class="btn btn-default btn-flat">个人资料</a>
+                                    <a href="${http}/settings/profile" class="btn btn-default btn-flat">个人资料</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="${base}/logout" class="btn btn-default btn-flat">退出登录</a>
+                                    <a href="${http}/logout" class="btn btn-default btn-flat">退出登录</a>
                                 </div>
                             </li>
                         </ul>
@@ -105,11 +105,11 @@
                 <li class="header">MENUS</li>
 
                 <li>
-                    <a href="${base}/admin" class="active"><i class="fa fa-dashboard"></i><span>仪表盘</span></a>
+                    <a href="${http}/admin" class="active"><i class="fa fa-dashboard"></i><span>仪表盘</span></a>
                 </li>
                 <@menus>
                     <#list results as menu>
-                        <li><a href="${base}/${menu.url}"><i class="${menu.icon}"></i><span>${menu.name}</span></a></li>
+                        <li><a href="${http}/${menu.url}"><i class="${menu.icon}"></i><span>${menu.name}</span></a></li>
                     </#list>
                 </@menus>
             </ul>

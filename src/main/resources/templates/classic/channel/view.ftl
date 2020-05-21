@@ -12,7 +12,7 @@
             <div class="infos panel-heading">
                 <h1 class="panel-title topic-title">${view.title}</h1>
                 <div class="meta inline-block">
-                    <a class="author" href="${base}/users/${view.user.id}">
+                    <a class="author" href="${http}/users/${view.user.id}">
                     ${view.user.nickname}
                     </a>
 <#--                    <abbr class="timeago">${timeAgo(view.created)}</abbr>-->
@@ -29,7 +29,7 @@
             <div class="panel-footer operate">
                 <#list view.tagsArray as tag>
                     <span>
-                        <a class="label label-default" href="${base}/tag/${tag}/">#${tag}</a>
+                        <a class="label label-default" href="${http}/tag/${tag}/">#${tag}</a>
                     </span>
                 </#list>
             </div>
@@ -127,12 +127,12 @@
 
 <script type="text/plain" id="chat_template">
     <li id="chat{5}">
-        <a class="avt fl" target="_blank" href="${base}/users/{0}">
+        <a class="avt fl" target="_blank" href="${http}/users/{0}">
             <img src="{1}">
         </a>
         <div class="chat_body">
             <h5>
-                <div class="fl"><a class="chat_name" href="${base}/users/{0}">{2}</a><span>{3}</span></div>
+                <div class="fl"><a class="chat_name" href="${http}/users/{0}">{2}</a><span>{3}</span></div>
                 <div class="fr reply_this"><a href="javascript:void(0);" onclick="goto('{5}', '{2}')"><i class="icon icon-action-redo"></i></a></div>
                 <div class="clear"></div>
             </h5>
@@ -235,8 +235,8 @@
 
     seajs.use(['comment', 'view'], function (comment) {
         comment.init({
-            load_url: '${base}/comment/list/${view.id}',
-            post_url: '${base}/comment/submit',
+            load_url: '${http}/comment/list/${view.id}',
+            post_url: '${http}/comment/submit',
             toId: '${view.id}',
             onLoad: function (i, data) {
             	alert(i);
@@ -247,7 +247,7 @@
                 if (data.pid > 0 && !(data.parent === null)) {
                     var pat = data.parent;
                     var pcontent = pat.content;
-                    quoto = '<div class="quote"><a href="${base}/users/' + pat.user.id + '">@' + pat.user.nickname +
+                    quoto = '<div class="quote"><a href="${http}/users/' + pat.user.id + '">@' + pat.user.nickname +
                         '</a>: ' + pcontent + '</div>';
                 }
                 var item = jQuery.format(template,

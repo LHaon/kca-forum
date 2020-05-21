@@ -10,7 +10,7 @@
             </div>
             <div class="panel-body">
                 <div id="message"><#include "/classic/inc/action_message.ftl"/></div>
-                <form id="submitForm" method="POST" action="${base}/oauth/callback/bind_oauth" accept-charset="UTF-8">
+                <form id="submitForm" method="POST" action="${http}/oauth/callback/bind_oauth" accept-charset="UTF-8">
                     <input type="hidden" name="oauthType" value="${open.oauthType}"/>
 
                     <input type="hidden" name="code" value="${open.oauthCode}"/>

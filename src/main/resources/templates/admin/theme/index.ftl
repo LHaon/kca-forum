@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1>主题管理</h1>
     <ol class="breadcrumb">
-        <li><a href="${base}/admin">首页</a></li>
+        <li><a href="${http}/admin">首页</a></li>
         <li class="active">主题管理</li>
     </ol>
 </section>
@@ -60,7 +60,7 @@
         $('a[data-action="toggle"]').click(function () {
             var that = $(this);
             var value = that.data('value');
-            $.getJSON('${base}/admin/theme/active', {'theme': value}, function (json) {
+            $.getJSON('${http}/admin/theme/active', {'theme': value}, function (json) {
                 layer.alert(json.message, function(){
                     location.reload();
                 });
@@ -68,7 +68,7 @@
         });
 
         $('#upload_btn').change(function(){
-            $(this).upload('${base}/admin/theme/upload', function(json){
+            $(this).upload('${http}/admin/theme/upload', function(json){
                 layer.alert(json.message, function(){
                     location.reload();
                 });

@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1>仪表盘</h1>
     <ol class="breadcrumb">
-        <li><a href="${base}/admin"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="${http}/admin"><i class="fa fa-dashboard"></i> 首页</a></li>
         <li class="active">仪表盘</li>
     </ol>
 </section>
@@ -20,7 +20,7 @@
                 <div class="icon">
                     <i class="fa fa-bars"></i>
                 </div>
-                <a href="${base}/admin/channel/list" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="${http}/admin/channel/list" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -34,7 +34,7 @@
                 <div class="icon">
                     <i class="fa fa-clone"></i>
                 </div>
-                <a href="${base}/admin/post/list" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="${http}/admin/post/list" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -48,7 +48,7 @@
                 <div class="icon">
                     <i class="fa fa-comments-o"></i>
                 </div>
-                <a href="${base}/admin/comment/list" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="${http}/admin/comment/list" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -62,7 +62,7 @@
                 <div class="icon">
                     <i class="fa fa-user"></i>
                 </div>
-                <a href="${base}/admin/user/list" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="${http}/admin/user/list" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -144,7 +144,7 @@
         <img src="{0}" alt="user image" class="offline">
 
         <p class="message">
-            <a href="${base}/users/{1}" class="name">
+            <a href="${http}/users/{1}" class="name">
                 <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {2}</small>
                 {3}
             </a>
@@ -162,7 +162,7 @@
         // 刷新系统变量
         $('button[data-action="reload_options"]').bind('click', function(){
             if(confirm('确定要刷新系统变量的缓存吗？')){
-                J.getJSON('${base}/admin/options/reload_options', ajaxReload);
+                J.getJSON('${http}/admin/options/reload_options', ajaxReload);
             }
             return false;
         });
@@ -170,12 +170,12 @@
         // 重建索引
         $('button[data-action="reset_indexes"]').bind('click', function(){
             if(confirm('确定要重建文章索引吗？')){
-                J.getJSON('${base}/admin/options/reset_indexes', ajaxReload);
+                J.getJSON('${http}/admin/options/reset_indexes', ajaxReload);
             }
             return false;
         });
         
-        J.getJSON('${base}/api/latest_comments', function (result) {
+        J.getJSON('${http}/api/latest_comments', function (result) {
             if (result.length > 0) {
                 var template = $('#chat')[0].text;
                 var html = [];

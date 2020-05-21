@@ -4,8 +4,8 @@
 <section class="content-header">
     <h1>修改角色</h1>
     <ol class="breadcrumb">
-        <li><a href="${base}/admin">首页</a></li>
-        <li><a href="${base}/admin/user/list">用户管理</a></li>
+        <li><a href="${http}/admin">首页</a></li>
+        <li><a href="${http}/admin/user/list">用户管理</a></li>
         <li class="active">修改角色</li>
     </ol>
 </section>

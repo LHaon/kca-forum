@@ -1,6 +1,6 @@
 <#-- 用户头像显示 -->
 <#macro showAva user clazz>
-<a href="${base}/users/${user.id}">
+<a href="${http}/users/${user.id}">
     <img class="${clazz}" src="${user.photoUrl}" />
 </a>
 </#macro>

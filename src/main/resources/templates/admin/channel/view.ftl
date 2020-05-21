@@ -3,8 +3,8 @@
 <section class="content-header">
     <h1>修改栏目</h1>
     <ol class="breadcrumb">
-        <li><a href="${base}/admin">首页</a></li>
-        <li><a href="${base}/admin/channel/list">栏目管理</a></li>
+        <li><a href="${http}/admin">首页</a></li>
+        <li><a href="${http}/admin/channel/list">栏目管理</a></li>
         <li class="active">修改栏目</li>
     </ol>
 </section>
