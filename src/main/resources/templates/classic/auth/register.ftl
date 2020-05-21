@@ -77,7 +77,7 @@
 						$.ajax({
 							type: 'get',
 							async: false,
-							url: "http://localhost:11111/user/sendMessage",
+							url: "${http}/user/sendMessage",
 							data: {
 								"phone": phone,
 								"msgType":2
@@ -129,7 +129,7 @@
 			}
 			var data = new FormData($( "#registerForm" )[0]);
 			$.ajax({
-				url: "http://localhost:11111/user/toRegister",
+				url: "${http}/user/toRegister",
 				type: "post",
 				async: false,
 				data: data,
@@ -139,7 +139,7 @@
 				success: function (data) {
 					if (data.code == 200) {
 						alert(data.data+"，即将跳转到登陆界面。");
-						window.location.href = "http://localhost:11111/user/login";
+						window.location.href = "${http}/user/login";
 					} else  {
 						$('#rpassword_tex').html(data.message)
 					}

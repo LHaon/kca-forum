@@ -67,7 +67,7 @@
 		var title = $('#title').val();
 		text = text + title;
 		$.ajax({
-			url: "http://localhost:11111/texts/judgeText",
+			url: "${http}/texts/judgeText",
 			type: "post",
 			async: true,
 			data: {
